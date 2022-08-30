@@ -112,6 +112,8 @@ local RECOILS = {
 }
 
 local CAR_INNACURACY_PITCH = 2.0
+local HELI_INNACURACY_PITCH = 0.25
+
 
 Citizen.CreateThread(function()
 	while true do
@@ -120,10 +122,15 @@ Citizen.CreateThread(function()
 			local _,wepHash = GetCurrentPedWeapon(me)
 			if RECOILS[wepHash] then
 				local p = GetGameplayCamRelativePitch()
-				if not IsPedInAnyVehicle(me, false) then
+				if not IsPedInAnyVehicle(me, false) and not IsPedInAnyHeli(me) then
 					SetGameplayCamRelativePitch(p + RECOILS[wepHash], 0.65)
+					-- print("REGULAR RECOIL") -- Debug
+				elseif IsPedInAnyHeli(me) then
+					SetGameplayCamRelativePitch(p + RECOILS[wepHash] + HELI_INNACURACY_PITCH, 0.65)
+					-- print("HELI RECOIL") -- Debug
 				else
 					SetGameplayCamRelativePitch(p + RECOILS[wepHash] + CAR_INNACURACY_PITCH, 0.65)
+					-- print("VEHICLE RECOIL") -- Debug
 				end
 			else
 				print("no recoil value for wep hash: " .. wepHash)
