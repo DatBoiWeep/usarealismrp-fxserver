@@ -242,6 +242,51 @@ Config.computerList = {
             rotate = false,
         },
     },
+    {
+        -- Vespucci Beach (Store F1 & F2)
+        -- if false player dont need a ticket to play on this computer.
+        isInGamingHouse = false,
+        computerType = Config.RetroMachine,
+        computerGPU = Config.GPUList[2],
+        computerCPU = Config.CPUList[2],
+        markerType = 31,
+        position = vector3(-1213.2971191406, -1507.7147216797, 4.341103553772),
+        markerOptions = {
+            scale = { x = 0.5, y = 0.5, z = 0.5 },
+            color = { r = 255, g = 255, b = 255, a = 125 },
+            rotate = true,
+        },
+    },
+    {
+        -- Vespucci Beach (Store B1 & B2)
+        -- if false player dont need a ticket to play on this computer.
+        isInGamingHouse = false,
+        computerType = Config.RetroMachine,
+        computerGPU = Config.GPUList[2],
+        computerCPU = Config.CPUList[2],
+        markerType = 31,
+        position = vector3(-1258.8668212891, -1442.6556396484, 4.3513126373291),
+        markerOptions = {
+            scale = { x = 0.5, y = 0.5, z = 0.5 },
+            color = { r = 255, g = 255, b = 255, a = 125 },
+            rotate = true,
+        },
+    },
+    {
+        -- Vespucci Beach (Store D1 & D2)
+        -- if false player dont need a ticket to play on this computer.
+        isInGamingHouse = false,
+        computerType = Config.RetroMachine,
+        computerGPU = Config.GPUList[2],
+        computerCPU = Config.CPUList[2],
+        markerType = 31,
+        position = vector3(-1204.2664794922, -1455.2581787109, 4.3739414215088),
+        markerOptions = {
+            scale = { x = 0.5, y = 0.5, z = 0.5 },
+            color = { r = 255, g = 255, b = 255, a = 125 },
+            rotate = true,
+        },
+    },
     -- Gaming computers
     {
         -- if false player dont need a ticket to play on this computer.
