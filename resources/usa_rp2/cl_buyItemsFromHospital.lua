@@ -11,7 +11,10 @@ local HOSPITAL_ITEM_PURCHASE_LOCATIONS = {
     {name = "mt. zenoah", x = -497.9, y = -335.9, z = 34.5},
     {name = "davis", x = 307.4, y = -1433.8, z = 29.9},
     {name = "viceroy modeical", x = -811.6181640625, y = -1236.4844970703, z = 7.3374252319336},
-    {name = "sandy", x = 1829.2332, y = 3673.7722, z = 34.2749}
+    {name = "sandy", x = 1829.2332, y = 3673.7722, z = 34.2749},
+    {name = "Pop's Pills - Store E1", x = -1226.7778320313, y = -1476.1014404297, z = 4.3738870620728},
+    {name = "Pop's Pills - Store B1", x = -1254.5871582031, y = -1435.6522216797, z = 4.373884677887},
+    {name = "Pop's Pills - Store D1", x = -1197.6026611328, y = -1459.0732421875, z = 4.3738880157471}
 }
 
 local nearbyHospitalBuySpots = {}
