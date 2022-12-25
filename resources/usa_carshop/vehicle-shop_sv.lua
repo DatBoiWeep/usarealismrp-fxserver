@@ -1033,7 +1033,13 @@ RegisterServerEvent("vehShop:sellVehicle")
 AddEventHandler("vehShop:sellVehicle", function(toSellVehicle)
 	local usource = source
 	print("toSellVehicle: " .. toSellVehicle.model)
-	local vehiclePrice = GetVehiclePrice(toSellVehicle)
+	local currentPrice = toSellVehicle.price
+	local vehiclePrice
+	if currentPrice > 0 then -- If a price is set above 0 then use existing price
+		vehiclePrice = currentPrice
+	else
+		vehiclePrice = GetVehiclePrice(toSellVehicle) -- If no price exists, use standard sell price
+	end
 	if not vehiclePrice then
 		if toSellVehicle.price then
 			print("vehicle price nil with toSellVehicle: " .. toSellVehicle.make .. " " .. toSellVehicle.model)
