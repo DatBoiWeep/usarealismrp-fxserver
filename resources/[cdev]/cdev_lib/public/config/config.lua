@@ -1,21 +1,21 @@
 PublicSharedConfig = {
     -- ⚡ Specify the framework you're using. Can be the following: esx, qbcore, custom
-    Framework = "qbcore",
+    Framework = "custom",
 
     -- 🗣️ Specify the language you're using. For more information on available languages visit our docs in https://docs.cdev.shop/fivem-resources/locales
     Language = "en",
 
     -- 👀 Specify the third eye/target resource you're using. Can be the following: qbcore, qtarget, ox, renewed(doesn't work in all props), custom
-    Target = "qbcore",
+    Target = "qtarget",
 
     -- 🎒 Specify the inventory resource you're using. Can be the following: qbcore, ox, custom
-    Inventory = "qbcore",
+    Inventory = "custom",
 
     -- 🚗 Specify the garage resource you're using. Can be the following: qbcore, esx, codesign, loaf, custom (only for cdev_restaurants)
-    Garage = "qbcore",
+    Garage = "custom",
 
     -- 🕒 Specify the progress bar resource you're using. Can be the following: qbcore, ox, custom (only for cdev_restaurants)
-    ProgressBar = "qbcore",
+    ProgressBar = "ox",
 
     -- 💬 Set this to true if you want to use your own notification UI instead of the cDev one. (Implement in public/client/api.lua)
     UseCustomNotifications = false,
