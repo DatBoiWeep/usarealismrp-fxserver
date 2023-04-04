@@ -11,7 +11,8 @@ local jobNames = {
 	['doctor'] = 'Doctor',
 	['corrections'] = 'Peace Officer (BCSO)',
 	['lawyer'] = 'Attorney',
-	['judge'] = 'Judge'
+	['judge'] = 'Judge',
+	['CatCafeEmployee'] = 'Cat Cafe Employee'
 }
 
 TriggerEvent('es:addCommand', 'ad', function(source, args, char)
@@ -80,6 +81,7 @@ TriggerEvent('es:addCommand', 'me', function(source, args, char, location)
 	local msg = table.concat(args, " ")
 	TriggerEvent('display:shareDisplayBySource', source, msg, 5, 370, 10, 8000, true)
 	exports["globals"]:sendLocalActionMessageChat("Person with SSN " .. source .. " " .. msg, location, 20)
+	TriggerEvent('rcore_cam:me', source, msg)
 end, {help = "Talk as yourself doing an action.", params = {{name = "message", help = "the action"}}})
 
 TriggerEvent('es:addCommand', 'showid', function(source, args, char, location)

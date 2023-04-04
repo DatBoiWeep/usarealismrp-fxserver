@@ -1046,6 +1046,14 @@ function interactionMenuUse(index, itemName, wholeItem)
 		TriggerEvent('injuries:bandageMyInjuries')
 		busy = false
 	end
+	elseif string.find(itemName, "Medical Bag") then
+	if not busy then
+		busy = true
+		playHealingAnimation(PlayerPedId())
+		TriggerEvent("usa:heal", 35)
+		TriggerEvent('injuries:bandageMyInjuries')
+		busy = false
+	end
 	elseif string.find(itemName, "Lockpick") then
 		local targetVehicle = getVehicleInFrontOfUser()
 		local boostingInfo = Entity(targetVehicle).state.boostingData
@@ -1088,7 +1096,7 @@ function interactionMenuUse(index, itemName, wholeItem)
 					TaskPlayAnim(playerPed, anim.dict, anim.name, 8.0, 1.0, -1, 31, 1.0, false, false, false)
 				end
 
-				local success = lib.skillCheck({'easy', 'easy', 'medium', 'medium'})
+				local success = lib.skillCheck({'easy', 'easy', 'medium', 'medium'}, {'i', 'j', 'k', 'l'})
 				if success then
 					SetVehicleDoorsLocked(veh, 1)
 					SetVehicleDoorsLockedForAllPlayers(veh, 0)
