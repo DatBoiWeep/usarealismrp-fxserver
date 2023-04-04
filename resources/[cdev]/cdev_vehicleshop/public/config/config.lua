@@ -2,7 +2,7 @@ PublicSharedResourceConfig = {
     -- 🚗 The format and length used for vehicle plates (maximum 8 characters)
     -- 📣 N = number, L = letter, S = space, X = number or letter
     -- 📣 Example: NNNLLL could output "547EXW", XXXX XXX could output "8XA5 12E"
-    PlateFormat = "XXXXXXXX",
+    PlateFormat = "NNLLLNNN",
 
     -- 🏢 Base dealership job details
     DealershipJob = {
