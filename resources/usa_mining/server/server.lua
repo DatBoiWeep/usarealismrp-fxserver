@@ -38,7 +38,7 @@ AddEventHandler('mining:giveUserMiningGoods', function()
     end
     -- make sure it has been at least <mining-animation-duration> time has passed since last attempt
     if lastMinedTimes[source] then
-        if exports.globals:GetSecondsFromTime(lastMinedTimes[source]) < Config.MINING_ANIM_DURATION then
+        if exports.globals:GetSecondsFromTime(lastMinedTimes[source]) < (Config.MINING_ANIM_DURATION / 1000) then
             return
         end
     end

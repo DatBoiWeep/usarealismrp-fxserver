@@ -270,7 +270,7 @@ AddEventHandler("inventory:moveItem", function(data)
 		elseif data.secondaryInventoryType == "property" then
 			TriggerEvent("properties-og:moveItemFromProperty", usource, data)
 		elseif data.secondaryInventoryType == "nearbyItems" then
-			TriggerEvent("interaction:attemptPickupByIndex", data.fromSlot, data.toSlot, source)
+			TriggerEvent("interaction:attemptPickupByUUID", data.itemUUID, data.toSlot, source)
 		end
 	elseif data.fromType == "secondary" and data.toType == "secondary" then
 		if data.secondaryInventoryType == "vehicle" then
@@ -367,9 +367,11 @@ end)
 
 RegisterServerEvent("civ:handsDown")
 AddEventHandler("civ:handsDown", function()
-	for id, isAccessing in pairs(inventoriesBeingAccessed[source]) do
-		TriggerClientEvent("interaction:sendNUIMessage", id, { type = "close" })
-		inventoriesBeingAccessed[source] = nil
+	if inventoriesBeingAccessed[source] then
+		for id, isAccessing in pairs(inventoriesBeingAccessed[source]) do
+			TriggerClientEvent("interaction:sendNUIMessage", id, { type = "close" })
+			inventoriesBeingAccessed[source] = nil
+		end
 	end
 end)
 
@@ -408,7 +410,7 @@ end
 
 AddEventHandler('es:playerLoaded', function(src, user)
 	local doc = exports.essentialmode:getDocument("third-eye-setting", GetPlayerIdentifiers(src)[1])
-	TriggerClientEvent("thirdEye:updateHotkey", src, (doc.key or THIRD_EYE_DEFAULT_HOTKEY))
+	TriggerClientEvent("thirdEye:updateHotkey", src, (doc and doc.key or THIRD_EYE_DEFAULT_HOTKEY))
 end)
 
 RegisterServerCallback {

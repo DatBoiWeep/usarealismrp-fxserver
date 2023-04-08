@@ -460,6 +460,8 @@ local vehicleShopItems = {
 			{make = "BMW", model = "i4 (2020)", price = 80000, hash = "ocni422spe", storage_capacity = 220.0},
 			{make = "BMW", model = "M8", price = 340000, hash = "bmwm8", storage_capacity = 160.0},
 			{make = "BMW", model = "M8 GTE", price = 2500000, hash = "rmodm8gte", storage_capacity = 120.0},
+			{make = "BMW", model = "M4 (G82)", price = 250000, hash = "m422", storage_capacity = 200.0},
+			{make = "BMW", model = "M5 Sport", price = 250000, hash = "22m5", storage_capacity = 220.0},
 			--
 			{make = "Bugatti", model = "Bolide", price = 5000000, hash = "bolide", storage_capacity = 120.0},
 			{make = "Bugatti", model = "Chiron", price = 4100000, hash = "chiron", storage_capacity = 120.0},
@@ -468,6 +470,7 @@ local vehicleShopItems = {
 			{make = "Can Am", model = "Maverick (2018)", price = 70000, hash = "can", storage_capacity = 90.0},
 			--
 			{make = "Cadillac", model = "CTS-V (2016)", price = 160000, hash = "ctsv16", storage_capacity = 220.0},
+			{make = "Cadillac", model = "CT5 Blackwing", price = 200000, hash = "ct5v", storage_capacity = 220.0},
 			{make = "Cadillac", model = "Escalade (2021)", price = 130000, hash = "21escalade", storage_capacity = 280.0},
 			--
 			{make = "Chevrolet", model = "C-10 Stepside Custom", price = 90000, hash = "c10custom", storage_capacity = 300.0},
@@ -490,6 +493,7 @@ local vehicleShopItems = {
 			{make = "Chevrolet", model = "Silverado (1986)", price = 56000, hash = "SILV86", storage_capacity = 340.0},
 			{make = "Chevrolet", model = "Silverado (Single Cab)", price = 70000, hash = "silv20", storage_capacity = 340.0},
 			{make = "Chevrolet", model = "Silverado 2500 HD", price = 125000, hash = "silv2500hd", storage_capacity = 340.0},
+			{make = "Chevrolet", model = "Silverado 1500 (Lowered)", price = 65000, hash = "loweyezv", storage_capacity = 300.0},
 			{make = "Chevrolet", model = "Tahoe (2008)", price = 80000, hash = "tahoe08", storage_capacity = 280.0},
 			--
 			{make = "Chrysler", model = "300 SRT8", price = 85000, hash = "300srt8", storage_capacity = 220.0},

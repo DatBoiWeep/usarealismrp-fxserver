@@ -49,11 +49,6 @@ AddEventHandler('mining:startMining', function()
     end
 end)
 
-for i = 1, 10 do
-    TriggerServerEvent('mining:giveUserMiningGoods')
-end
-
-
 local purchaser = 'a_f_y_business_01'
 local purchase_location = {x = -629.08, y = -265.75, z = 38.79}
 local BASE_SELL_TIME = 5000

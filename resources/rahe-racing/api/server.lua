@@ -234,7 +234,7 @@ supportedVehicles = {
     { name = "2020 Porsche 718 Cayman GT4", model = "por718gt4", class = "S" },
     { name = "Chevrolet Corvette C7R GTLM", model = "C7R", class = "S" },
     { name = "2012 Porsche 911 GT2 RS", model = "pgt2", class = "S" },
-    { name = "1993 Porsche 911 (993) RWB "Rotana"", model = "911rwb", class = "S" },
+    { name = "1993 Porsche 911 (993) RWB Rotana", model = "911rwb", class = "S" },
     { name = "2016 SRT Viper", model = "viper", class = "S" },
     { name = "2016 SRT Viper ACR", model = "acr", class = "S" },
     { name = "Audi R8 Hycade", model = "r8hycade", class = "S" },
@@ -372,6 +372,8 @@ supportedVehicles = {
     { name = "Mitsubishi Lancer Evolution IX Voltex", model = "topfoil", class = "A" },
     { name = "2012 Mercedes-Benz C63 AMG Coupe Black Series", model = "mbc63", class = "A" },
     { name = "1969 Dodge Charger", model = "rmodcharger69", class = "A" },
+    { name = "2022 BMW M4", model = "m422", class = "A"},
+    { name = "2022 BMW M5 Sport", model = "22M5", class = "A"},
     -- B Class:**
     { name = "Declasse Hotring Sabre", model = "hotring", class = "B" },
     { name = "Imponte Beater Dukes", model = "dukes3", class = "B" },
@@ -513,6 +515,7 @@ supportedVehicles = {
     { name = "Chevrolet C-10 Stepside Custom", model = "c10custom", class = "B" },
     { name = "1969 Chevrolet Camaro SS", model = "camaro69", class = "B" },
     { name = "1970 Chevrolet Camaro Z28", model = "camaro70", class = "B" },
+    { name = "2006 Chevrolet Silverado", model = "loweyezv", class = "B" },
     { name = "2018 Can Am Maverick", model = "can", class = "B" },
     { name = "2020 Lincoln Continental (Custom Wheels)", model = "cont", class = "B" },
     { name = "1970 Chevrolet Corvette", model = "corvette70", class = "B" },
@@ -683,6 +686,7 @@ supportedVehicles = {
     { name = "1966 Volkswagon Type 2", model = "type266", class = "C" },
     { name = "2000 Ford F350 Dually", model = "00f350d", class = "C" },
     { name = "Hummer H2", model = "H2", class = "C" },
+    { name = "1971 AMC Javelin-AMX", model = "aamx", class = "C" },
     -- D Class:**
     { name = "Bravado Youga Classic 4x4", model = "youga3", class = "D" },
     { name = "Bravado Youga Custom", model = "youga4_USA", class = "D" },
