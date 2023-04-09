@@ -36,7 +36,7 @@ client_scripts {
 
 server_scripts {
     -- Dependencies
-    "@mysql-async/lib/MySQL.lua", -- Feel free to change this to oxmysql, but it's not necessary (ox already provides for mysql-async)
+    "@ox_lib/init.lua", -- Feel free to change this to oxmysql, but it's not necessary (ox already provides for mysql-async)
 
     -- Public scripts
     'shared/external.lua', -- Escrowed,
