@@ -6,7 +6,7 @@ PublicSharedConfig = {
     Language = "en",
 
     -- 👀 Specify the third eye/target resource you're using. Can be the following: qbcore, qtarget, ox, renewed(doesn't work in all props), custom
-    Target = "qtarget",
+    Target = "custom",
 
     -- 🎒 Specify the inventory resource you're using. Can be the following: qbcore, ox, custom
     Inventory = "custom",
