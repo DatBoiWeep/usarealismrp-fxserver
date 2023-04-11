@@ -39,6 +39,10 @@ server_scripts {
     'data/languages/*.lua',
 }
 
+shared_scripts {
+    '@pmc-callbacks/import.lua',
+}
+
 escrow_ignore {
     'public/config/config.lua',
     'public/client/api.lua',

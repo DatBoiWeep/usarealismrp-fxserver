@@ -34,9 +34,14 @@ client_scripts {
     "client/main.lua",
 }
 
+shared_scripts {
+    '@ox_lib/init.lua',
+    '@pmc-callbacks/import.lua',
+}
+
 server_scripts {
     -- Dependencies
-    "@ox_lib/init.lua", -- Feel free to change this to oxmysql, but it's not necessary (ox already provides for mysql-async)
+    "@oxmysql/lib/MySQL.lua", -- Feel free to change this to oxmysql, but it's not necessary (ox already provides for mysql-async)
 
     -- Public scripts
     'shared/external.lua', -- Escrowed,
