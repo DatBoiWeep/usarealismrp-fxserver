@@ -16,10 +16,7 @@ RegisterNetEvent(clib_Config.getFrameworkConfig().ServerPlayerJobUpdateEvent, fu
         TriggerEvent("cdev_lib:api:jobUpdate", source, job.name, job.grade)
     else
         -- 🔧 If using custom, implement your own code here
-        local player = GetPlayer(source)
-        if not player then
-            return
-        end
+        local player = exports["usa-characters"]:GetCharacter(source)
         player.set("job", job.name)
     end
 end)
@@ -34,7 +31,7 @@ clib_API.Character = {
             return clib.frameworks.ESX.GetPlayerFromId(source).identifier
         else
             -- 🔧 If using custom, implement your own code here
-            local player = GetPlayer(source)
+            local player = exports["usa-characters"]:GetCharacter(source)
             if not player then
                 return
             end
@@ -51,6 +48,8 @@ clib_API.Character = {
             return player and player.source or nil
         else
             -- 🔧 If using custom, implement your own code here
+            local char = exports["usa-characters"]:GetCharacter(source)
+            return char
         end
     end,
     -- 🔑 Return the license attributed for the player with the given source
@@ -61,6 +60,8 @@ clib_API.Character = {
             return clib.frameworks.ESX.GetPlayerFromId(source).license
         else
             -- 🔧 If using custom, implement your own code here
+            local char = exports["usa-characters"]:GetCharacter(source)
+            return char.get("_id")
         end
     end,
     -- 📝 Return the name of the character belonging to the player with the given source
@@ -74,7 +75,7 @@ clib_API.Character = {
             return player and player.name or "Unknown"
         else
             -- 🔧 If using custom, implement your own code here
-            local player = GetPlayer(source)
+            local player = exports["usa-characters"]:GetCharacter(source)
             if not player then
                 return
             end
@@ -92,7 +93,7 @@ clib_API.Character = {
             player.setJob(job, grade)
         else
             -- 🔧 If using custom, implement your own code here
-            local player = GetPlayer(source)
+            local player = exports["usa-characters"]:GetCharacter(source)
             if not player then
                 return
             end
@@ -109,7 +110,7 @@ clib_API.Character = {
             player.setJob("unemployed", 0)
         else
             -- 🔧 If using custom, implement your own code here
-            local player = GetPlayer(source)
+            local player = exports["usa-characters"]:GetCharacter(source)
             if not player then
                 return
             end
@@ -126,7 +127,7 @@ clib_API.Character = {
             return player.job.name, player.job.grade
         else
             -- 🔧 If using custom, implement your own code here
-            local player = GetPlayer(source)
+            local player = exports["usa-characters"]:GetCharacter(source)
             if not player then
                 return
             end
@@ -143,7 +144,8 @@ clib_API.Character = {
             return player.getMoney()
         else
             -- 🔧 If using custom, implement your own code here
-            return GetPlayer(source).get("money")
+            local player = exports["usa-characters"]:GetCharacter(source)
+            return player.get("money")
         end
     end,
     -- 💸 Add cash to the character belonging to the player with the given source
@@ -156,7 +158,8 @@ clib_API.Character = {
             player.addMoney(amount)
         else
             -- 🔧 If using custom, implement your own code here
-            GetPlayer(source).giveMoney(amount)
+            local player = exports["usa-characters"]:GetCharacter(source)
+            player.giveMoney(amount)
         end
     end,
     -- 💸 Remove cash from the character belonging to the player with the given source
@@ -169,7 +172,8 @@ clib_API.Character = {
             player.removeMoney(amount)
         else
             -- 🔧 If using custom, implement your own code here
-            GetPlayer(source).removeMoney(amount)
+            local player = exports["usa-characters"]:GetCharacter(source)
+            player.removeMoney(amount)
         end
     end,
     -- 💸 Add bank money to the character belonging to the player with the given source
@@ -182,7 +186,8 @@ clib_API.Character = {
             player.addAccountMoney("bank", amount)
         else
             -- 🔧 If using custom, implement your own code here
-            GetPlayer(source).giveBank(amount)
+            local player = exports["usa-characters"]:GetCharacter(source)
+            player.giveBank(amount)
         end
     end,
     -- 💸 Remove bank money from the character belonging to the player with the given source
@@ -195,7 +200,8 @@ clib_API.Character = {
             player.removeAccountMoney("bank", amount)
         else
             -- 🔧 If using custom, implement your own code here
-            GetPlayer(source).removeBank(amount)
+            local player = exports["usa-characters"]:GetCharacter(source)
+            player.removeBank(amount)
         end
     end,
     -- 💸 Return the bank money of the character belonging to the player with the given source
@@ -208,7 +214,8 @@ clib_API.Character = {
             return player.getAccount("bank").round
         else
             -- 🔧 If using custom, implement your own code here
-            GetPlayer(source).get("bank")
+            local player = exports["usa-characters"]:GetCharacter(source)
+            player.get("bank")
         end
     end,
 }
