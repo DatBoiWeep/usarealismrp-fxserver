@@ -259,33 +259,28 @@ AddEventHandler("catcafe:addxp", function(xpCooldown)
             print("Error retreiving char _id")
         end
     end
-    if char.get("job") == "CatCafeEmployee" then
-        if not xpCooldown then
-            local xpEarning = math.random(3,7)
-            local result = MySQL.prepare.await('SELECT xp FROM usa_catcafe WHERE uid = ?', {ident})
-            if config.debugMode then
-                if result then
-                    print("Result is found for adding XP")
-                else
-                    print("There is a problem retrieving XP")
-                end
-            end
-            MySQL.update('UPDATE usa_catcafe SET xp = ? WHERE uid = ?', {result + xpEarning, ident}, function(affectedRows)
-                if affectedRows then
-                    if config.debugMode then
-                        print("User is receiving XP - Script is running ok")
-                    end
-                    TriggerClientEvent('catcafe:xpNotify', usource, xpEarning)
-                end
-            end)
-        else
-            if config.debugMode then
-                print("User is on XP cooldown")
+    if not xpCooldown then
+        local xpEarning = math.random(3,7)
+        local result = MySQL.prepare.await('SELECT xp FROM usa_catcafe WHERE uid = ?', {ident})
+        if config.debugMode then
+            if result then
+                print("Result is found for adding XP")
+            else
+                print("There is a problem retrieving XP")
             end
         end
+        MySQL.update('UPDATE usa_catcafe SET xp = ? WHERE uid = ?', {result + xpEarning, ident}, function(affectedRows)
+            if affectedRows then
+                if config.debugMode then
+                    print("User is receiving XP - Script is running ok")
+                end
+                TriggerClientEvent('catcafe:xpNotify', usource, xpEarning)
+            end
+        end)
     else
-        TriggerEvent("notifyStaff", "Player "..GetPlayerName(usource).." attempted to cheat by giving themselves XP for Cat Cafe.")
-        DropPlayer(usource, "Cheating in cat cafe... why tho")
+        if config.debugMode then
+            print("User is on XP cooldown")
+        end
     end
 end)
 
@@ -442,13 +437,13 @@ AddEventHandler("catcafe:payB", function(bool)
                 char.giveMoney(PayBonus)
                 TriggerEvent('catcafe:paybonus', usource, PayBonus)
             else
-                exports["es_admin"]:BanPlayer(usource, "Modding (Executing Money Event in Cat Cafe). If you feel this was a mistake please let a staff member know.")
+                exports["es_admin"]:BanPlayer(usource, "Modding (Executing Money Event in Cat Cafe P3). If you feel this was a mistake please let a staff member know.")
             end
         else
-            exports["es_admin"]:BanPlayer(usource, "Modding (Executing Money Event in Cat Cafe). If you feel this was a mistake please let a staff member know.")
+            exports["es_admin"]:BanPlayer(usource, "Modding (Executing Money Event in Cat Cafe P2). If you feel this was a mistake please let a staff member know.")
         end
     else
-        exports["es_admin"]:BanPlayer(usource, "Modding (Executing Money Event in Cat Cafe). If you feel this was a mistake please let a staff member know.")
+        exports["es_admin"]:BanPlayer(usource, "Modding (Executing Money Event in Cat Cafe P1). If you feel this was a mistake please let a staff member know.")
     end
 end)
 

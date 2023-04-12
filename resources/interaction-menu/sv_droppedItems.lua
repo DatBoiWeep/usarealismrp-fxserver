@@ -47,8 +47,10 @@ AddEventHandler("interaction:attemptPickup", function(item)
 end)
 
 RegisterServerEvent("interaction:removeDroppedItemAccessor")
-AddEventHandler("interaction:removeDroppedItemAccessor", function(src)
-	peopleViewingDroppedItems[src] = nil
+AddEventHandler("interaction:removeDroppedItemAccessor", function()
+	if peopleViewingDroppedItems[source] then
+		peopleViewingDroppedItems[source] = nil
+	end
 end)
 
 RegisterServerEvent("interaction:attemptPickupByUUID")

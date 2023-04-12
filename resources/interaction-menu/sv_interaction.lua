@@ -154,7 +154,6 @@ AddEventHandler("inventory:removeInventoryAccessor", function(srcInventory)
 			inventoriesBeingAccessed[srcInventory][source] = nil
 		end
 	end
-	TriggerEvent("interaction:removeDroppedItemAccessor", srcInventory)
 end)
 
 RegisterServerEvent("inventory:addInventoryAccessor")
