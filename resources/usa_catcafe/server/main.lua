@@ -501,3 +501,16 @@ RegisterServerCallback {
         end
 	end
 }
+
+RegisterServerCallback {
+	eventName = 'catcafe:isPlayerInJob',
+	eventCallback = function(source)
+        local char = exports["usa-characters"]:GetCharacter(source)
+        local job = char.get("job")
+        if job ~= "civ" then
+            return false
+        else
+            return true
+        end
+	end
+}

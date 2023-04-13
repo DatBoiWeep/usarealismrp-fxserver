@@ -135,9 +135,17 @@ end)
 RegisterNetEvent('catcafe:toggleClockOn')
 AddEventHandler('catcafe:toggleClockOn', function()
     if working == 'no' then
-        TriggerServerEvent('catcafe:checkCriminalHistory')
-        TriggerServerEvent("catcafe:getrank")
-        TriggerServerEvent('catcafe:retrievestats')
+        local job = TriggerServerCallback {
+            eventName = "catcafe:isPlayerInJob",
+            args = {}
+        }
+        if job then
+            hrNotify("You are currently working for another job. You need to stop working for them first", "error")
+        else
+            TriggerServerEvent('catcafe:checkCriminalHistory')
+            TriggerServerEvent("catcafe:getrank")
+            TriggerServerEvent('catcafe:retrievestats')
+        end
     else
         TriggerServerEvent("catcafe:quitJob")
         working = "no"
