@@ -251,7 +251,7 @@ MechanicHelper.installUpgrade = function(veh, upgrade, cb)
     SetVehicleDoorOpen(veh, 4, false, false)
 
     if lib.progressCircle({
-        duration = Config.MechanicHelper.UPGRADE_INSTALL_TIME,
+        duration = Config.UPGRADE_INSTALL_TIME,
         label = 'Installing Part...',
         position = 'bottom',
         useWhileDead = false,
