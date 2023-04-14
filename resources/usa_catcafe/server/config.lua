@@ -39,6 +39,9 @@ config = {
         }
     },
 
+    -- Time until machine fixes itself
+    timeSoloRepair = 15, -- Minutes
+
     -- Does a bunch of printing
     debugMode = true
 }
