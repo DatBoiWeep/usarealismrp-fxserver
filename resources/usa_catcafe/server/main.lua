@@ -38,6 +38,33 @@ local ITEMS = {
     }
 }
 
+local machine = {
+    ColdDrinks = {
+        status = true,
+        durability = 100,
+        uses = 0,
+        cleaned = true
+    },
+    HotDrinks = {
+        status = true,
+        durability = 100,
+        uses = 0,
+        cleaned = true
+    },
+    ComboBar = {
+        status = true,
+        durability = 100,
+        uses = 0,
+        cleaned = true
+    },
+    SoloBar = {
+        status = true,
+        durability = 100,
+        uses = 0,
+        cleaned = true
+    },
+}
+
 -- Needed for new employees
 local result_check = {uid = nil}
 
@@ -447,6 +474,139 @@ AddEventHandler("catcafe:payB", function(bool)
     end
 end)
 
+RegisterServerEvent("catcafe:machineDurability")
+AddEventHandler("catcafe:machineDurability", function()
+    local colddrinks = machine.ColdDrinks.uses
+    local hotdrinks = machine.HotDrinks.uses
+    local combobar = machine.ComboBar.uses
+    local solobar = machine.SoloBar.uses
+    local damage = math.random(2,5)
+
+    if colddrinks > 0 then
+        machine.ColdDrinks.durability = machine.ColdDrinks.durability - damage
+    end
+    if hotdrinks > 0 then
+        machine.HotDrinks.durability = machine.HotDrinks.durability - damage
+    end
+    if combobar > 0 then
+        machine.ComboBar.durability = machine.ComboBar.durability - damage
+    end
+    if solobar > 0 then
+        machine.SoloBar.durability = machine.SoloBar.durability - damage
+    end
+end)
+
+RegisterServerEvent("catcafe:machineStatus")
+AddEventHandler("catcafe:machineStatus", function()
+    local status = {
+        colddrinks = machine.ColdDrinks.status,
+        hotdrinks = machine.HotDrinks.status,
+        combobar = machine.ComboBar.status,
+        solobar = machine.SoloBar.status
+    }
+
+    local durability = {
+        colddrinks = machine.ColdDrinks.durability,
+        hotdrinks = machine.HotDrinks.durability,
+        combobar = machine.ComboBar.durability,
+        solobar = machine.SoloBar.durability
+    }
+
+    -- DEBUG
+    DebugMode("Executing check status & durability of machines")
+
+    if status.colddrinks then
+        if durability.colddrinks < 75 then
+            if math.random() < 0.15 then
+                status.colddrinks = false
+                -- DEBUG
+                DebugMode("Colddrinks has been shut off")
+            end
+        elseif durability.colddrinks < 40 then
+            if math.random() < 0.60 then
+                status.colddrinks = false
+                -- DEBUG
+                DebugMode("Colddrinks has been shut off")
+            end
+        elseif durability.colddrinks == 0 then
+            status.colddrinks = false
+            -- DEBUG
+            DebugMode("Colddrinks has been shut off")
+        end
+    end
+    if status.hotdrinks then
+        if durability.hotdrinks < 75 then
+            if math.random() < 0.15 then
+                status.hotdrinks = false
+                -- DEBUG
+                DebugMode("Hotdrinks has been shut off")
+            end
+        elseif durability.hotdrinks < 40 then
+            if math.random() < 0.60 then
+                status.hotdrinks = false
+                -- DEBUG
+                DebugMode("Hotdrinks has been shut off")
+            end
+        elseif durability.hotdrinks == 0 then
+            status.hotdrinks = false
+            -- DEBUG
+            DebugMode("Hotdrinks has been shut off")
+        end
+    end
+    if status.combobar then
+        if durability.combobar < 75 then
+            if math.random() < 0.15 then
+                status.combobar = false
+                -- DEBUG
+                DebugMode("Combobar has been shut off")
+            end
+        elseif durability.combobar < 40 then
+            if math.random() < 0.60 then
+                status.combobar = false
+                -- DEBUG
+                DebugMode("Combobar has been shut off")
+            end
+        elseif durability.combobar == 0 then
+            status.combobar = false
+            -- DEBUG
+            DebugMode("Combobar has been shut off")
+        end
+    end
+    if status.solobar then
+        if durability.solobar < 75 then
+            if math.random() < 0.15 then
+                status.solobar = false
+                -- DEBUG
+                DebugMode("Solobar has been shut off")
+            end
+        elseif durability.solobar < 40 then
+            if math.random() < 0.60 then
+                status.solobar = false
+                -- DEBUG
+                DebugMode("Solobar has been shut off")
+            end
+        elseif durability.solobar == 0 then
+            status.solobar = false
+            -- DEBUG
+            DebugMode("Solobar has been shut off")
+        end
+    end
+
+    -- If status is OFF / False
+    if not status.colddrinks then
+        TriggerClientEvent("catcafe:notifyMachineDown", "colddrinks")
+    end
+    if not status.hotdrinks then
+        TriggerClientEvent("catcafe:notifyMachineDown", "hotdrinks")
+    end
+    if not status.combobar then
+        TriggerClientEvent("catcafe:notifyMachineDown", "combos")
+    end
+    if not status.solobar then
+        TriggerClientEvent("catcafe:notifyMachineDown", "indiv")
+    end
+end)
+
 function checkStrikes(char, src)
     MySQL.prepare('SELECT strikes FROM usa_catcafe WHERE uid = ?', {char.get("_id")}, function(result)
         -- debug stuff
@@ -465,12 +625,27 @@ function checkStrikes(char, src)
     end)
 end
 
+function DebugMode(text)
+    if config.debugMode then
+        print(text)
+    end
+end
+
 RegisterServerCallback {
 	eventName = 'catcafe:removecashforingredients',
 	eventCallback = function(source, category, index)
         local item = ITEMS[category][index]
         local char = exports["usa-characters"]:GetCharacter(source)
         local money = char.get("money")
+        if category == "colddrinks" then
+            machine.ColdDrinks.uses = machine.ColdDrinks.uses + 1
+        elseif category == "hotdrinks" then
+            machine.HotDrinks.uses = machine.HotDrinks.uses + 1
+        elseif category == "combos" then
+            machine.ComboBar.uses = machine.ComboBar.uses + 1
+        elseif category == "indiv" then
+            machine.SoloBar.uses = machine.SoloBar.uses + 1
+        end
         if money >= item.price then
             if char.canHoldItem(item) then
                 char.removeMoney(item.price)
@@ -507,7 +682,7 @@ RegisterServerCallback {
 	eventCallback = function(source)
         local char = exports["usa-characters"]:GetCharacter(source)
         local job = char.get("job")
-        if job ~= "civ" then
+        if job == "civ" then
             return false
         else
             return true
