@@ -515,95 +515,50 @@ AddEventHandler("catcafe:machineStatus", function()
     -- DEBUG
     DebugMode("Executing check status & durability of machines")
 
-    if status.colddrinks then
-        if durability.colddrinks < 75 then
-            if math.random() < 0.15 then
-                status.colddrinks = false
+    local machines = {"colddrinks", "hotdrinks", "combobar", "solobar"}
+
+    for i, item in ipairs(machines) do
+        if status[item] then
+            if durability[item] < 75 then
+                if math.random() < 0.15 then
+                    status[item] = false
+                    -- DEBUG
+                    DebugMode(item .. " has been shut off")
+                end
+            elseif durability[item] < 40 then
+                if math.random() < 0.60 then
+                    status[item] = false
+                    -- DEBUG
+                    DebugMode(item .. " has been shut off")
+                end
+            elseif durability[item] == 0 then
+                status[item] = false
                 -- DEBUG
-                DebugMode("Colddrinks has been shut off")
+                DebugMode(item .. " has been shut off")
             end
-        elseif durability.colddrinks < 40 then
-            if math.random() < 0.60 then
-                status.colddrinks = false
-                -- DEBUG
-                DebugMode("Colddrinks has been shut off")
-            end
-        elseif durability.colddrinks == 0 then
-            status.colddrinks = false
-            -- DEBUG
-            DebugMode("Colddrinks has been shut off")
-        end
-    end
-    if status.hotdrinks then
-        if durability.hotdrinks < 75 then
-            if math.random() < 0.15 then
-                status.hotdrinks = false
-                -- DEBUG
-                DebugMode("Hotdrinks has been shut off")
-            end
-        elseif durability.hotdrinks < 40 then
-            if math.random() < 0.60 then
-                status.hotdrinks = false
-                -- DEBUG
-                DebugMode("Hotdrinks has been shut off")
-            end
-        elseif durability.hotdrinks == 0 then
-            status.hotdrinks = false
-            -- DEBUG
-            DebugMode("Hotdrinks has been shut off")
-        end
-    end
-    if status.combobar then
-        if durability.combobar < 75 then
-            if math.random() < 0.15 then
-                status.combobar = false
-                -- DEBUG
-                DebugMode("Combobar has been shut off")
-            end
-        elseif durability.combobar < 40 then
-            if math.random() < 0.60 then
-                status.combobar = false
-                -- DEBUG
-                DebugMode("Combobar has been shut off")
-            end
-        elseif durability.combobar == 0 then
-            status.combobar = false
-            -- DEBUG
-            DebugMode("Combobar has been shut off")
-        end
-    end
-    if status.solobar then
-        if durability.solobar < 75 then
-            if math.random() < 0.15 then
-                status.solobar = false
-                -- DEBUG
-                DebugMode("Solobar has been shut off")
-            end
-        elseif durability.solobar < 40 then
-            if math.random() < 0.60 then
-                status.solobar = false
-                -- DEBUG
-                DebugMode("Solobar has been shut off")
-            end
-        elseif durability.solobar == 0 then
-            status.solobar = false
-            -- DEBUG
-            DebugMode("Solobar has been shut off")
         end
     end
 
-    -- If status is OFF / False
-    if not status.colddrinks then
-        TriggerClientEvent("catcafe:notifyMachineDown", "colddrinks")
+    -- Checks to see if system is off
+    for i, item in ipairs(machines) do
+        if not status[item] then
+            TriggerClientEvent("catcafe:notifyMachineDown", item)
+        end
     end
-    if not status.hotdrinks then
-        TriggerClientEvent("catcafe:notifyMachineDown", "hotdrinks")
-    end
-    if not status.combobar then
-        TriggerClientEvent("catcafe:notifyMachineDown", "combos")
-    end
-    if not status.solobar then
-        TriggerClientEvent("catcafe:notifyMachineDown", "indiv")
+end)
+
+RegisterServerEvent("catcafe:notifyMachineDown")
+AddEventHandler("catcafe:notifyMachineDown", function(machine)
+    local usource = source
+    local char = exports["usa-characters"]:GetCharacter(usource)
+    local ident = char.get("_id")
+    local rank = MySQL.prepare.await('SELECT rank FROM usa_catcafe WHERE uid = ?', {ident})
+    local trained = {"Shift Supervisor", "Shift Manager", "Store Manager"}
+
+    if rank == trained then
+        TriggerClientEvent("catcafe:notifyMachine", usource, machine, true) -- User is of rank to fix, tell user machine is broken and to repair
+    else
+        TriggerClientEvent("catcafe:notifyMachine", usource, machine, false) -- User is not of rank to fix, tell user machine is broken
     end
 end)
 
