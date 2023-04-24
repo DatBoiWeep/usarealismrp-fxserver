@@ -357,6 +357,8 @@ local THROWABLES = {
 	["Red Shoe"] = true
 }
 
+local hasLoadedItemImages = false
+
 RegisterNUICallback('escape', function(data, cb)
 	DisableGui()
 	if data.vehicle.plate then
@@ -1131,7 +1133,7 @@ function interactionMenuUse(index, itemName, wholeItem)
 		-- Cell Phone --
 		-------------------
 	elseif string.find(itemName, "Cell Phone") then
-		TriggerEvent("high_phone:openPhone")
+		exports["lb-phone"]:ToggleOpen(true, false)
 		-------------------
 		-- Food Item  --
 		-------------------
@@ -1549,7 +1551,7 @@ function EnableGui(target_vehicle_plate, goToPage)
 			id = playerServerId
 		}
 	end
-	SendNUIMessage({
+	local nuiMessage = {
 		type = "enableui",
 		enable = true,
 		nearestPlayer = nearestPlayer,
@@ -1558,7 +1560,12 @@ function EnableGui(target_vehicle_plate, goToPage)
 		isInVehicle = IsPedInAnyVehicle(me, true),
 		isCuffed = IsPedCuffed(me),
 		goToPage = goToPage
-	})
+	}
+	if not hasLoadedItemImages then
+		hasLoadedItemImages = true
+		nuiMessage.itemImages = ITEM_IMAGES
+	end
+	SendNUIMessage(nuiMessage)
 	if target_vehicle_plate then
 		TriggerServerEvent("vehicle:AddPersonToInventory", target_vehicle_plate)
 	end

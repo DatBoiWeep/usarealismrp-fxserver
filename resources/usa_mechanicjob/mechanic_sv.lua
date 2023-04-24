@@ -1,5 +1,7 @@
 exports["globals"]:PerformDBCheck("usa_mechanicjob", "mechanicjob")
 exports["globals"]:PerformDBCheck("usa_mechanicjob", "vehicle-underglow")
+exports["globals"]:PerformDBCheck("usa_mechanicjob", "mechanic-part-orders")
+exports["globals"]:PerformDBCheck("usa_mechanicjob", "mechanic-part-deliveries")
 
 local NEEDS_TO_BE_CLOCKED_IN = true
 
@@ -218,33 +220,13 @@ AddEventHandler("mechanic:orderPart", function(partName)
 				orderedPart.uuid = exports.globals:generateID()
 				orderedPart.orderedTime = os.time()
 				orderedPart.expectedDeliveryTimeDays = PARTS_DELIVERY_TIME_DAYS
-				local query = {
-					["owner_identifier"] = char.get("_id")
-				}
-				local fields = {
-					"_id",
-					"orderedParts",
-				}
-				MechanicHelper.db.getSpecificFieldFromDocumentByRows("mechanicjob", query, fields, function(doc)
-					if doc then
-						if not doc.orderedParts then
-							doc.orderedParts = {}
-						end
-						table.insert(doc.orderedParts, orderedPart)
-						MechanicHelper.db.updateDocument("mechanicjob", doc._id, {orderedParts = doc.orderedParts}, function(ok)
-							if ok then
-								char.removeBank(orderedPart.price)
-								TriggerClientEvent("usa:notify", src, "Ordered for $" .. exports.globals:comma_value(orderedPart.price))
-								doc.orderedParts = updateDeliveryProgress(char, doc.orderedParts)
-								TriggerClientEvent("mechanic:setOrderedParts", src, doc.orderedParts)
-							else
-								print("mechanic doc update failed")
-							end
-						end)
-					else
-						print("no doc found")
-					end
-				end)
+				orderedPart.owner = char.get("_id")
+				local ok = exports.essentialmode:createDocumentWithId("mechanic-part-orders", orderedPart.uuid, orderedPart)
+				if ok then
+					char.removeBank(orderedPart.price, "Mechanic Order ("..partName..")")
+					local orderedParts = (exports.essentialmode:getDocumentsByRows("mechanic-part-orders", query) or {})
+					TriggerClientEvent("mechanicMenu:sendDataToApp", src, { showNotification = true, notificationText = orderedPart.name .. " ordered for $" .. exports.globals:comma_value(orderedPart.price), orderedParts = orderedParts})
+				end
 			else
 				TriggerClientEvent("usa:notify", src, "Not enough money! Need: $" .. exports.globals:comma_value(PARTS[partName].price))
 			end
@@ -252,33 +234,26 @@ AddEventHandler("mechanic:orderPart", function(partName)
 	end)
 end)
 
-RegisterServerEvent("mechanic:claimDeliveries")
-AddEventHandler("mechanic:claimDeliveries", function()
+RegisterServerEvent("mechanic:claimDelivery")
+AddEventHandler("mechanic:claimDelivery", function(partId)
 	local src = source
 	local char = exports["usa-characters"]:GetCharacter(src)
 	local charCoords = GetEntityCoords(GetPlayerPed(src))
-	MechanicHelper.getMechanicInfo(char.get("_id"), function(info)
-		-- drop parts on ground
-		for i = 1, #info.deliveredParts do
-			local newCoords = {}
-			newCoords.x = charCoords.x + (math.random() * 2)
-			newCoords.y = charCoords.y + (math.random() * 2)
-			newCoords.z = charCoords.z - 0.8
-			local part = info.deliveredParts[i]
-			part.coords = newCoords
-			TriggerEvent("interaction:addDroppedItem", part)
-		end
-		if #info.deliveredParts > 0 then
-			TriggerClientEvent("usa:notify", src, "All deliveries claimed!")
-		else
-			TriggerClientEvent("usa:notify", src, "No deliveries!")
-			return
-		end
-		-- save
-		MechanicHelper.db.updateDocument("mechanicjob", info._id, {deliveredParts = {}}, function(ok) end)
-		-- update menu
-		TriggerClientEvent("mechanic:setDeliveredParts", src, {})
-	end)
+	local part = exports.essentialmode:getDocument("mechanic-part-deliveries", partId)
+	if part then
+		local newCoords = {}
+		newCoords.x = charCoords.x + (math.random() * 2)
+		newCoords.y = charCoords.y + (math.random() * 2)
+		newCoords.z = charCoords.z - 0.8
+		part.coords = newCoords
+		TriggerEvent("interaction:addDroppedItem", part)
+		exports.essentialmode:deleteDocument("mechanic-part-deliveries", partId)
+		local query = {
+			owner = char.get("_id")
+		}
+		local allDeliveries = (exports.essentialmode:getDocumentsByRows("mechanic-part-deliveries", query) or {})
+		TriggerClientEvent("mechanicMenu:sendDataToApp", src, { showNotification = true, notificationText = part.name .. " claimed!", deliveredParts = allDeliveries })
+	end
 end)
 
 RegisterServerEvent("mechanic:fetchDeliveryProgress")
@@ -360,15 +335,11 @@ function updateDeliveryProgress(char, orders)
 					end
 				end
 				if not wasAlreadyInserted then
-					table.insert(doc.deliveredParts, newDeliveries[i])
+					newDeliveries[i]._rev = nil
+					exports.essentialmode:createDocumentWithId("mechanic-part-deliveries", newDeliveries[i].uuid, newDeliveries[i])
+					exports.essentialmode:deleteDocument("mechanic-part-orders", newDeliveries[i].uuid)
 				end
 			end
-			MechanicHelper.db.updateDocument("mechanicjob", doc._id, {deliveredParts = doc.deliveredParts, orderedParts = orders}, function(ok)
-				if ok then
-					TriggerClientEvent("mechanic:setOrderedParts", char.get("source"), orders)
-					TriggerClientEvent("mechanic:setDeliveredParts", char.get("source"), doc.deliveredParts)
-				end
-			end)
 		else
 			print("no doc found when updating delivery progress")
 		end
@@ -415,6 +386,26 @@ function getUpgradeFromPartName(name)
 	end
 end
 
+function getNameFromCharId(id)
+	local char = exports.essentialmode:getDocument("characters", id)
+	return char.name.first .. " " .. char.name.last
+end
+
+function fetchLeaderboard()
+	local allMechanics = exports.essentialmode:getAllDocuments("mechanicjob")
+	local only50 = {}
+	table.sort(allMechanics, function(a, b)
+		return a.repairCount > b.repairCount
+	end)
+	for i = 1, 50 do
+		if allMechanics[i] then
+			allMechanics[i].name = getNameFromCharId(allMechanics[i].owner_identifier)
+			table.insert(only50, allMechanics[i])
+		end
+	end
+	return only50
+end
+
 --[[
 	- attributes to make fully persistant -
 	engine hp
@@ -457,7 +448,97 @@ RegisterServerCallback {
 	end
 }
 
+RegisterServerCallback {
+	eventName = "mechanic:loadMenuData",
+	eventCallback = function(src)
+		local ret = nil
+		local src = source
+		local char = exports["usa-characters"]:GetCharacter(src)
+		if char.get("job") == "mechanic" then
+			MechanicHelper.getMechanicRank(char.get("_id"), function(rank)
+				if rank == 0 then rank = 1 end
+				local availableParts = exports.globals:deepCopy(PARTS_FOR_RANK[rank])
+				for i = 1, #availableParts do
+					availableParts[i] = {
+						name = availableParts[i],
+						price = PARTS[availableParts[i]].price
+					}
+				end
+				local info = {}
+				info.rank = rank
+				info.availableParts = availableParts
+				info.playerName = char.getName()
+				ret = info
+			end)
+			while ret == nil do
+				Wait(1)
+			end
+			return ret
+		else
+			TriggerClientEvent("usa:notify", src, "Not signed in!")
+		end
+	end
+}
+
+RegisterServerCallback {
+	eventName = "mechanic:fetchOrders",
+	eventCallback = function(src)
+		local char = exports["usa-characters"]:GetCharacter(src)
+		local query = {
+			owner = char.get("_id")
+		}
+		local orderedParts = (exports.essentialmode:getDocumentsByRows("mechanic-part-orders", query) or {})
+		orderedParts = updateDeliveryProgress(char, orderedParts)
+		return orderedParts
+	end
+}
+
+RegisterServerCallback {
+	eventName = "mechanic:fetchDeliveries",
+	eventCallback = function(src)
+		local char = exports["usa-characters"]:GetCharacter(src)
+		local query = {
+			owner = char.get("_id")
+		}
+		local deliveries = (exports.essentialmode:getDocumentsByRows("mechanic-part-deliveries", query) or {})
+		return deliveries
+	end
+}
+
+RegisterServerCallback {
+	eventName = "mechanic:fetchLeaderboard",
+	eventCallback = function(src)
+		return fetchLeaderboard()
+	end
+}
+
 RegisterServerEvent("mechanic:saveUnderglow")
 AddEventHandler("mechanic:saveUnderglow", function(plate, r, g, b)
 	exports.essentialmode:updateDocument("vehicle-underglow", plate, { r = r, g = g, b = b }, true)
+end)
+
+AddEventHandler("character:loaded", function(char) -- migration from old db format
+	MechanicHelper.getMechanicInfo(char.get("_id"), function(info)
+		if info.orderedParts then
+			for i = #info.orderedParts, 1, -1 do
+				info.orderedParts[i]._rev = nil
+				info.orderedParts[i].owner = char.get("_id")
+				local ok = exports.essentialmode:createDocumentWithId("mechanic-part-orders", info.orderedParts[i].uuid, info.orderedParts[i])
+				if ok then
+					table.remove(info.orderedParts, i)
+				end
+			end
+		end
+		if info.deliveredParts then
+			for i = #info.deliveredParts, 1, -1 do
+				info.deliveredParts[i]._rev = nil
+				info.deliveredParts[i].owner = char.get("_id")
+				local ok = exports.essentialmode:createDocumentWithId("mechanic-part-deliveries", info.deliveredParts[i].uuid, info.deliveredParts[i])
+				if ok then
+					table.remove(info.deliveredParts, i)
+				end
+			end
+		end
+		exports.essentialmode:updateDocument("mechanicjob", info._id, { deliveredParts = "deleteMePlz!", orderedParts = "deleteMePlz!" })
+	end)
 end)

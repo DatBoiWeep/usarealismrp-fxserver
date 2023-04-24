@@ -3,7 +3,8 @@
 --# by: minipunch
 --# made for: USA REALISM RP
 
-local NEARBY_PROPERTIES = {} -- loaded from the server on first load or whenever a change is made. below data is only for reference whle making
+local ALL_PROPERTIES = {}
+local NEARBY_PROPERTIES = {}
 
 local my_property_identifier = nil -- gets updated by the server on first load, this is the hex steam ID of the player
 
@@ -36,6 +37,10 @@ local currentMapBlips = {} -- used to mark owned properties as blips on map on c
 
 local PROPERTY_NAME_MAX_LENGTH = 35
 
+local NEARBY_PROPERTY_INTERVAL_CHECK_MS = 5000
+
+TriggerServerEvent("properties:loadForClient")
+
 RegisterNetEvent("properties:setPropertyBlips")
 AddEventHandler("properties:setPropertyBlips", function(propertyLocations)
     RemoveBlips()
@@ -47,16 +52,19 @@ AddEventHandler("properties:setPropertyIdentifier", function(ident)
     my_property_identifier = ident
 end)
 
-RegisterNetEvent("properties-og:setNearbyProperties")
-AddEventHandler("properties-og:setNearbyProperties", function(nearby)
-    NEARBY_PROPERTIES = nearby
+RegisterNetEvent("properties:setPropertiesForClient")
+AddEventHandler("properties:setPropertiesForClient", function(properties)
+    ALL_PROPERTIES = properties
 end)
 
 RegisterNetEvent("properties:update")
 AddEventHandler("properties:update", function(property)
-    if NEARBY_PROPERTIES[property.name] then
-        NEARBY_PROPERTIES[property.name] = property
-    end
+    ALL_PROPERTIES[property.name] = property
+end)
+
+RegisterNetEvent("properties:remove")
+AddEventHandler("properties:remove", function(name)
+    ALL_PROPERTIES[name] = nil
 end)
 
 RegisterNetEvent("properties:loadWardrobe")
@@ -688,7 +696,7 @@ Citizen.CreateThread(function()
                                         if can_open.owner == true then
                                             item = NativeUI.CreateCheckboxItem("Continue Tennancy", not nearest_property_info.will_leave, "Enable/Disable if you want to continue paying for this property", 1)
                                             item.CheckboxEvent = function(parentmenu, selected, checked)
-                                                if GetGameTimer() - last_check_toggle > 10000 then
+                                                if GetGameTimer() - last_check_toggle > 5000 then
                                                     last_check_toggle = GetGameTimer()
                                                     nearest_property_info.will_leave = not checked
                                                     TriggerServerEvent("properties:willLeave", nearest_property_info.name, not checked)
@@ -887,7 +895,7 @@ Citizen.CreateThread(function()
                                                                     alert("~r~Transfer Ownership to "..server_id.."? ~INPUT_MP_TEXT_CHAT_TEAM~~r~/~INPUT_REPLAY_ENDPOINT~")
                                                                     if IsControlJustPressed(0, 246) then
                                                                         confirmed = true
-                                                                        TriggerServerEvent("properties:changeOwner", nearest_property_info.name, server_id)
+                                                                        TriggerServerEvent("properties:requestChangeOwner", nearest_property_info.name, server_id)
                                                                     elseif IsControlJustPressed(0, 306) then
                                                                         confirmed = true
                                                                         TriggerEvent("usa:notify", "You stopped the transfer!")
@@ -1120,6 +1128,23 @@ Citizen.CreateThread(function()
 		end
 		Wait(5)
 	end
+end)
+
+RegisterNetEvent("properties:confirmNewOwner")
+AddEventHandler("properties:confirmNewOwner", function(property_name, id, old_owner_id, owner_name)
+    local alert = lib.alertDialog({
+        header = '*Property Transfer*',
+        content = owner_name .. ' is trying to transfer the property "'..property_name..'" to you, do you want to accept this?',
+        centered = true,
+        cancel = true,
+        labels = {cancel = "Decline", confirm = "Accept"}
+    })
+
+    local accepted = false
+    if alert == "confirm" then
+        accepted = true
+    end
+    TriggerServerEvent("properties:changeOwner", property_name, id, old_owner_id, accepted)
 end)
 
 --------------------------------------------
@@ -1382,3 +1407,41 @@ function isUnderglowOn(veh)
 	end
 	return false
 end
+
+function isNearbyPropertyOwner()
+    local playerCoords = GetEntityCoords(PlayerPedId())
+    for _, info in pairs(NEARBY_PROPERTIES) do
+        local distance = GetDistanceBetweenCoords(playerCoords, info.x, info.y, info.z, true)
+        if distance < 1 then
+            if info.owner and info.owner.identifier == my_property_identifier then
+                return true
+            elseif info.coowners then
+                for _, coowner in ipairs(info.coowners) do
+                    if coowner.identifier == my_property_identifier then
+                        return true
+                    end
+                end
+            end
+        end
+    end
+    return false
+end
+exports("isNearbyPropertyOwner", isNearbyPropertyOwner)
+
+Citizen.CreateThread(function()
+    local lastCheck = GetGameTimer()
+    while true do
+        if GetGameTimer() - lastCheck > NEARBY_PROPERTY_INTERVAL_CHECK_MS then
+            lastCheck = GetGameTimer()
+            NEARBY_PROPERTIES = {}
+            local mycoords = GetEntityCoords(PlayerPedId())
+            for name, info in pairs(ALL_PROPERTIES) do
+                local dist = #(mycoords - vector3(info.x, info.y, info.z))
+                if dist < 100 then
+                    NEARBY_PROPERTIES[name] = info
+                end
+            end
+        end
+        Wait(1)
+    end
+end)
