@@ -299,6 +299,9 @@ end)
 RegisterServerEvent("inventory:dropItem")
 AddEventHandler("inventory:dropItem", function(name, index, posX, posY, posZ, heading, quantity)
 	quantity = math.abs(tonumber(quantity))
+	if quantity == 0 then
+		return
+	end
 	--------------------
 	-- play animation --
 	--------------------
