@@ -44,7 +44,7 @@ BUSINESSES = {
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
 		price = 25000,
-		purchasePercentage = 0.09
+		purchasePercentage = 0.05
 	},
 	["Benefactor Dealership"] = {
 		position = {-52.756038665771, 71.777839660645, 71.933853149414},
@@ -60,7 +60,7 @@ BUSINESSES = {
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
 		price = 25000,
-		purchasePercentage = 0.09
+		purchasePercentage = 0.05
 	},
 	["LS Tattoos (El Burro Heights)"] = {
 		position = {1325.2, -1650.7, 52.3},
