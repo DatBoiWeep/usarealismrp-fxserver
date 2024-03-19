@@ -6,10 +6,15 @@
 
 local INPUT_KEY = 38 -- E
 
+local BUY_RED_PHOS_COORDS = {x = -2174.8139648438, y = 4294.421875, z = 49.051670074463}
+local BUY_PSEUDOPHEDRINE_COORDS = {x = -3169.9484863281, y = 1094.1722412109, z = 20.856250762939}
+local PACKAGE_COORDS = {x = 2434.78, y = 4964.29, z = 42.34}
+local COOK_COORDS = {x = 738.85601806641, y = -773.63940429688, z = 25.093187332153}
+
 local meth = {
     peds = {
-        {x = 705.34, y = 4185.25, z = 40.7858, name = "meth_supplies_ped", model = "U_M_O_TAPHILLBILLY"},
-        {x = -1149.1988525391, y = 4938.3979492188, z = 222.26870727539, name = "meth_supplies_ped_quality", model = 'A_M_M_HILLBILLY_01'}
+        {x = BUY_PSEUDOPHEDRINE_COORDS.x, y = BUY_PSEUDOPHEDRINE_COORDS.y, z = BUY_PSEUDOPHEDRINE_COORDS.z, name = "meth_supplies_ped", model = "U_M_O_TAPHILLBILLY"},
+        {x = BUY_RED_PHOS_COORDS.x, y = BUY_RED_PHOS_COORDS.y, z = BUY_RED_PHOS_COORDS.z, name = "meth_supplies_ped_quality", model = 'A_M_M_HILLBILLY_01'}
     },
     suppliesProduce = "Pseudoephedrine",
     suppliesProduceQuality = 'Red Phosphorus',
@@ -23,13 +28,6 @@ local meth = {
 }
 
 local peds = {}
-
--- /gotoc 1149.1988525391 4938.3979492188 222.26870727539,
--- /gotoc 738.85601806641 -773.63940429688 25.093187332153
-local BUY_RED_PHOS_COORDS = {x = -1149.1988525391, y = 4938.3979492188, z = 222.26870727539}
-local BUY_PSEUDOPHEDRINE_COORDS = {x = 704.62, y = 4185.3, z = 40.70}
-local PACKAGE_COORDS = {x = 2434.78, y = 4964.29, z = 42.34}
-local COOK_COORDS = {x = 738.85601806641, y = -773.63940429688, z = 25.093187332153}
 
 local methRank = nil
 
@@ -139,8 +137,8 @@ RegisterNetEvent("methJob:returnPedToStartPosition")
 AddEventHandler("methJob:returnPedToStartPosition", function(pedType)
     for i =1, #peds do
         if pedType == peds[i].name then
-            TaskGoStraightToCoord(peds[i].handle, meth.peds[i].x, meth.peds[i].y, meth.peds[i].z, 2, -1)
-            SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
+            --TaskGoStraightToCoord(peds[i].handle, meth.peds[i].x, meth.peds[i].y, meth.peds[i].z, 2, -1)
+            --SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
             meth.pedIsBusy = false
         end
     end
@@ -177,8 +175,8 @@ AddEventHandler("methJob:getSupplies", function(supplyType)
         for i = 1, #peds do
             if peds[i].name == "meth_supplies_ped" then
                 meth.pedIsBusy = true
-                TaskGoStraightToCoord(peds[i].handle, 711.15, 4185.45, 41.08, 2, -1) -- pier by Grapeseed
-                SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
+                --TaskGoStraightToCoord(peds[i].handle, 711.15, 4185.45, 41.08, 2, -1) -- pier by Grapeseed
+                --SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
                 TriggerServerEvent("methJob:startTimer", "meth_supplies_ped")
                 local sounds = {
                   {sound = "Shout_Threaten_Ped", param = "Speech_Params_Force_Shouted_Critical"},
@@ -193,8 +191,8 @@ AddEventHandler("methJob:getSupplies", function(supplyType)
         for i = 1, #peds do
             if peds[i].name == "meth_supplies_ped_quality" then
                 meth.pedIsBusy = true
-                TaskGoStraightToCoord(peds[i].handle, -1150.1939697266, 4940.9306640625, 222.26870727539, 2, -1)
-                SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
+                --TaskGoStraightToCoord(peds[i].handle, -1150.1939697266, 4940.9306640625, 222.26870727539, 2, -1)
+                --SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
                 TriggerServerEvent("methJob:startTimer", "meth_supplies_ped_quality")
                 local sounds = {
                   {sound = "Shout_Threaten_Ped", param = "Speech_Params_Force_Shouted_Critical"},
