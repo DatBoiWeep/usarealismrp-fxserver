@@ -680,8 +680,8 @@ Config.recipes = {
             name = "Hand Grenade",
             image = "https://static.wikia.nocookie.net/gtawiki/images/5/52/Grenade-GTAV.png/revision/latest?cb=20190809090848",
             requires = {
-                { name = "Metal Scraps", quantity = 2 },
-                { name = "Black Powder", quantity = 3 }
+                { name = "Metal Scraps", quantity = 3 },
+                { name = "Black Powder", quantity = 5 }
             },
             produces = {
                 {
@@ -723,7 +723,7 @@ Config.recipes = {
             image = "https://i.imgur.com/twK3t2s.png",
             requires = {
                 { name = "7.62mm Shell Casing", quantity = 10 },
-                { name = "Gun Powder", quantity = 1 }
+                { name = "Gun Powder", quantity = 2 }
             },
             produces = {
                 {
@@ -734,7 +734,7 @@ Config.recipes = {
                     objectModel = "prop_ld_ammo_pack_03"
                 }
             },
-            requiredCraftingLevel = 1,
+            requiredCraftingLevel = 2,
             type = "ammo",
             craftDurationSeconds = 3 * 60
         },
@@ -743,7 +743,7 @@ Config.recipes = {
             image = "https://i.imgur.com/ivr2Jcg.png",
             requires = {
                 { name = "5.56mm Shell Casing", quantity = 10 },
-                { name = "Gun Powder", quantity = 1 }
+                { name = "Gun Powder", quantity = 2 }
             },
             produces = {
                 {
@@ -754,7 +754,7 @@ Config.recipes = {
                     objectModel = "prop_ld_ammo_pack_03"
                 }
             },
-            requiredCraftingLevel = 1,
+            requiredCraftingLevel = 2,
             type = "ammo",
             craftDurationSeconds = 3 * 60
         },
@@ -763,7 +763,7 @@ Config.recipes = {
             image = "https://i.imgur.com/TFW3q4q.png",
             requires = {
                 { name = "9x18mm Shell Casing", quantity = 10 },
-                { name = "Gun Powder", quantity = 1 }
+                { name = "Gun Powder", quantity = 2 }
             },
             produces = {
                 {
@@ -774,7 +774,7 @@ Config.recipes = {
                     objectModel = "prop_ld_ammo_pack_03"
                 }
             },
-            requiredCraftingLevel = 1,
+            requiredCraftingLevel = 2,
             type = "ammo",
             craftDurationSeconds = 3 * 60
         },
