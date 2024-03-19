@@ -3,7 +3,7 @@ math.random(); math.random(); -- prepare random price generator
 
 local markets = {
   ['marketA'] = {
-    ['coords'] = {-424.69351196289, 179.0447845459, 80.596160888672}, -- los santos
+    ['coords'] = {-1107.8990478516, -1642.3686523438, 4.6405258178711}, -- los santos
     ['items'] = {
       {name = 'Lockpick', type = 'misc', price = 150, legality = 'illegal', quantity = 1, weight = 5, stock = math.random(0, 7)},
       --{name = 'Pistol', type = 'weapon', hash = 453432689, price = 3000, legality = 'illegal', quantity = 1, weight = 10, stock = math.random(0, 3), objectModel = "w_pi_pistol"},
@@ -45,7 +45,7 @@ local markets = {
     ["pedHash"] = -48477765
   },
   ['marketB'] = {
-    ['coords'] = {-1936.9052734375, 2051.40625, 140.83247375488}, -- Vineyard
+    ['coords'] = {1364.1737060547, 6549.888671875, 14.540022850037}, -- Very North
     ['items'] = {
       {name = 'Lockpick', type = 'misc', price = 150, legality = 'illegal', quantity = 1, weight = 5, stock = math.random(1, 5)},
       {name = 'Hotwiring Kit', type = 'misc', price = 300, legality = 'illegal', quantity = 1, weight = 10, stock = math.random(0, 8)},
@@ -69,7 +69,7 @@ local markets = {
     ["pedHash"] = -1773333796
   },
   ['marketC'] = {
-    ['coords'] = {4962.9575195313, -5108.0854492188, 2.9820621013641}, -- Island
+    ['coords'] = {5065.90625, -4590.8232421875, 2.8567626476288}, -- Island
     ['items'] = {
       { name = "Molotov", type = "weapon", hash = 615608432, price = 300, legality = "illegal", quantity = 1, weight = 20, stock = math.random(0, 3), objectModel = "w_ex_molotov"},
       --{ name = "Tommy Gun", type = "weapon", hash = 1627465347, price = 50000, legality = "illegal", quantity = 1, weight = 45, stock = math.random(0, 2), objectModel = "w_sb_gusenberg" },
@@ -92,7 +92,7 @@ local markets = {
     ['pedHash'] = 'mp_m_g_vagfun_01'
   },
   ['marketD'] = {
-    ['coords'] = {112.30765533447, -1961.1926269531, 20.95094871521}, -- Grove St.
+    ['coords'] = {805.32623291016, -2373.2253417969, 29.097282409668}, -- East Los Santos
     ['items'] = {
       { name = "Large Firework", type = "misc", price = 2000, legality = "illegal", quantity = 1, weight = 15, stock = math.random(1, 10), objectModel = "ind_prop_firework_03" },
       { name = "Firework Gun", type = "weapon", hash = 2138347493, price = 10000, legality = "illegal", quantity = 1, weight = 50, stock = math.random(1, 3), objectModel = "w_lr_firework" },
