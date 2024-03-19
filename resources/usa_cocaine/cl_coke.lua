@@ -22,7 +22,7 @@ local COORDS = {
     }
 }
 
-local SUPPLY_PICKUP_COORDS = vector3(2832.9826660156, 4571.947265625, 46.952602386475)
+local SUPPLY_PICKUP_COORDS = vector3(886.9033203125, -953.30474853516, 39.213241577148)
 
 local COKE_SUPPLY_WAIT_TIME = 45000
 local COCAINE_PROCESS_WAIT_TIME = 55000
@@ -33,7 +33,14 @@ local INPUT_KEY = 38 -- E
 
 local cocaine = {
     peds = {
-        {x = 2832.9826660156, y = 4571.947265625, z = 46.952602386475, heading = 189.7925567627, name = 'coke_supplies_ped', model = "IG_LESTERCREST"}
+        {
+            x = SUPPLY_PICKUP_COORDS.x,
+            y = SUPPLY_PICKUP_COORDS.y,
+            z = SUPPLY_PICKUP_COORDS.z,
+            heading = 358.7925567627,
+            name = 'coke_supplies_ped',
+            model = "IG_LESTERCREST"
+        }
     },
     requiredItem = "Razor Blade",
     requiredSupplies = 'Uncut Cocaine',
@@ -123,7 +130,7 @@ Citizen.CreateThread(function()
         local playerCoords = GetEntityCoords(playerPed)
         DrawText3D(1088.18, -3187.18, -38.85, 5, '[E] - Exit')
         DrawText3D(1181.63, -3113.83, 6.03, 3, '[E] - Enter')
-        DrawText3D(2832.9826660156, 4571.947265625, 46.952602386475, 5, '[E] - Buy Uncut Cocaine (~g~$' .. UNCUT_PRICE .. '.00~w~)')
+        DrawText3D(SUPPLY_PICKUP_COORDS.x, SUPPLY_PICKUP_COORDS.y, SUPPLY_PICKUP_COORDS.z, 5, '[E] - Buy Uncut Cocaine (~g~$' .. UNCUT_PRICE .. '.00~w~)')
         for i = 1, #COORDS.PROCESSING do
             DrawText3D(COORDS.PROCESSING[i].X, COORDS.PROCESSING[i].Y, COORDS.PROCESSING[i].Z, 5, '[E] - Process Cocaine')
         end
@@ -132,7 +139,7 @@ Citizen.CreateThread(function()
                 DoorTransition(playerPed, 1088.68, -3187.58, -38.99, 180.0)
             elseif GetDistanceBetweenCoords(playerCoords, 1088.68, -3187.58, -38.99, true) < 0.7 then -- leave coke location
                 DoorTransition(playerPed, 1181.63, -3113.83, 6.03, 89.15)
-            elseif GetDistanceBetweenCoords(playerCoords, 2832.9826660156, 4571.947265625, 46.952602386475, true) < 2 and not cocaine.pedIsBusy then -- purchase supplies  
+            elseif GetDistanceBetweenCoords(playerCoords, SUPPLY_PICKUP_COORDS.x, SUPPLY_PICKUP_COORDS.y, SUPPLY_PICKUP_COORDS.z, true) < 2 and not cocaine.pedIsBusy then -- purchase supplies  
                 if not cocaine.activeJob then
                     TriggerServerEvent("cocaineJob:checkUserMoney", cocaine.requiredSupplies)
                     Wait(500)
@@ -185,7 +192,7 @@ Citizen.CreateThread(function()
         local z = cocaine.peds[j].z
 
         --Citizen.Trace("spawned in ped # " .. i)
-        local ped = CreatePed(4, hash, x, y, z, 175.189 --[[Heading]], false --[[Networked, set to false if you just want to be visible by the one that spawned it]], false --[[Dynamic]])
+        local ped = CreatePed(4, hash, x, y, z, cocaine.peds[j].heading --[[Heading]], false --[[Networked, set to false if you just want to be visible by the one that spawned it]], false --[[Dynamic]])
         SetEntityCanBeDamaged(ped,false)
         SetPedCanRagdollFromPlayerImpact(ped,false)
         TaskSetBlockingOfNonTemporaryEvents(ped,true)
@@ -317,13 +324,13 @@ AddEventHandler("cocaineJob:getSupplies", function(supplyType)
     for i = 1, #peds do
         if peds[i].name == "coke_supplies_ped" then
             cocaine.pedIsBusy = true
-            TaskGoStraightToCoord(peds[i].handle, 2840.2087402344, 4571.0146484375, 46.701831817627, 2, -1, 294.20455932617)
-            SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
+           -- TaskGoStraightToCoord(peds[i].handle, peds[i].walkToX, peds[i].walkToY, peds[i].walkToZ, 2, -1, 294.20455932617)
+            --SetBlockingOfNonTemporaryEvents(peds[i].handle, false)
             local beginTime = GetGameTimer()
             local sounds = {
-              {sound = "Shout_Threaten_Ped", param = "Speech_Params_Force_Shouted_Critical"},
-              {sound = "Shout_Threaten_Gang", param = "Speech_Params_Force_Shouted_Critical"},
-              {sound = "Generic_Hi", param = "Speech_Params_Force"}
+                {sound = "Shout_Threaten_Ped", param = "Speech_Params_Force_Shouted_Critical"},
+                {sound = "Shout_Threaten_Gang", param = "Speech_Params_Force_Shouted_Critical"},
+                {sound = "Generic_Hi", param = "Speech_Params_Force"}
             }
             local random_sound = sounds[math.random(1, tonumber(#sounds))]
             PlayAmbientSpeech1(peds[i].handle, random_sound.sound, random_sound.param)
