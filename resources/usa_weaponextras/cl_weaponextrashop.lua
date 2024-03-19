@@ -26,7 +26,7 @@ local locations = {
   { x = 845.79321289063, y = -1034.9332275391, z = 28.1965675354, legal = true }, -- Vespucci
   --{ x = 129.6, y = -1920.3, z = 21.3, legal = false } -- grove st
   --{ x = 752.996, y = -3192.206, z = 6.07, legal = false } -- terminal, industrial LS
-  {x = 180.8, y = 2793.2, z = 45.7, legal = false, ped = { heading = 260.0, hash = -907676309 }}, -- sandy shores, harmony area
+  {x = -1512.1514892578, y = 1520.1346435547, z = 115.28854370117, legal = false, ped = { heading = 75.0, hash = -907676309 }}, -- valley area
   { x = -540.18902587891, y = -588.16094970703, z = 34.681781768799, legal = true}, -- MLO Gun Store
   { x = 816.65960693359, y = -2150.2551269531, z = 29.619186401367, legal = true } -- Popular St.
 }
