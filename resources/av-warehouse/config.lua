@@ -63,13 +63,13 @@ Config.Rewards = {
 		type = 'items',		
 		reward = {
 			[1] = { name = ".50 Cal Bullets", type = "ammo", price = 500, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_01" },
-			[2] = { name = "5.56mm Bullets", type = "ammo", price = 600, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_03"  },
-			[3] = { name = "7.62mm Bullets", type = "ammo", price = 600, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_03" },
+			[2] = { name = "5.56mm Shell Casing", price = 100, legality = "legal", quantity = 30, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
+			[3] = { name = "7.62mm Shell Casing", price = 100, legality = "legal", quantity = 30, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
 			[4] = { name = "9mm Bullets", type = "ammo", price = 300, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_01" },
 			[5] = { name = ".45 Bullets", type = "ammo", price = 375, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_01" },
 			[6] = { name = "Musket Ammo", type = "ammo", price = 300, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_02" },
 			[7] = { name = "12 Gauge Shells", type = "ammo", price = 300, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_02" },
-			[8] = { name = "9x18mm Bullets", type = "ammo", price = 350, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_01" },
+			[8] = { name = "9x18mm Shell Casing", price = 100, legality = "legal", quantity = 30, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
 			[9] = { name = "Firework Projectile", legality = "illegal", type = "ammo", price = 400, weight = 15, quantity = 1 },
 			[10] = { name = "Firework Projectile", legality = "illegal", type = "ammo", price = 400, weight = 15, quantity = 1 },
 		}
