@@ -28,114 +28,110 @@ function DepositPayCheck(char)
 
     if job == "sheriff" or job == "highwaypatrol" or job == "fbi" then
         local cop_rank = char.get("policeRank")
-        paycheckAmount = 850 -- Cadet
+        paycheckAmount = 250 -- Cadet
         if cop_rank == 2 then
-            paycheckAmount = 950 -- Trooper
+            paycheckAmount = 350 -- Trooper
         elseif cop_rank == 3 then
-            paycheckAmount = 1050 -- Sr Trooper
+            paycheckAmount = 450 -- Sr Trooper
         elseif cop_rank == 4 then
-            paycheckAmount = 1150 -- Lead Sr Trooper
+            paycheckAmount = 550 -- Lead Sr Trooper
         elseif cop_rank == 5 then
-            paycheckAmount = 1250 -- Corporal
+            paycheckAmount = 650 -- Corporal
         elseif cop_rank == 6 then
-            paycheckAmount = 1350 -- Sergeant
+            paycheckAmount = 750 -- Sergeant
         elseif cop_rank == 7 then
-            paycheckAmount = 1450 -- Staff Sergeant
+            paycheckAmount = 850 -- Staff Sergeant
         elseif cop_rank == 8 then
-            paycheckAmount = 1650 -- Lieutenant
+            paycheckAmount = 950 -- Lieutenant
         elseif cop_rank == 9 then
-            paycheckAmount = 1750 -- Captain
+            paycheckAmount = 1050 -- Captain
         elseif cop_rank == 10 then
-            paycheckAmount = 1850 -- Assistant Commissioner
+            paycheckAmount = 1150 -- Assistant Commissioner
         elseif cop_rank == 11 then
-            paycheckAmount = 1950 -- Deputy Commissioner
+            paycheckAmount = 1250 -- Deputy Commissioner
         elseif cop_rank == 12 then
-            paycheckAmount = 2000 -- Commissioner
+            paycheckAmount = 1300 -- Commissioner
         elseif cop_rank == 13 then
-            paycheckAmount = 2000 -- Minipunch
+            paycheckAmount = 1300 -- Minipunch
         end
     elseif job == "ems" then
         local rank = char.get("emsRank")
-        paycheckAmount = 950 -- Probationary Fire Paramedic
+        paycheckAmount = 450 -- Probationary Fire Paramedic
         if rank == 2 then
-            paycheckAmount = 1050 -- Fire Paramedic
+            paycheckAmount = 550 -- Fire Paramedic
         elseif rank == 3 then
-            paycheckAmount = 1150 -- Sr. Fire Paramedic
+            paycheckAmount = 650 -- Sr. Fire Paramedic
         elseif rank == 4 then
-            paycheckAmount = 1250 -- Engineer
+            paycheckAmount = 750 -- Engineer
         elseif rank == 5 then
-            paycheckAmount = 1350 -- Lieutenant
+            paycheckAmount = 850 -- Lieutenant
         elseif rank == 6 then
-            paycheckAmount = 1450 -- Captain
+            paycheckAmount = 950 -- Captain
         elseif rank == 7 then
-            paycheckAmount = 1650 -- Battalion Chief
+            paycheckAmount = 1150 -- Battalion Chief
         elseif rank == 8 then
-            paycheckAmount = 1750 -- Assistant Fire Chief
+            paycheckAmount = 1250 -- Assistant Fire Chief
         elseif rank == 9 then
-            paycheckAmount = 1950 -- Fire Chief
+            paycheckAmount = 1450 -- Fire Chief
         end
     elseif job == "mechanic" then
-        paycheckAmount = 650
+        paycheckAmount = 150
     elseif job == "reporter" then
-        paycheckAmount = 500
+        paycheckAmount = 150
     elseif job == "judge" then
-        paycheckAmount = 2800
+        paycheckAmount = 1800
     elseif job == "corrections" then
         local bcsoRank = char.get("bcsoRank")
-        paycheckAmount = 650 --Correctional Deputy
+        paycheckAmount = 175 --Correctional Deputy
         if bcsoRank == 2 then
-            paycheckAmount = 750 --Sr Correctional Deputy
+            paycheckAmount = 200 --Sr Correctional Deputy
         elseif bcsoRank == 3 then
-            paycheckAmount = 950 --Probational Deputy
+            paycheckAmount = 250 --Probational Deputy
         elseif bcsoRank == 4 then
-            paycheckAmount = 1050 -- Sheriff's Deputy
+            paycheckAmount = 350 -- Sheriff's Deputy
         elseif bcsoRank == 5 then
-            paycheckAmount = 1150 -- Senior Sheriff's Deputy
+            paycheckAmount = 450 -- Senior Sheriff's Deputy
         elseif bcsoRank == 6 then
-            paycheckAmount = 1250 -- Corporal
+            paycheckAmount = 550 -- Corporal
         elseif bcsoRank == 7 then
-            paycheckAmount = 1450 -- Sergeant
+            paycheckAmount = 650 -- Sergeant
         elseif bcsoRank == 8 then
-            paycheckAmount = 1550 -- Captain
+            paycheckAmount = 750 -- Captain
         elseif bcsoRank == 9 then
-            paycheckAmount = 1650 -- Commander
+            paycheckAmount = 850 -- Commander
         elseif bcsoRank == 10 then
-            paycheckAmount = 1850 -- Undersheriff
+            paycheckAmount = 1200 -- Undersheriff
         elseif bcsoRank == 11 then
-            paycheckAmount = 1950 -- Sheriff
+            paycheckAmount = 1300 -- Sheriff
         end
     elseif job == "lawyer" then
         paycheckAmount = 2000
     elseif job == "doctor" then
         local rank = char.get("doctorRank")
-        paycheckAmount = 1800 -- Intern Nurse/Doctor
+        paycheckAmount = 550 -- Intern Nurse/Doctor
         if rank == 2 then
-            paycheckAmount = 1900 -- Registered Nurse/Resident Doctor
+            paycheckAmount = 650 -- Registered Nurse/Resident Doctor
         elseif rank == 3 then
-            paycheckAmount = 2000 -- Attending Doctor/Psychiatrist
+            paycheckAmount = 750 -- Attending Doctor/Psychiatrist
         elseif rank == 4 then
-            paycheckAmount = 2250 -- Team Leader
+            paycheckAmount = 850 -- Team Leader
         elseif rank == 5 then
-            paycheckAmount = 2400 -- Director of Department
+            paycheckAmount = 950 -- Director of Department
         elseif rank == 6 then
-            paycheckAmount = 2500 -- Co-Dean of Med
+            paycheckAmount = 1100 -- Co-Dean of Med
         elseif rank == 7 then
-            paycheckAmount = 2700 -- Dean of Med
+            paycheckAmount = 1500 -- Dean of Med
         end
     elseif job == "da" then
-        paycheckAmount = 2000
-    elseif job == 'BurgerShotEmployee' then
-        paycheckAmount = 1200
+        paycheckAmount = 1500
     elseif job == "eventPlanner" then
-        paycheckAmount = 1000
+        paycheckAmount = 500
     elseif job == "metroDriver" then
         paycheckAmount = 650
     elseif job == "trainDriver" then
         paycheckAmount = 750
-    elseif job == "CatCafeEmployee" then
-        paycheckAmount = 1000
     else
-        paycheckAmount = 25 -- welfare amount (no job)
+        paycheckAmount = 20 -- welfare amount (no job)
         isWelfare = true
     end
 
