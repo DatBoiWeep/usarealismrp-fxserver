@@ -84,7 +84,7 @@ Citizen.CreateThread(function()
 				DrawSpecialText("Press ~g~E~w~ to grab a chicken")
 				if IsControlJustPressed(1,38) then
 					TriggerServerEvent("chickenJob:getChicken")
-					Wait(150)
+					Wait(5000)
 				end
 			end
 		elseif GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, locations.slaughterCircle.x, locations.slaughterCircle.y, locations.slaughterCircle.z, true) < 3 then
@@ -92,6 +92,7 @@ Citizen.CreateThread(function()
 				DrawSpecialText("Press ~g~E~w~ to slaughter a chicken")
 				if IsControlJustPressed(1,38) then
 					TriggerServerEvent("chickenJob:killChicken")
+					Wait(2000)
 				end
 			end
 		elseif GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, locations.pluckCircle.x, locations.pluckCircle.y, locations.pluckCircle.z, true) < 3 then
@@ -99,6 +100,7 @@ Citizen.CreateThread(function()
 				DrawSpecialText("Press ~g~E~w~ to start plucking feathers")
 				if IsControlJustPressed(1,38) then
 					TriggerServerEvent("chickenJob:pluckChicken")
+					Wait(2000)
 				end
 			end
 		elseif GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, locations.harvestCircle.x, locations.harvestCircle.y, locations.harvestCircle.z, true) < 4 then
@@ -106,6 +108,7 @@ Citizen.CreateThread(function()
 				DrawSpecialText("Press ~g~E~w~ to cut the meat from the bones")
 				if IsControlJustPressed(1,38) then
 					TriggerServerEvent("chickenJob:chopChicken")
+					Wait(2000)
 				end
 			end
 		elseif GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, locations.depositCircle.x, locations.depositCircle.y, locations.depositCircle.z, true) < 3 then
@@ -113,6 +116,7 @@ Citizen.CreateThread(function()
 				DrawSpecialText("Press ~g~E~w~ to drop the meat in a bin")
 				if IsControlJustPressed(1,38) then
 					TriggerServerEvent("chickenJob:depositChickenMeat")
+					Wait(2000)
 				end
 			end
 		else	-- if player is not in range of any circle but they are processing something, kill the task
