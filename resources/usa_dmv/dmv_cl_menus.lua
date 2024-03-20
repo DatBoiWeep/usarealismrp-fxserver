@@ -32,7 +32,7 @@ Citizen.CreateThread(function()
             vein:beginWindow(windowX, windowY) -- Mandatory
 
             vein:beginRow()
-                drawLabel('Custom Vehicle License Plate ($7,000)')
+                drawLabel('Custom Vehicle License Plate')
             vein:endRow()
 
             vein:beginRow()

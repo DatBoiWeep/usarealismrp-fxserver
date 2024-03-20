@@ -108,5 +108,17 @@ TEBEX_PACKAGE_FUNCTIONS = {
         char.giveItem(randomPotion)
         TriggerClientEvent("usa:notify", src, "Magic potion claimed!", "INFO: Random magic potion claimed!")
         return true
+    end,
+    customPlateCredit = function(src)
+        local playerAccountIdent = exports.essentialmode:getPlayerFromId(src).getIdentifier()
+        local customPlateCreditDoc = exports.essentialmode:getDocument("custom-plate-credits", playerAccountIdent)
+        if customPlateCreditDoc then
+            exports.essentialmode:updateDocument("custom-plate-credits", playerAccountIdent, { count = customPlateCreditDoc.count + 1 })
+            TriggerClientEvent("usa:notify", src, "Plate credit added!", "^3INFO ^0Custom license plate credit has been successfully added to your account! Current count: " .. customPlateCreditDoc.count + 1)
+        else
+            exports.essentialmode:createDocumentWithId("custom-plate-credits", playerAccountIdent, { count = 1 })
+            TriggerClientEvent("usa:notify", src, "Plate credit added!", "^3INFO ^0Custom license plate credit has been successfully added to your account! Current count: 1")
+        end
+        return true
     end
 }

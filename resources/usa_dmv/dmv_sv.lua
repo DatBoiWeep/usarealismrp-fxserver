@@ -1,5 +1,6 @@
 local DL_PRICE = 250
 local CUSTOM_PLATE_PRICE = 7000
+local SKIP_IN_GAME_PAYMENT = true
 
 local BLACKLISTED_PLATE_PHRASES = {
 	"nigger",
@@ -85,6 +86,13 @@ RegisterServerEvent("dmv:orderCustomPlate")
 AddEventHandler("dmv:orderCustomPlate", function(oldPlate, newPlate)
 	local src = source
 	local c = exports["usa-characters"]:GetCharacter(src)
+	local playerAccountIdent = exports.essentialmode:getPlayerFromId(src).getIdentifier()
+	local customPlateCreditsDoc = (exports.essentialmode:getDocument("custom-plate-credits", playerAccountIdent) or { count = 0 })
+	print("custom plate credits: " .. customPlateCreditsDoc.count)
+	if customPlateCreditsDoc.count <= 0 then
+		TriggerClientEvent("usa:notify", src, "Need more credits!", "^3INFO: ^0You don't have any custom license plate credits. Go to https://store.usarrp.gg to purchase a custom license plate credit.")
+		return
+	end
 	oldPlate = exports.globals:trim(oldPlate:upper())
 	newPlate = exports.globals:trim(newPlate:upper())
 	if newPlate == "" or oldPlate == "" then
@@ -100,7 +108,7 @@ AddEventHandler("dmv:orderCustomPlate", function(oldPlate, newPlate)
 		return
 	end
 	if doesCharacterOwnVehicle(c, oldPlate) then
-		if c.get("bank") >= CUSTOM_PLATE_PRICE then
+		if c.get("bank") >= CUSTOM_PLATE_PRICE or SKIP_IN_GAME_PAYMENT then
 			if not getVehicleDBDoc(newPlate) then
 				if not containsBlacklistedPhrase(newPlate) then
 					TriggerEvent("es:exposeDBFunctions", function(db)
@@ -127,10 +135,14 @@ AddEventHandler("dmv:orderCustomPlate", function(oldPlate, newPlate)
 						end
 						c.set("vehicles", vehs)
 						-- charge fee
-						c.removeBank(CUSTOM_PLATE_PRICE, "DMV Custom Plate")
+						if not SKIP_IN_GAME_PAYMENT then
+							c.removeBank(CUSTOM_PLATE_PRICE, "DMV Custom Plate")
+							TriggerClientEvent("usa:notify", src, "~y~Fee:~w~ " .. exports.globals:comma_value(CUSTOM_PLATE_PRICE))
+						end
+						-- decrement custom plate credit
+						exports.essentialmode:updateDocument("custom-plate-credits", playerAccountIdent, { count = customPlateCreditsDoc.count - 1 })
 						-- notify success
 						TriggerClientEvent("usa:notify", src, "Plate updated!")
-						TriggerClientEvent("usa:notify", src, "~y~Fee:~w~ " .. exports.globals:comma_value(CUSTOM_PLATE_PRICE))
 						-- notify garages to bypass vehicle plate ownership check for a vehicle that was used to drive to the DMV
 						TriggerEvent("garage:notifyOfPlateChange", src, oldPlate, newPlate)
 						-- send to discord #dmv-log --
