@@ -105,7 +105,7 @@ function DepositPayCheck(char)
             paycheckAmount = 1300 -- Sheriff
         end
     elseif job == "lawyer" then
-        paycheckAmount = 2000
+        paycheckAmount = 1000
     elseif job == "doctor" then
         local rank = char.get("doctorRank")
         paycheckAmount = 550 -- Intern Nurse/Doctor
