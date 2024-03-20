@@ -771,7 +771,7 @@ Config.recipes = {
             craftDurationSeconds = 3 * 60
         },
         {
-            name = "30 round Magazine (7.62mm)",
+            name = "7.62mm Mag [30]",
             image = "https://i.imgur.com/2AOnIid.png",
             requires = {
                 { name = "Sheet Metal", quantity = 5 },
@@ -794,7 +794,7 @@ Config.recipes = {
             craftDurationSeconds = 2 * 60
         },
         {
-            name = "30 round Magazine (5.56mm)",
+            name = "5.56mm Mag [30]",
             image = "https://i.imgur.com/9tK7cKI.png",
             requires = {
                 { name = "Sheet Metal", quantity = 5 },
@@ -817,7 +817,7 @@ Config.recipes = {
             craftDurationSeconds = 2 * 60
         },
         {
-            name = "18 round Magazine (9x18mm)",
+            name = "9x18mm Mag [18]",
             image = "https://i.imgur.com/brGIZW0.png",
             requires = {
                 { name = "Sheet Metal", quantity = 2 },
@@ -887,23 +887,23 @@ Config.recipes = {
             type = "weapons"
         },
         {
-          name = "FN SCAR SC",
-          image = "https://i.imgur.com/m2C9Z7x.png",
-          requires = {
-              { name = "FN SCAR SC Gun Cast", quantity = 1 },
-              { name = "Metal Spring", quantity = 3 },
-              { name = "Steel", quantity = 6 },
-              { name = "Aluminum", quantity = 3 },
-          },
-          produces = {
-              {
-                  name = "FN SCAR SC",
-                  hash = GetHashKey("WEAPON_SCARSC"),
-                  quantity = 1,
-                  type = "weapon",
-                  weight = 28,
-                  objectModel = "w_sb_smg",
-                  notStackable = true
+            name = "FN SCAR SC",
+            image = "https://i.imgur.com/m2C9Z7x.png",
+            requires = {
+                { name = "FN SCAR SC Gun Cast", quantity = 1 },
+                { name = "Metal Spring", quantity = 3 },
+                { name = "Steel", quantity = 6 },
+                { name = "Aluminum", quantity = 3 },
+            },
+            produces = {
+                {
+                    name = "FN SCAR SC",
+                    hash = GetHashKey("WEAPON_SCARSC"),
+                    quantity = 1,
+                    type = "weapon",
+                    weight = 28,
+                    objectModel = "w_sb_smg",
+                    notStackable = true
                 }
             },
             requiredCraftingLevel = 3,

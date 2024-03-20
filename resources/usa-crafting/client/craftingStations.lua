@@ -1,6 +1,7 @@
 local globals = exports.globals
 local isMenuOpen = false
 local alreadyCrafting = false
+local loadedItemImages = false
 
 function spawnCraftingStation(station)
     local handle = CreateObject(station.object.model, station.coords, false, false, false)
@@ -11,9 +12,17 @@ function spawnCraftingStation(station)
 end
 
 function ToggleGui()
-    SendNUIMessage({
-        type = "toggle"
-    })
+    if not isMenuOpen and not loadedItemImages then
+        SendNUIMessage({
+            type = "toggle",
+            ITEM_IMAGES = ITEM_IMAGES
+        })
+        loadedItemImages = true
+    else
+        SendNUIMessage({
+            type = "toggle"
+        })
+    end
     SetNuiFocus(not isMenuOpen, not isMenuOpen)
     isMenuOpen = not isMenuOpen
 end

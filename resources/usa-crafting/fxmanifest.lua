@@ -10,6 +10,7 @@ shared_scripts {
 }
 
 client_scripts {
+    "@interaction-menu/itemImages.lua",
     '@salty_tokenizer/init.lua',
     "client/*.lua"
 }

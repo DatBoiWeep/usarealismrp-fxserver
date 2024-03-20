@@ -6,7 +6,8 @@ var craftingInterfaceApp = new Vue({
             recipe: {
                 image: ""
             }
-        }
+        },
+        ITEM_IMAGES: []
     },
     methods: {
      showModal(recipe) {
@@ -21,7 +22,10 @@ var craftingInterfaceApp = new Vue({
         $.post('http://usa-crafting/attemptCraft', JSON.stringify({
             recipe: this.modal.recipe
         }));
-     }
+    },
+    getItemImage(itemName) {
+        return "https://cfx-nui-interaction-menu/ui/images/" + this.ITEM_IMAGES[itemName]
+    }
     },
     computed: {
          
@@ -41,6 +45,7 @@ $(function() {
                 document.body.style.display = "none";
             } else {
                 document.body.style.display = "flex";
+                craftingInterfaceApp.ITEM_IMAGES = event.data.ITEM_IMAGES;
                 $.post('http://usa-crafting/fetchUnlockedRecipes', JSON.stringify({}));
             }
         } else if (event.data.type == "gotUnlockedRecipes") {

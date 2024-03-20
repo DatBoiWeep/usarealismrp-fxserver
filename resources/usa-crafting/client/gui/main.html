@@ -18,7 +18,7 @@
 					<h2>{{ modal.recipe.name }}</h2>
 				</header>
 				<div class="w3-container w3-padding-16">
-					<img class="recipe-image" v-bind:src="modal.recipe.image">
+					<img class="recipe-image" v-bind:src="getItemImage(modal.recipe.name)">
 					<p>Requires:</p>
 					<p v-for="(requiredItem, index) in modal.recipe.requires">{{requiredItem.quantity}}x {{requiredItem.name}}</p>
 				</div>
@@ -34,7 +34,7 @@
 				<div id="recipes">
 					<div id="recipes-container">
 						<div v-for="(recipe, index) in unlockedRecipes" class="recipe-container w3-center" @click="showModal(recipe)">
-							<img class="recipe-image" v-bind:src="recipe.image">
+							<img class="recipe-image" v-bind:src="getItemImage(recipe.name)">
 							<p class="recipe-name">{{ recipe.name }}</p>
 						</div>
 					</div>
