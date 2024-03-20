@@ -25,7 +25,7 @@ end
 function AddItem(source, name, amount)
     local char = exports["usa-characters"]:GetCharacter(source)
     if name == "money" then
-        amount = amount + math.random(0, 200)
+        amount = amount + math.random(0, 150)
         char.giveBank(amount)
         TriggerClientEvent("usa:notify", source, "Earned: $" .. exports.globals:comma_value(amount), "^3INFO: ^0Earned: $" .. exports.globals:comma_value(amount))
         return true

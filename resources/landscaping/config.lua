@@ -111,7 +111,7 @@ Config.Workplace = { -- Where landscapers can start work, and get their required
             {
                 label = "Lawnmower",
                 item = "lawnmower",
-                price = 300,
+                price = 175,
             },
             {
                 label = "Leafblower",
@@ -250,7 +250,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario.
-            {type = "money", amount = 650},
+            {type = "money", amount = 400},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -267,7 +267,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario.
-            {type = "money", amount = 650},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -487,7 +487,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -532,7 +532,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -549,7 +549,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -566,7 +566,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -583,7 +583,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -631,7 +631,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
         spread = 40, -- Amount of leaves to place inside the area.
         offset = 0.02, -- Offset of the Z-coordinate of each prop placed in the area.
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 650},
+            {type = "money", amount = 400},
             {type = "xp", name = "landscaping", amount = 700},
         }
     },
@@ -648,7 +648,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -665,7 +665,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -691,7 +691,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -744,7 +744,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -761,7 +761,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -778,7 +778,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -795,7 +795,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -812,7 +812,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -829,7 +829,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -846,7 +846,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -863,7 +863,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -880,7 +880,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -897,7 +897,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -914,7 +914,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -931,7 +931,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -948,7 +948,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -965,7 +965,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
@@ -982,7 +982,7 @@ Config.Scenarios = { -- This is where you'll add work for landscapers to do.
             offset = -0.2, -- Offset of the Z-coordinate of each prop placed in the area.
         },
         rewards = { -- Rewards for finishing the scenario. Rewards are split amongst those that help clear it.
-            {type = "money", amount = 500},
+            {type = "money", amount = 175},
             {type = "xp", name = "landscaping", amount = 1000},
         }
     },
