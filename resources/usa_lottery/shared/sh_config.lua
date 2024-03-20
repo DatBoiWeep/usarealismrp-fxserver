@@ -4,7 +4,7 @@ Config = {
 
     PedLocation = vector4(-1083.13, -245.57, 36.76, 200.8), -- This is where the ped will spawn.
 
-    TicketPrice = 5000, -- Total amount the tickets cost.
+    TicketPrice = 1000, -- Total amount the tickets cost.
 
     TargetLocation = vector3(-1083.13, -245.57, 37.76), -- This is where the target location is.
 

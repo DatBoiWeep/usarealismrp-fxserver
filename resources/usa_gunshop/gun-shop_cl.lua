@@ -123,8 +123,11 @@ Citizen.CreateThread(function()
 	    			TriggerServerEvent('gunShop:requestOpenMenu')
 						closest_location = locations[i]
 					else -- held
+						--[[
 						local business = exports["usa-businesses"]:GetClosestStore(15)
 						TriggerServerEvent("gunShop:purchaseLicense", business)
+						--]]
+						exports.globals:notify("Speak with a judge or LEO command staff member to get a weapon's license")
 					end
 				end
     	end

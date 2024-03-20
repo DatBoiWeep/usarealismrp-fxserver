@@ -89,15 +89,15 @@ RegisterServerEvent("containerjob:reward")
 AddEventHandler("containerjob:reward", function(securityToken)
 	if not exports['salty_tokenizer']:secureServerEvent(GetCurrentResourceName(), source, securityToken) then
 		return false
-	end
+    end
     if onJob[source] then
         targetContainer = onJob[source]
         -- calculate reward based on distance from drop off
         local dist = #(vector3(targetContainer.x, targetContainer.y, targetContainer.z) - vector3(CONTAINER_DROP_OFF.x, CONTAINER_DROP_OFF.y, CONTAINER_DROP_OFF.z))
-        local reward = math.floor(dist * 4.15)
+        local reward = math.floor(dist * 1.25)
         -- give reward
         local char = exports["usa-characters"]:GetCharacter(source)
-        reward = reward + math.random(0, 500)
+        reward = reward + math.random(0, 250)
         char.giveBank(reward, "Container Reward")
         TriggerClientEvent("usa:notify", source, "~g~Reward:~w~ $" .. exports.globals:comma_value(reward), "Container Reward: $" .. exports.globals:comma_value(reward))
         -- reset state
