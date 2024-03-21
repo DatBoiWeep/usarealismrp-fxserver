@@ -1,5 +1,6 @@
 local DISCORD_WEBHOOK_URL = GetConvar("lb-phone-media", "")
 local MEDIA_API_KEY = GetConvar("lb-phone-media-api-key", "")
+local WALLET_DISCORD_WEBHOOK_URL = GetConvar("lb-phone-wallet-webhook", "")
 
 -- Webhook for instapic posts, recommended to be a public channel
 INSTAPIC_WEBHOOK = DISCORD_WEBHOOK_URL
@@ -15,7 +16,7 @@ LOGS = {
     YellowPages = DISCORD_WEBHOOK_URL,
     Marketplace = DISCORD_WEBHOOK_URL,
     Mail = DISCORD_WEBHOOK_URL,
-    Wallet = DISCORD_WEBHOOK_URL,
+    Wallet = WALLET_DISCORD_WEBHOOK_URL,
     DarkChat = DISCORD_WEBHOOK_URL,
     Services = DISCORD_WEBHOOK_URL,
     Crypto = DISCORD_WEBHOOK_URL,
