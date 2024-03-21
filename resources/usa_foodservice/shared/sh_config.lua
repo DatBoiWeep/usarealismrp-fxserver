@@ -6,7 +6,7 @@ CONFIG = {
                 COORDS = vector3(-1195.634, -893.85, 13.88616),
                 MENU = {
                     {
-                        header = "($500) Money Shot Burger",
+                        header = "($250) Money Shot Burger",
                         context = "Double patty burger",
                         event = "bs:addOrderItem",
                         args = {
@@ -15,7 +15,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($375) The Bleeder Burger",
+                        header = "($185) The Bleeder Burger",
                         context = "Single patty burger",
                         event = "bs:addOrderItem",
                         args = {
@@ -24,7 +24,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($375) Torpedo Sandwich",
+                        header = "($185) Torpedo Sandwich",
                         context = "Sandwich",
                         event = "bs:addOrderItem",
                         args = {
@@ -33,7 +33,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($375) Meat Free Burger",
+                        header = "($200) Meat Free Burger",
                         context = "Plant based burger",
                         event = "bs:addOrderItem",
                         args = {
@@ -42,7 +42,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($175) French Fries",
+                        header = "($100) French Fries",
                         context = "Crispy french fries",
                         event = "bs:addOrderItem",
                         args = {
@@ -51,7 +51,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($350) Coca Cola",
+                        header = "($85) Coca Cola",
                         context = "A refreshing beverage",
                         event = "bs:addOrderItem",
                         args = {
@@ -77,22 +77,22 @@ CONFIG = {
             },
             ITEMS = {
                 ["Money Shot Burger"] = {
-                    PRICE = 500
+                    PRICE = 250
                 },
                 ["The Bleeder Burger"] = {
-                    PRICE = 375
+                    PRICE = 185
                 },
                 ["Torpedo Sandwich"] = {
-                    PRICE = 375
+                    PRICE = 185
                 },
                 ["Meat Free Burger"] = {
-                    PRICE = 375
+                    PRICE = 200
                 },
                 ["French Fries"] = {
-                    PRICE = 175
+                    PRICE = 100
                 },
                 ["Coca Cola"] = {
-                    PRICE = 350
+                    PRICE = 85
                 },
             },
             JOB_VEHICLE = {
@@ -134,7 +134,7 @@ CONFIG = {
                 COORDS = vector3(-584.7996, -1061.443, 22.3442),
                 MENU = {
                     {
-                        header = "($250) Fruit Tart",
+                        header = "($125) Fruit Tart",
                         context = "A delicious fruit tart snack",
                         event = "bs:addOrderItem",
                         args = {
@@ -143,7 +143,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($450) Pancake",
+                        header = "($200) Pancake",
                         context = "A delicious pancake",
                         event = "bs:addOrderItem",
                         args = {
@@ -152,7 +152,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($400) Miso Soup",
+                        header = "($125) Miso Soup",
                         context = "Delicious bowl of miso soup",
                         event = "bs:addOrderItem",
                         args = {
@@ -161,7 +161,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($500) UWU Sandwich",
+                        header = "($250) UWU Sandwich",
                         context = "A delicious cat cafe sandwich",
                         event = "bs:addOrderItem",
                         args = {
@@ -170,7 +170,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($250) Weepy Cupcake",
+                        header = "($125) Weepy Cupcake",
                         context = "A delicious cat cafe cupcake",
                         event = "bs:addOrderItem",
                         args = {
@@ -179,7 +179,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($250) Moon Mochi",
+                        header = "($125) Moon Mochi",
                         context = "Rice cake wrapped ice cream",
                         event = "bs:addOrderItem",
                         args = {
@@ -188,7 +188,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($500) Buddha Bowl",
+                        header = "($250) Buddha Bowl",
                         context = "The signature buddha bowl",
                         event = "bs:addOrderItem",
                         args = {
@@ -197,7 +197,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($500) Bento Box",
+                        header = "($250) Bento Box",
                         context = "The signature bento box",
                         event = "bs:addOrderItem",
                         args = {
@@ -206,7 +206,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($350) Espresso",
+                        header = "($85) Espresso",
                         context = "A cup of espresso",
                         event = "bs:addOrderItem",
                         args = {
@@ -215,7 +215,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($350) Macchiato",
+                        header = "($85) Macchiato",
                         context = "A cup of macchiato",
                         event = "bs:addOrderItem",
                         args = {
@@ -224,7 +224,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($350) Latte",
+                        header = "($85) Latte",
                         context = "A classic latte",
                         event = "bs:addOrderItem",
                         args = {
@@ -233,7 +233,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($350) Mocha",
+                        header = "($85) Mocha",
                         context = "A classic mocha coffee",
                         event = "bs:addOrderItem",
                         args = {
@@ -242,7 +242,7 @@ CONFIG = {
                         }
                     },
                     {
-                        header = "($350) Blueberry Bubble Tea",
+                        header = "($85) Blueberry Bubble Tea",
                         context = "A blueberry bubble tea",
                         event = "bs:addOrderItem",
                         args = {
@@ -268,43 +268,43 @@ CONFIG = {
             },
             ITEMS = {
                 ["Fruit Tart"] = {
-                    PRICE = 250
+                    PRICE = 125
                 },
                 ["Pancake"] = {
-                    PRICE = 450
+                    PRICE = 200
                 },
                 ["Miso Soup"] = {
-                    PRICE = 400
+                    PRICE = 125
                 },
                 ["UWU Sandwich"] = {
-                    PRICE = 500
+                    PRICE = 250
                 },
                 ["Weepy Cupcake"] = {
-                    PRICE = 250
+                    PRICE = 125
                 },
                 ["Moon Mochi"] = {
-                    PRICE = 250
+                    PRICE = 125
                 },
                 ["Buddha Bowl"] = {
-                    PRICE = 500
+                    PRICE = 250
                 },
                 ["Bento Box"] = {
-                    PRICE = 500
+                    PRICE = 250
                 },
                 ["Espresso"] = {
-                    PRICE = 350
+                    PRICE = 85
                 },
                 ["Macchiato"] = {
-                    PRICE = 350
+                    PRICE = 85
                 },
                 ["Latte"] = {
-                    PRICE = 350
+                    PRICE = 85
                 },
                 ["Mocha"] = {
-                    PRICE = 350
+                    PRICE = 85
                 },
                 ["Blueberry Bubble Tea"] = {
-                    PRICE = 350
+                    PRICE = 85
                 },
             },
             JOB_VEHICLE = { -- todo: add heading
