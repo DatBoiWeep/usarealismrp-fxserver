@@ -212,7 +212,7 @@ Config.CustomApps = {
 
 Config.Valet = {}
 Config.Valet.Enabled = true -- allow players to get their vehicles from the phone
-Config.Valet.Price = 7500 -- price to get your vehicle
+Config.Valet.Price = 3000 -- price to get your vehicle
 Config.Valet.Model = `S_M_Y_XMech_01`
 Config.Valet.Drive = true -- should a ped bring the car, or should it just spawn in front of the player?
 Config.Valet.DisableDamages = false -- disable vehicle damages (engine & body health) on esx
