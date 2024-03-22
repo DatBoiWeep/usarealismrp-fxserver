@@ -5,7 +5,7 @@ exports["globals"]:PerformDBCheck("usa_mechanicjob", "mechanic-part-deliveries")
 
 local NEEDS_TO_BE_CLOCKED_IN = true
 
-local TOW_REWARD = {500, 750}
+local TOW_REWARD = {100, 200}
 
 local TRUCKS_FOR_RANK = {
 	[1] = {"flatbed"},
