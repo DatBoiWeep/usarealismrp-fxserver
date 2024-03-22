@@ -22,28 +22,29 @@ BUSINESSES = {
 		cameraID = 'store45',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 5000
+		price = 10000
 	},
 	["Auto Repair (Elgin Ave.)"] = {
 		position = {559.68804931641, -197.12748718262, 58.152648925781},
 		cameraID = 'store44',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 5000
+		price = 15000
 	},
-	["Vangelico Jewelry Store (Rockford Hills)"] = {
-		position = {-631.0, -229.4, 38.1},
-		cameraID = 'store35',
-		isBeingRobbed = false,
-		lastRobbedTime = 0,
-		price = 6000
-	},
+	-- No one really buys this, doesn't make any money
+	-- ["Vangelico Jewelry Store (Rockford Hills)"] = { 
+	-- 	position = {-631.0, -229.4, 38.1},
+	-- 	cameraID = 'store35',
+	-- 	isBeingRobbed = false,
+	-- 	lastRobbedTime = 0,
+	-- 	price = 000
+	-- },
 	["Car Dealership (Los Santos)"] = {
 		position = {-28.2, -1104.1, 26.4},
 		cameraID = 'store34',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 25000,
+		price = 50000,
 		purchasePercentage = 0.05
 	},
 	["Benefactor Dealership"] = {
@@ -51,15 +52,15 @@ BUSINESSES = {
 		cameraID = 'store98',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 30000,
-		purchasePercentage = 0.10
+		price = 69000,
+		purchasePercentage = 0.04
 	},
 	["Car Dealership (Harmony)"] = {
 		position = {1234.0, 2737.2, 38.0},
 		cameraID = 'store33',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 25000,
+		price = 30000,
 		purchasePercentage = 0.05
 	},
 	["LS Tattoos (El Burro Heights)"] = {
@@ -310,14 +311,14 @@ BUSINESSES = {
 		cameraID = 'store41',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 10000
+		price = 30000
 	},
 	["Ammunation (Popular St.)"] = {
 		position = {818.0, -2155.7, 29.6},
 		cameraID = 'store36',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 6000
+		price = 20000
 	},
 	["Clothing Store 3 (Route 68)"] = {
 		position = {1198.3, 2713.9, 38.2},
@@ -331,7 +332,7 @@ BUSINESSES = {
 		cameraID = 'store42',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 6500
+		price = 10000
 	},
 	["Clothing Store (Paleto Bay)"] = {
 		position = {6.2, 6508.7, 31.9},
@@ -352,7 +353,7 @@ BUSINESSES = {
 		cameraID = 'store40',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 6500
+		price = 12500
 	},
 	["247 Supermarket (Popular St.)"] = {
 		position = {812.90832519531, -778.39324951172, 26.175024032593},
@@ -366,14 +367,14 @@ BUSINESSES = {
 		cameraID = 'store50',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 7500
+		price = 12500
 	},
 	["Hayes Auto (Rockford)"] = {
 		position = {-1428.1103515625, -458.63803100586, 35.90970993042},
 		cameraID = 'store52',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 10000,
+		price = 12500,
 		purchasePercentage = 0.05
 	},
 	["Autocare Automotive"] = {
@@ -381,28 +382,28 @@ BUSINESSES = {
 		cameraID = 'store53',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 10000,
+		price = 12500,
 		purchasePercentage = 0.05
 	},
 	["General Store (Great Ocean Highway)"] = {
 		position = {-2067.5854492188, -333.97616577148, 13.315826416016},
 		cameraID = 'store54',
 		isBeingRobbed = false,
-		price = 2400,
+		price = 6400,
 		purchasePercentage = 0.05
 	},
 	["General Store (Route 68 (GOH)"] = {
 		position = {-2539.0610351563, 2310.4838867188, 33.221008300781},
 		cameraID = 'store55',
 		isBeingRobbed = false,
-		price = 2400,
+		price = 8400,
 		purchasePercentage = 0.05
 	},
 	["General Store (Paleto Bay)"] = {
 		position = {162.92617797852, 6643.9150390625, 31.687068939209},
 		cameraID = 'store56',
 		isBeingRobbed = false,
-		price = 2400,
+		price = 3400,
 		purchasePercentage = 0.05
 	},
 	["RPG Repair"] = {
@@ -410,7 +411,7 @@ BUSINESSES = {
 		cameraID = 'store57',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 10000,
+		price = 15000,
 		purchasePercentage = 0.05,
 		notRobbable = true
 	},
@@ -419,7 +420,7 @@ BUSINESSES = {
 		cameraID = 'store58',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 10000,
+		price = 15000,
 		notRobbable = true
 	},
 	["The Cookie Jar"] = {
@@ -427,7 +428,7 @@ BUSINESSES = {
 		cameraID = 'store59',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 10000,
+		price = 15000,
 		notRobbable = true
 	},
 	["Ammunation (Chumash)"] = {
@@ -435,7 +436,7 @@ BUSINESSES = {
 		cameraID = 'store60',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 6500
+		price = 12500
 	},
 	["Clothing Store (Chumash)"] = {
 		position = {-3173.17, 1055.76, 20.86},
@@ -449,8 +450,8 @@ BUSINESSES = {
 		cameraID = 'casino',
 		isBeingRobbed = false,
 		lastRobbedTime = 0,
-		price = 25000,
-		purchasePercentage = 0.09
+		price = 75000,
+		purchasePercentage = 0.04
 	},
 }
 
