@@ -1,64 +1,34 @@
 local VEHICLE_RANKS = {
 	["sheriff"] = {
-		["pcvpi"] = {
+		["polstanierp"] = {
 			rank = 1,
-			allowedLiveries = {1, 2, 3, 4},
-			hash = GetHashKey("pcvpi")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polstanierp")
 		},
-		["p14tesla"] = {
+		["polbuffalop2"] = {
 			rank = 4,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p14tesla")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("p14polbuffalop2tesla")
 		},
-		["p16tau"] = {
+		["poltorencep"] = {
 			rank = 1,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p16tau")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("poltorencep")
 		},
-		["p20exp"] = {
+		["polscoutp"] = {
 			rank = 2,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = GetHashKey("p20exp")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polscoutp")
 		},
-		["p21tah"] = {
+		["polcarap"] = {
 			rank = 4,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = GetHashKey("p21tah")
-		},
-		["p21dur"] = {
-			rank = 4,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p21dur")
-		},
-		["sotruck"] = {
-			rank = 5,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("sotruck")
-		},
-		["p18xl"] = {
-			rank = 5,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p18xl")
-		},
-		["trx"] = {
-			rank = 5,
-			allowedLiveries = { 1 },
-			hash = GetHashKey("trx")
-		},
-		["polbike3"] = {
-			rank = 2,
-			allowedLiveries = { 1, 2 },
-			hash = GetHashKey("polbike3")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polcarap")
 		},
 		["polmav"] = {
 			rank = 3,
 			allowedLiveries = { 1 },
 			hash = 353883353
-		},
-		["as350"] = {
-			rank = 3,
-			allowedLiveries = {1, 3, 4, 5},
-			hash = 1346171487
 		},
 		["buzzard2"] = {
 			rank = 3,
@@ -75,36 +45,6 @@ local VEHICLE_RANKS = {
 			allowedLiveries = { 1, 2 },
 			hash = 1077822991
 		},
-		["npolchal"] = {
-			rank = 2,
-			allowedLiveries = { 1, 2, 3 },
-			hash = 1949729657
-		},
-		["npolstang"] = {
-			rank = 3,
-			allowedLiveries = { 1, 2, 3 },
-			hash = -1336796853
-		},
-		["npolvette"] = {
-			rank = 5,
-			allowedLiveries = { 1, 2, 3 },
-			hash = -1109563416
-		},
-		["intchar"] = {
-			rank = 7,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = GetHashKey("intchar")
-		},
-		["tolplam"] = {
-			rank = 8,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = -989604086
-		},
-		["nm_avent"] = {
-			rank = 8,
-			allowedLiveries = {1, 2},
-			hash = 1765546396
-		},
 		["predator"] = {
 			rank = 1,
 			allowedLiveries = { 1 },
@@ -120,11 +60,6 @@ local VEHICLE_RANKS = {
 			allowedLiveries = { 1 },
 			hash = 1033245328
 		},
-		["bostonwhale"] = {
-			rank = 1,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("bostonwhale")
-		},
 		["pboat"] = {
 			rank = 1,
 			allowedLiveries = {1, 2, 3},
@@ -134,16 +69,6 @@ local VEHICLE_RANKS = {
 			rank = 4,
 			allowedLiveries = { 1 },
 			hash = -1647941228
-		},
-		["bearcatrb"] = {
-			rank = 3,
-			allowedLiveries = {1, 2, 3},
-			hash = -500937862
-		},
-		["14suvrb"] = {
-			rank = 5,
-			allowedLiveries = {1},
-			hash = GetHashKey("14suvrb")
 		},
 		["policet"] = {
 			rank = 1,
@@ -157,70 +82,35 @@ local VEHICLE_RANKS = {
 		}
 	},
 	["corrections"] = {
-		["p4x4"] = {
+		["polstanierp"] = {
 			rank = 1,
 			allowedLiveries = {1, 2},
-			hash = GetHashKey("p4x4")
+			hash = GetHashKey("polstanierp")
 		},
-		["pcvpi"] = {
+		["polbuffalop2"] = {
+			rank = 4,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("p14polbuffalop2tesla")
+		},
+		["poltorencep"] = {
 			rank = 1,
-			allowedLiveries = {1, 2, 3, 4},
-			hash = GetHashKey("pcvpi")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("poltorencep")
 		},
-		["p14tesla"] = {
-			rank = 4,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p14tesla")
-		},
-		["p16tau"] = {
-			rank = 1,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p16tau")
-		},
-		["p20exp"] = {
+		["polscoutp"] = {
 			rank = 2,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = GetHashKey("p20exp")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polscoutp")
 		},
-		["p21tah"] = {
+		["polcarap"] = {
 			rank = 4,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = GetHashKey("p21tah")
-		},
-		["p21dur"] = {
-			rank = 4,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p21dur")
-		},
-		["sotruck"] = {
-			rank = 5,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("sotruck")
-		},
-		["p18xl"] = {
-			rank = 5,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("p18xl")
-		},
-		["trx"] = {
-			rank = 5,
-			allowedLiveries = { 1 },
-			hash = GetHashKey("trx")
-		},
-		["polbike3"] = {
-			rank = 2,
-			allowedLiveries = { 1, 2 },
-			hash = GetHashKey("polbike3")
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polcarap")
 		},
 		["polmav"] = {
 			rank = 3,
 			allowedLiveries = { 1 },
 			hash = 353883353
-		},
-		["as350"] = {
-			rank = 3,
-			allowedLiveries = {1, 3, 4, 5},
-			hash = 1346171487
 		},
 		["buzzard2"] = {
 			rank = 3,
@@ -237,36 +127,6 @@ local VEHICLE_RANKS = {
 			allowedLiveries = { 1, 2 },
 			hash = 1077822991
 		},
-		["npolchal"] = {
-			rank = 2,
-			allowedLiveries = { 1, 2, 3 },
-			hash = 1949729657
-		},
-		["npolstang"] = {
-			rank = 3,
-			allowedLiveries = { 1, 2, 3 },
-			hash = -1336796853
-		},
-		["npolvette"] = {
-			rank = 5,
-			allowedLiveries = { 1, 2, 3 },
-			hash = -1109563416
-		},
-		["intchar"] = {
-			rank = 7,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = GetHashKey("intchar")
-		},
-		["tolplam"] = {
-			rank = 7,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = -989604086
-		},
-		["nm_avent"] = {
-			rank = 7,
-			allowedLiveries = {1, 2},
-			hash = 1765546396
-		},
 		["predator"] = {
 			rank = 1,
 			allowedLiveries = { 1 },
@@ -282,11 +142,6 @@ local VEHICLE_RANKS = {
 			allowedLiveries = { 1 },
 			hash = 1033245328
 		},
-		["bostonwhale"] = {
-			rank = 1,
-			allowedLiveries = {1, 2, 3},
-			hash = GetHashKey("bostonwhale")
-		},
 		["pboat"] = {
 			rank = 1,
 			allowedLiveries = {1, 2, 3},
@@ -297,16 +152,6 @@ local VEHICLE_RANKS = {
 			allowedLiveries = { 1 },
 			hash = -1647941228
 		},
-		["bearcatrb"] = {
-			rank = 3,
-			allowedLiveries = {1, 2, 3},
-			hash = -500937862
-		},
-		["14suvrb"] = {
-			rank = 5,
-			allowedLiveries = {1},
-			hash = GetHashKey("14suvrb")
-		}, 
 		["policet"] = {
 			rank = 1,
 			allowedLiveries = {1, 2, 3},
@@ -319,50 +164,30 @@ local VEHICLE_RANKS = {
 		}
 	    },
 	    ["ems"] = {
-		["fordambo"] = {
+		["sandbulance"] = {
+			rank = 1,
+			allowedLiveries = { 1},
+			hash = GetHashKey("sandbulance")
+		},
+		["bfdsuv"] = {
 			rank = 1,
 			allowedLiveries = { 1, 2},
-			hash = GetHashKey("fordambo")
+			hash = GetHashKey("bfdsuv")
 		},
-		["e20exp"] = {
+		["firetruck"] = {
 			rank = 1,
-			allowedLiveries = { 1, 2},
-			hash = GetHashKey("e20exp")
-		},
-		["p21tah"] = {
-			rank = 3,
-			allowedLiveries = {1, 2, 3, 4, 5},
-			hash = GetHashKey("p21tah")
-		},
-		["pierce1"] = {
-			rank = 1,
-			allowedLiveries = { 1 },
-			hash = GetHashKey("pierce1")
+			allowedLiveries = { 1},
+			hash = GetHashKey("firetruk")
 		},
 		["polmav"] = {
 			rank = 1,
 			allowedLiveries = { 3 },
 			hash = GetHashKey("polmav")
 		},
-		["as350"] = {
-			rank = 1,
-			allowedLiveries = { 2 },
-			hash = GetHashKey("as350")
-		},
 		["buzzard2"] = {
 			rank = 1,
 			allowedLiveries = { 1 },
 			hash = GetHashKey("buzzard2")
-		},
-		["ec145med"] = {
-			rank = 1,
-			allowedLiveries = { 1, 2 },
-			hash = GetHashKey("ec145med")
-		},
-		["safr412"] = {
-			rank = 1,
-			allowedLiveries = { 1, 2 },
-			hash = GetHashKey("safr412")
 		},
 		--["lguard2"] = 1,
 		["blazer2"] = {
@@ -384,11 +209,6 @@ local VEHICLE_RANKS = {
 			rank = 2,
 			allowedLiveries = { 1 },
 			hash = 1033245328
-		},
-		["sotruck"] = {
-			rank = 1,
-			allowedLiveries = { 2 },
-			hash = 1799416425
 		},
 		["largeboat"] = {
 			rank = 1,
