@@ -8,11 +8,13 @@ game         'gta5'
 name 'rahe-boosting'
 author 'RAHE Development'
 description 'RAHE Boosting Extended'
-version '1.4.2'
+version '1.4.5'
 
 --[[ Manifest ]]--
 dependencies {
     'rahe-hackingdevice',
+    'oxmysql',
+    'ox_lib',
     '/server:5848',
     '/onesync',
 }
@@ -21,13 +23,10 @@ ui_page 'tablet/nui/index.html'
 
 files {
     'tablet/nui/index.html',
-    'tablet/nui/style.css',
     'tablet/nui/jquery-3.6.3.min.js',
     'tablet/nui/tailwind.css',
-    'tablet/nui/app.js',
     'tablet/nui/alpine.js',
     'tablet/nui/translations.js',
-    'tablet/nui/translations_en.js',
     'tablet/nui/tailwind.css',
 
     'tablet/nui/img/*.png',

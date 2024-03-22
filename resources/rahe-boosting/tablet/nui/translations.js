@@ -35,6 +35,11 @@ TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_VALID_UNTIL = 'Time remaining'
 TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_REWARD = 'Reward'
 TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_STARTED = "Boosting contract started. Deliver it to the dealer until the contract's valid."
 TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_STARTED_VIN = "Boosting contract started. Deliver it to the dealer for VIN scratching until the contract's valid."
+TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_AVAILABLE_PRE = "For the contract to grant more experience than usual, complete this contract with a minimum of"
+TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_AVAILABLE_AFT = "members."
+TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_APPLIED = "Bonus applied!"
+TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_APPLIED_PRE = "Completing this contract will reward"
+TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_APPLIED_AFT = "the usual amount of experience."
 TRANSLATIONS.HOME_TAB.ACTIVE_CANCEL = 'Cancel'
 
 TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_GROUP_JOIN = 'Join a group'

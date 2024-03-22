@@ -11,23 +11,28 @@ svConfig = {
 
     -- Time between boosting contract loop executions. If the default value (15) is used, then every 15 minutes (4 times per hour), contracts will be
     -- generated for the players who are queued. The chances of receiving a contract in that loop execution are defined in vehicle class configs, the
-    -- 'generationPercentage' value. For example, if the 'D' class has a generationPercentage value of 70, then every 15 minutes there is a 25% chance
+    -- 'generationPercentage' value. For example, if the 'D' class has a generationPercentage value of 70, then every 15 minutes there is a 70% chance
     -- that you will receive a D class boosting contract.
-    minutesBetweenGenerations = 7,
+    minutesBetweenGenerations = 15,
 
     -- The amount of contracts that player will be given when he opens the tablet for the very first time (to get him started).
-    initialContractAmount = 5,
+    initialContractAmount = 7,
 
     -- The amount of online police required for people to get important (A / S class) contracts. This will be applied to classes which have the 'isImportant' as true.
-    requiredPoliceAmount = 4,
+    requiredPoliceAmount = 2,
 
     --  Define the principal which will be given the ACE permission to use the in-game admin panel. If you don't wish to use this, set it to false.
+    -- In order for this to work, make sure you allow ox_lib to grant permissions (https://overextended.dev/ox_lib) ('You'll also need to grant ace permissions to the resource.')
     adminPrincipal = false,
 
     -- A comma separated list of player identifiers (strings) that are allowed to access the admin panel (in addition to those allowed by ACE permissions).
+    -- Examples for different frameworks:
+    --
+    -- QB: adminIdentifiers = {'RKDJ2732', 'MNSU0922'},
+    -- ESX: adminIdentifiers = {'char1:17beaa0fce04fd5d7e8571a6a1b51f172e7c4457', 'char1:17beaa0fce04fd5d7e8571a6a1b51f172e7c4457'},
     adminIdentifiers = {},
 
-    -- A comma separated list of player identifiers that are allowed to access the admin panel.
+    -- If the player should be penalized during delivery for having an engine whose health is below 80%.
     penalizeForDamagedEngine = true,
 
     -- The amount in dollars that's the maximum penalty for having a damaged engine when dropping off.
@@ -39,7 +44,12 @@ svConfig = {
     vehicleAreaMaximumOffset = 145.0,
 
     -- An option to enable / disable VIN scratching. If disabled, then the player will get an error message when trying to VIN scratch a vehicle.
-    vinScratchingEnabled = true,
+    vinScratchingEnabled = false,
+
+    -- Determine whether experience should be distributed among group members when performing a contract with a group.
+    -- Set to 'true' for experience to be shared among group members.
+    -- Set to 'false' for experience to be given only to the contract owner.
+    splitExperienceInGroups = true,
 
     -- A list of conditions for different vehicle classes
     -- The list must be ordered by their 'xpRequired' value (high -> low)
@@ -51,8 +61,8 @@ svConfig = {
     -- @timeBetweenGenerations: the time in minutes that has to be passed since the last generation of this class
     -- @isImportant: if a class is important, then it needs police presence for it to be generated (svConfig.requiredPoliceAmount) and has a GPS tracker.
     -- @gpsHacksRequired: if the class is marked is important, then it will have a GPS tracker which has to be hacked this many times.
-    -- @gpsHackMinTime:
-    -- @gpsHackMaxTime:
+    -- @gpsHackMinTime: the minimum amount of time the player has to complete the GPS hacking mini game.
+    -- @gpsHackMaxTime: the maximum amount of time the player has to complete the GPS hacking mini game.
     -- @maxContractsOfType: how many contracts of this type can be available at once
     -- @maxContactsPerSession: how many contracts of this type can one player receive per restart
     -- @priceMin: the minimum crypto price needed to accept the contract
@@ -64,6 +74,8 @@ svConfig = {
     -- @rewardCryptoMin: the minimum crypto reward
     -- @rewardCryptoMax: the maximum crypto reward
     -- @experiencePerJob: amount of experience points received when the contract is successful
+    -- @bonusExperienceMultiplier: the multiplier by which 'experiencePerJob' will be multiplied with when 'bonusExperienceMinimumMembers' is reached. Used only when 'splitExperienceInGroups' is true.
+    -- @bonusExperienceMinimumMembers: the minimum number of members required within a group for the bonus 'bonusExperienceMultiplier' to take effect. Used only when 'splitExperienceInGroups' is true.
     -- @tuningChance: the probability of the vehicle being tuned (0-100%)
     -- @riskChances: the probability of different risks on the vehicle
         -- @doorsLocked: the probability that vehicle doors are locked
@@ -78,23 +90,25 @@ svConfig = {
             class = "S",
             xpRequired = 2500,
             generationPercentage = 1,
-            timeBetweenGenerations = 80,
+            timeBetweenGenerations = 120,
             isImportant = true,
             gpsHacksRequired = 20,
             gpsHackMinTime = 20,
             gpsHackMaxTime = 25,
             maxContractsOfType = 1,
-            maxContractsPerSession = 1,
-            priceMin = 600,
-            priceMax = 950,
-            minScratchPrice = 9000,
-            maxScratchPrice = 17500,
+            maxContractsPerSession = 3,
+            priceMin = 1750,
+            priceMax = 2150,
+            minScratchPrice = 12150,
+            maxScratchPrice = 21000,
             rewardCashMin = 50000,
             rewardCashMax = 95000,
             rewardCryptoMin = 1000,
             rewardCryptoMax = 1400,
             experiencePerJob = 27,
-            tuningChance = 70,
+            bonusExperienceMultiplier = 4,
+            bonusExperienceMinimumMembers = 4,
+            tuningChance = 65,
             riskChances = {
                 doorsLocked = 100,
                 advancedLockChance = 0,
@@ -111,8 +125,8 @@ svConfig = {
             gpsHacksRequired = 10,
             gpsHackMinTime = 25,
             gpsHackMaxTime = 30,
-            maxContractsOfType = 2,
-            maxContractsPerSession = 3,
+            maxContractsOfType = 4,
+            maxContractsPerSession = 10,
             priceMin = 250,
             priceMax = 450,
             minScratchPrice = 2500,
@@ -122,6 +136,8 @@ svConfig = {
             rewardCryptoMin = 500,
             rewardCryptoMax = 700,
             experiencePerJob = 19,
+            bonusExperienceMultiplier = 4,
+            bonusExperienceMinimumMembers = 4,
             tuningChance = 45,
             riskChances = {
                 doorsLocked = 100,
@@ -147,6 +163,8 @@ svConfig = {
             rewardCryptoMin = 60,
             rewardCryptoMax = 90,
             experiencePerJob = 12,
+            bonusExperienceMultiplier = 4,
+            bonusExperienceMinimumMembers = 3,
             tuningChance = 25,
             riskChances = {
                 doorsLocked = 100,
@@ -172,6 +190,8 @@ svConfig = {
             rewardCryptoMin = 9,
             rewardCryptoMax = 18,
             experiencePerJob = 3,
+            bonusExperienceMultiplier = 3,
+            bonusExperienceMinimumMembers = 2,
             tuningChance = 25,
             riskChances = {
                 doorsLocked = 100,
@@ -186,7 +206,7 @@ svConfig = {
             generationPercentage = 70,
             timeBetweenGenerations = 0,
             isImportant = false,
-            maxContractsOfType = 2,
+            maxContractsOfType = 3,
             maxContractsPerSession = 0,
             priceMin = 0,
             priceMax = 0,
@@ -197,6 +217,8 @@ svConfig = {
             rewardCryptoMin = 1,
             rewardCryptoMax = 2,
             experiencePerJob = 1,
+            bonusExperienceMultiplier = 2,
+            bonusExperienceMinimumMembers = 2,
             tuningChance = 25,
             riskChances = {
                 doorsLocked = 25,
@@ -292,18 +314,6 @@ svConfig = {
             receiveItemIds = {
                 [1] = 'Bank Laptop'
             }
-        },
-        ['Fake License Plate'] = {
-            cashRequired = 30000,
-            cryptoRequired = math.random(11,27),
-            availablePerRestart = math.random(5,10),
-            isSoldOut = true,
-            title = "Fake License Plate [Coming Soon]",
-            description = "Got a brand spanking new whip from your neighbor? Hide their plate so cops don't get suspicious.",
-            iconFile = 'plate.png',
-            receiveItemIds = {
-                [1] = 'Fake Plate'
-            }
         }
     }
 }
@@ -363,62 +373,7 @@ supportedVehicles = {
     { name = "Karin Hotring Everon", model = "everon2", class = "S" },
     { name = "Ocelot Virtue", model = "virtue", class = "S" },
     -- Custom S Class
-    { name = "1999 Lamborghini Diablo GTR", model = "500gtrlam", class = "S" },
-    { name = "Mclaren 600LT", model = "600lt", class = "S" },
-    { name = "Ferrari F8 Tributo", model = "f8t", class = "S" },
-    { name = "Lamborghini LP700 R", model = "lp700r", class = "S" },
-    { name = "Nissan GTR", model = "gtr", class = "S" },
-    { name = "Audi R8", model = "r820", class = "S" },
-    { name = "2010 Lexus LFA", model = "lfa", class = "S" },
-    { name = "Lamborghini Huracan", model = "lwhuracan", class = "S" },
-    { name = "Ferrari F12", model = "rmodf12tdf", class = "S" },
-    { name = "Ferrari F40", model = "rmodf40", class = "S" },
-    { name = "Italdesign Nissan GTR-50", model = "rmodgtr50", class = "S" },
-    { name = "Lamborghini Sian", model = "rmodsianr", class = "S" },
-    { name = "Porsche 911 Turbo S", model = "pts21", class = "S" },
-    { name = "Porsche GT3", model = "pgt3", class = "S" },
-    { name = "2016 Honda NSX", model = "aimgainnsx", class = "S" },
-    { name = "McLaren Elva", model = "elva", class = "S" },
-    { name = "Lamborghini Huracan Evo 2", model = "evo2", class = "S" },
-    { name = "Lamborghini Gallardo LW", model = "gallardolw", class = "S" },
-    { name = "Lamborghini Murcielago LP-670", model = "lp670", class = "S" },
-    { name = "Lamborghini Murcielago LP-670 LW", model = "lwlp670", class = "S" },
-    { name = "Ferrari 458 LW", model = "lw458s", class = "S" },
-    { name = "Jaguar CX-75", model = "cx75", class = "S" },
-    { name = "Lamborghini Essenza", model = "rmodessenza", class = "S" },
-    { name = "Mercedes SLR Stirling Moss", model = "moss", class = "S" },
-    { name = "Ford GT500" , model = "shelby20", class = "S" },
-    { name = "Mercedes-Benz AMG GT" , model = "rr20amggt", class = "S" },
-    { name = "Dodge Charger (Redeye)" , model = "chr20" , class = "S" },
-    { name = "Lamborghini Urus", model = "urustc", class = "S" },
-    { name = "Audi RSQ8 Mansory", model = "rsq8m", class = "S" },
-    { name = "2022 Porsche GT3", model = "pgt322", class = "S" },
-    { name = "Honda Civic (EG6)", model = "eg6", class = "S" },
-    { name = "Honda Civic (EK9)", model = "spoonek", class = "S" },
-    { name = "1993 Honda Civic (FnF)", model = "fnfcivic", class = "S" },
     { name = "Pegassi Monroe Custom", model = "monroec", class = "S" },
-    { name = "Mclaren Senna", model = "sennas", class = "S" },
-    { name = "Mclaren Senna GTR", model = "sennasgtr", class = "S" },
-    { name = "Pagani Zonda R", model = "zondar", class = "S" },
-    { name = "Ferrari FXXK", model = "fxxk", class = "S" },
-    { name = "Mercedes-Benz CLK LM", model = "clklm", class = "S" },
-    { name = "Toyota Supra (Castrol)", model = "castrolsupra", class = "S" },
-    { name = "Nissan Skyline GT-R (R34)", model = "skyline", class = "S" },
-    { name = "Nissan Skyline GT-R V-Spec (R33)", model = "r33vspec", class = "S" },
-    { name = "Nissan Skyline GT-R (R32)", model = "r32", class = "S" },
-    { name = "1992 Honda NSX", model = "na1", class = "S" },
-    { name = "Ferrari LaFerrari", model = "laferrari", class = "S" },
-    { name = "McLaren P1", model = "p1", class = "S" },
-    { name = "Porsche 918", model = "918", class = "S" },
-    { name = "McLaren P1 GTR", model = "rmodp1gtr", class = "S" },
-    { name = "2020 Porsche 718 Cayman GT4", model = "por718gt4", class = "S" },
-    { name = "Chevrolet Corvette C7R GTLM", model = "C7R", class = "S" },
-    { name = "2012 Porsche 911 GT2 RS", model = "pgt2", class = "S" },
-    { name = "1993 Porsche 911 (993) RWB Rotana", model = "911rwb", class = "S" },
-    { name = "2016 SRT Viper", model = "viper", class = "S" },
-    { name = "2016 SRT Viper ACR", model = "acr", class = "S" },
-    { name = "Audi R8 Hycade", model = "r8hycade", class = "S" },
-    { name = "BMW M8 GTE", model = "rmodm8gte", class = "S" },
     -- A CLASS
     { name = "Sultan RS", model = "sultanrs", class = "A" },
     { name = "Annis Elegy Retro", model = "elegy", class = "A" },
@@ -480,54 +435,7 @@ supportedVehicles = {
     { name = "Declasse Tahoma Coupe", model = "tahoma", class = "A" },
     { name = "Declasse Tulip M-100", model = "tulip2", class = "A" },
     -- Custom A Class
-    { name = "Dodge Challenger", model = "16challenger", class = "A" },
-    { name = "2016 Dodge Charger", model = "16charger", class = "A" },
-    { name = "2021 Chevrolet Camaro", model = "21camaro", class = "A" },
-    { name = "1967 Ford Mustang GT500", model = "67GT500", class = "A" },
-    { name = "1999 Dodge Viper", model = "99viper", class = "A" },
-    { name = "Audi RS6", model = "rs6", class = "A" },
-    -- { name = "BMW M2", model = "m2", class = "A" },
-    -- { name = "BMW M3", model = "bmwm3e92", class = "A" },
-    -- { name = "BMW M3 GTS", model = "m3e92gts", class = "A" },
-    -- { name = "BMW M3 E36", model = "rmodm3e36", class = "A" },
-    -- { name = "BMW M3 E46", model = "M3E46", class = "A" },
-    -- { name = "BMW M4", model = "f82", class = "A" },
-    -- { name = "BMW M4", model = "f82hs", class = "A" },
-    -- { name = "BMW M4", model = "f82lw", class = "A" },
-    -- { name = "BMW M4", model = "f82st", class = "A" },
-    -- { name = "BMW M4", model = "f824slw", class = "A" },
-    -- { name = "BMW M5", model = "bmci", class = "A" },
-    -- { name = "BMW M5 E60", model = "m5e60", class = "A" },
-    -- { name = "BMW M8", model = "bmwm8", class = "A" },
-    -- { name = "BMW M4 G82", model = "m422", class = "A" },
-    -- { name = "BMW M5 Sport", model = "22m5", class = "A" },
-    { name = "Cadillac CT5 Blackwing", model = "ct5v", class = "A" },
-    { name = "Chevrolet Camaro", model = "zl12017", class = "A" },
-    { name = "Chevrolet C7", model = "c7", class = "A" },
-    { name = "Ford Mustang", model = "mgt", class = "A" },
-    { name = "2016 Cadillac CTS-V", model = "ctsv16", class = "A" },
-    { name = "2018 Honda Civic Type-R", model = "FK8", class = "A" },
-    { name = "Jeep SRT8", model = "srt8", class = "A" },
-    { name = "2020 Lexus LC500", model = "lc500", class = "A" },
-    { name = "2017 Mercedes-Benz S63 AMG Cabriolet", model = "mers63c", class = "A" },
-    { name = "Chevorlet Corvette C8", model = "stingray", class = "A" },
-    { name = "Mercedes GT63", model = "rmodgt63", class = "A" },
-    { name = "Mercedes C63 AMG", model = "C63AMG", class = "A" },
-    { name = "2020 Audi RS6 Avant", model = "rs62", class = "A" },
-    { name = "2017 Subaru WRX STI", model = "sti17", class = "A" },
-    { name = "Toyota Supra Mk4", model = "supra2", class = "A" },
-    { name = "2016 Maserati GranTurismo", model = "stradale18", class = "A" },
-    { name = "Bentley Bacalar", model = "rmodbacalar", class = "A" },
-    { name = "Aston Martin DBS", model = "rmodmartin", class = "A" },
-    { name = "Ford Raptor Pandem", model = "razerpandemraptor", class = "A" },
-    { name = "Chrysler 300 SRT8", model = "300srt8", class = "A" },
-    { name = "Dodge Durango Hellephant", model = "hellephantdurango", class = "A" },
-    { name = "1977 Ford Mustang Boss", model = "rr70bosswide", class = "A" },
-    { name = "Lexus RC-F", model = "rrrcf", class = "A" },
     { name = "Karin Rebel Custom", model = "rebeld", class = "A" },
-    { name = "Mitsubishi Lancer Evolution IX Voltex", model = "topfoil", class = "A" },
-    { name = "2012 Mercedes-Benz C63 AMG Coupe Black Series", model = "mbc63", class = "A" },
-    { name = "1969 Dodge Charger", model = "rmodcharger69", class = "A" },
     -- B CLASS
     { name = "Declasse Hotring Sabre", model = "hotring", class = "B" },
     { name = "Imponte Beater Dukes", model = "dukes3", class = "B" },
@@ -595,83 +503,12 @@ supportedVehicles = {
     { name = "Ubermacht Sentinel Classic Widebody", model = "sentinel4", class = "B" },
     { name = "Weeny Issi Sport", model = "issi8", class = "B" },
     -- Custom B Class
-    { name = "Toyota 4Runner", model = "4runner", class = "B" },
-    { name = "2019 Mercedes-Benz S650 Maybach", model = "19S650", class = "B" },
-    { name = "2021 Cadillac Escalade", model = "21escalade", class = "B" },
-    { name = "2002 Chevrolet Camaro", model = "camaro02", class = "B" },
-    { name = "2008 Chevrolet Tahoe", model = "tahoe08", class = "B" },
-    { name = "2021 Ford Bronco Wildtrak", model = "wildtrak", class = "B" },
-    { name = "2016 Bentley Bentayga", model = "bbentayga", class = "B" },
-    { name = "Mercedes-Benz E55 AMG", model = "benze55", class = "B" },
-    -- { name = "BMW E30", model = "alpinae30", class = "B" },
-    -- { name = "BMW E34", model = "e34", class = "B" },
-    -- { name = "2016 BMW X5", model = "x5m2016", class = "B" },
-    -- { name = "BMW Z3", model = "z3", class = "B" },
-    { name = "Subaru BRZ", model = "brz13", class = "B" },
-    { name = "Chevrolet C-10 Stepside Custom", model = "c10custom", class = "B" },
-    { name = "1969 Chevrolet Camaro SS", model = "camaro69", class = "B" },
-    { name = "1970 Chevrolet Camaro Z28", model = "camaro70", class = "B" },
-    { name = "1970 Chevrolet Corvette", model = "corvette70", class = "B" },
-    { name = "Ford Crown Victoria", model = "crownvic2011", class = "B" },
-    { name = "2006 Chevrolet Silverado", model = "loweyezv", class = "B"},
-    { name = "Rolls Royce Cullinan", model = "cullinan", class = "B" },
-    { name = "2001 Honda Civic Type-R ", model = "ep3", class = "B" },
-    { name = "Ford F350", model = "wdf350", class = "B" },
-    { name = "2021 Ford F-450 Platinum", model = "f450plat", class = "B" },
-    { name = "1999 Ford F-150 SVT Lightning", model = "flightning99", class = "B" },
-    --{ name = "1932 Ford HulaGirl", model = "ford32hulagirl", class = "B" },
-    { name = "1932 Ford V-8 Coupé 2", model = "fordc32h", class = "B" },
-    { name = "Ford F150 Raptor", model = "f150", class = "B" },
-    { name = "Ford F150 Raptor 2", model = "foxraptor", class = "B" },
-    { name = "Mercedes-Benz G-Class Brabus", model = "w463a1", class = "B" },
-    { name = "Volkswagon Golf GTI", model = "golfgti", class = "B" },
-    { name = "Jeep Gladiator", model = "jeepg", class = "B" },
-    { name = "2020 Land Rover Range Rover Vogue Mansory", model = "mansrr", class = "B" },
-    { name = "Maserati Levante Novitec", model = "mlnovitec", class = "B" },
-    { name = "2020 Chrysler Pacifica Limited S", model = "pacificasb", class = "B" },
-    { name = "2016 Volkswagen Passat", model = "passat", class = "B" },
-    { name = "Peugeot 206 GTi", model = "peugeot206", class = "B" },
-    { name = "2006 GMC Sierra", model = "polar06seirra", class = "B" },
-    { name = "Dodge Ram SRT-10", model = "ramsrt10", class = "B" },
-    { name = "Toyota Supra", model = "rmodsuprapandem", class = "B" },
-    { name = "Mazda RX-7", model = "rx7rb", class = "B" },
-    { name = "Chevrolet Silverado 2500 HD", model = "silv2500hd", class = "B" },
-    { name = "Subaru WRX STI", model = "subisti08", class = "B" },
-    { name = "2004 Subaru WRX STI", model = "subwrx", class = "B" },
-    { name = "2016 Rolls Royce Wraith", model = "wraith", class = "B" },
-    { name = "2018 GMC CadimaX 3500HD", model = "GODzBGDCADIMAX", class = "B" },
-    { name = "2020 Ford F-450", model = "20f450", class = "B" },
-    { name = "2020 Ford F-350", model = "f350d", class = "B" },
-    { name = "2020 GMC Sierra 3500HD", model = "GODz3500HDWELDER", class = "B" },
-    { name = "Volkswagon Golf (MK6)", model = "golfmk6", class = "B" },
-    { name = "Acura RSX (DC5)", model = "dc5", class = "B" },
-    { name = "Audi A6", model = "a6", class = "B" },
     { name = "Voodoo Caddy S", model = "voodoo_caddys", class = "B" },
-    { name = "Nissan 370z", model = "370z", class = "B" },
-    { name = "2019 Dodge Ram Donk", model = "19ramdonk", class = "B" },
-    { name = "GMC Denali", model = "denali18", class = "B" },
-    { name = "Dodge Ram TRX", model = "dodgetrx", class = "B" },
-    { name = "Ford F100 Slammed", model = "slammedf100", class = "B" },
-    { name = "2009 Ford Focus RS", model = "09fordRS", class = "B" },
-    { name = "2017 Ford Focus RS", model = "17fordRS", class = "B" },
-    { name = "Dababy Car", model = "dababy", class = "B" },
-    { name = "Ford F100 Trophy", model = "f100trophy", class = "B" },
+    { name = "Dababy Car", model = "dababy", class = "B" }, 
     { name = "Progen Proff", model = "proff", class = "B" },
-    { name = "Dodge Ram 1500 Custom", model = "gcram1500", class = "B" },
-    { name = "Spyker C8", model = "spyker", class = "B" },
-    { name = "Pontiac G8", model = "pontiacg8", class = "B" },
-    { name = "Dodge 2500", model = "bcbruiser", class = "B" },
-    { name = "Dodge 3500", model = "bcys", class = "B" },
-    { name = "Dodge 3500 HD", model = "bc203500hd", class = "B"},
-    { name = "Chevrolet C10", model = "bcc10c", class = "B"},
     { name = "Karin Ariant", model = "ariant", class = "B"},
     { name = "Karin Asterope RS", model = "asteropers", class = "B"},
-    { name = "Mercedes-Benz 190E Evolution II", model = "190e", class = "B"},
-    { name = "2006 Pontiac GTO", model = "gto06", class = "B"},
-    { name = "1969 Pontiac GTO The Judge", model = "judge", class = "B"},
-    { name = "1987 Mercedes Benz AMG Hammer Coupe", model = "amgh", class = "B"},
-    { name = "1969 Pontiac Firebird Trans AM", model = "trans69", class = "B"},
-    { name = "2016 Mazda MX5 Pandem", model = "mxpan", class = "B"},
+    { name = "Albany Esperanto", model = "vwe_esperanto1", class = "B"},
     -- C CLASS
     { name = "Dinka Blista Compact", model = "blista2", class = "C" },
     { name = "Karin Asterope", model = "asterope", class = "C" },
@@ -712,24 +549,7 @@ supportedVehicles = {
     { name = "Classique Broadway", model = "broadway", class = "C" },
     { name = "Bravado", model = "eudora", class = "C" },
     -- Custom C Class
-    { name = "1996 Chevrolet Impala SS", model = "impala", class = "C" },
-    { name = "1959 Chevrolet Impala", model = "impala59c", class = "C" },
-    { name = "Porsche 356", model = "356ac", class = "C" },
-    { name = "1978 Ford F150", model = "f15078", class = "C" },
-    { name = "1973 Chevrolet Caprice Nip Donk", model = "brainshack", class = "C" },
-    { name = "1957 Ferrari California", model = "cali57", class = "C" },
-    { name = "Chevrolet Nova", model = "nova66", class = "C" },
-    { name = "Ford Galaxie", model = "galaxie", class = "C" },
-    { name = "Mercedes-Benz 300 SL", model = "mb300sl", class = "C" },
-    { name = "1973 Porsche 911", model = "porrs73", class = "C" },
-    { name = "1986 Chevrolet Silverado", model = "SILV86", class = "C" },
     { name = "Weeny Tamworth", model = "tamworth", class = "C" },
-    { name = "1962 Volkswagon Type 2", model = "type262", class = "C" },
-    { name = "1963 Volkswagon Type 2", model = "type263", class = "C" },
-    { name = "1966 Volkswagon Type 2", model = "type266", class = "C" },
-    { name = "2000 Ford F350 Dually", model = "00f350d", class = "C" },
-    { name = "Hummer H2", model = "h2", class = "C" },
-    { name = "1971 AMC Javelin-AMX", model = "aamx", class = "C" },
     -- D CLASS
     { name = "Bravado Youga Classic 4x4", model = "youga3", class = "D" },
     { name = "Bravado Youga Custom", model = "youga4_USA", class = "D" },
@@ -770,8 +590,7 @@ supportedVehicles = {
     { name = "Bravado Youga Classic", model = "youga2", class = "D" },
     { name = "BF Weevil", model = "weevil", class = "D" },
     -- Custom D Class
-    { name = "1932 Ford V-8 Coupé", model = "fordc32", class = "D" },
-    { name = "1980 Ford Bronco", model = "80bronco", class = "D" },
+    
 }
 
 if svConfig.debugMode then

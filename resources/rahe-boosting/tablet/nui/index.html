@@ -533,6 +533,21 @@
                                                         </li>
                                                     </template>
                                                 </ul>
+
+                                                <div x-show="ownedContract?.groupData?.bonusAvailable">
+                                                    <div x-show="ownedContract?.groupData?.participants.length < ownedContract?.groupData?.bonusMinimumMembers" class="text-center pt-4">
+                                                        <span class="text-xs text-gray-400">
+                                                            <span x-text="TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_AVAILABLE_PRE"></span> <strong><span x-text="ownedContract?.groupData?.bonusMinimumMembers"></span> <span x-text="TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_AVAILABLE_AFT"></span></strong>
+                                                        </span>
+                                                    </div>
+
+                                                    <div x-show="ownedContract?.groupData?.participants.length >= ownedContract?.groupData?.bonusMinimumMembers" class="text-center pt-4">
+                                                        <span class="text-xs text-gray-400">
+                                                            <span class="text-emerald-400" x-text="TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_APPLIED"></span>
+                                                            <span x-text="TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_APPLIED_PRE"></span> <span class="text-emerald-400"><span x-text="ownedContract?.groupData?.bonusMultiplier"></span>x</span> <span x-text="TRANSLATIONS.HOME_TAB.ACTIVE_CONTRACT_BONUS_APPLIED_AFT"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1051,7 +1066,7 @@
                                                                 </div>
                                                             </td>
                                                             <td class="whitespace-nowrap px-3 py-3 text-sm text-gray-500 text-center">
-                                                                <div class="text-gray-300" x-text="entry.experience"></div>
+                                                                <div class="text-gray-300" x-text="Math.round(entry.experience)"></div>
                                                             </td>
 
                                                             <td class="whitespace-nowrap px-2 py-3 text-sm text-gray-500 text-center">
