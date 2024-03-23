@@ -808,7 +808,7 @@ LuckyWheelItems["Money1"] = {
     posibility = 80,
     soundName = "Win_Cash",
     animName = "win",
-    moneyReward = 2500
+    moneyReward = 4000
 }
 
 LuckyWheelItems["Money2"] = {
@@ -840,7 +840,7 @@ LuckyWheelItems["Money5"] = {
     posibility = 50,
     soundName = "Win_Cash",
     animName = "win",
-    moneyReward = 15000
+    moneyReward = 10000
 }
 
 LuckyWheelItems["Money6"] = {
@@ -848,7 +848,7 @@ LuckyWheelItems["Money6"] = {
     posibility = 40,
     soundName = "Win_Cash",
     animName = "win_big",
-    moneyReward = 20000
+    moneyReward = 15000
 }
 
 LuckyWheelItems["Money7"] = {
@@ -856,7 +856,7 @@ LuckyWheelItems["Money7"] = {
     posibility = 40,
     soundName = "Win_Cash",
     animName = "win_big",
-    moneyReward = 30000
+    moneyReward = 25000
 }
 
 LuckyWheelItems["Money8"] = {
@@ -864,7 +864,7 @@ LuckyWheelItems["Money8"] = {
     posibility = 30,
     soundName = "Win_Cash",
     animName = "win_big",
-    moneyReward = 40000
+    moneyReward = 30000
 }
 
 LuckyWheelItems["Money9"] = {
@@ -872,7 +872,7 @@ LuckyWheelItems["Money9"] = {
     posibility = 20,
     soundName = "Win_Cash",
     animName = "win_big",
-    moneyReward = 50000
+    moneyReward = 40000
 }
 
 LuckyWheelItems["Chips1"] = {
