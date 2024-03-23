@@ -48,6 +48,10 @@ AddEventHandler('death:revivePerson', function(targetSource)
 	user.getGroup() == "admin" or
 	user.getGroup() == "superadmin" or
 	user.getGroup() == "owner" then
+		if targetSource == source then
+			TriggerClientEvent("usa:notify", source, "Can't revive self", "^3INFO: ^0Can't revive yourself")
+			return
+		end
 		TriggerClientEvent('death:allowRevive', targetSource)
 	end
 end)
@@ -68,6 +72,10 @@ TriggerEvent('es:addCommand', 'revive', function(source, args, char)
 		if args[2] == nil then
 			TriggerClientEvent("death:reviveNearest", source)
 		else
+			if tonumber(args[2]) == source then
+				TriggerClientEvent("usa:notify", source, "Can't revive self", "^3INFO: ^0Can't revive yourself")
+				return
+			end
 			TriggerClientEvent("death:allowRevive", tonumber(args[2]))
 		end
 	else
