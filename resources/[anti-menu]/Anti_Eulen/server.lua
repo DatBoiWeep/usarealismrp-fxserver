@@ -24,7 +24,8 @@ AddEventHandler("BanEvent", function()
     else
         print(_source, "Eulen Detected ("..player_ping.."), player ident: " .. GetPlayerIdentifiers(_source)[1])
         if not fiveguardbans then
-            DropPlayer(_source, "Eulen Detected")
+            --DropPlayer(_source, "Eulen Detected")
+            exports["es_admin"]:BanPlayer(_source, "Modding (Eulen detected). If you feel this was a mistake please let a staff member know.")
         else
             exports[fiveguardname]:fg_BanPlayer(_source, "Eulen detected", true)
         end
