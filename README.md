@@ -104,15 +104,8 @@ USARRP
 		- ``emit(doc._id, doc.owner);``
 	* **getBusinessStorage**
 		- ``emit(doc._id, doc.storage);``
-4) Must create following views in a `tweetViews` design doc in the `twitter-tweets` db:
-	* **byLikes**
-		- ``emit(doc.likes, doc);``
-	* **byCreatedTime**
-		- ``emit(doc.timeMs, doc);``
-5) [optional] Create index on the ``stored_location`` field in the ``vehicles`` database for ``usa-properties-og`` to function correctly when storing/retrieving vehicles from property garages.
-6) [optional] Create indexes on the ``receiver`` and ``transmitter`` fields (in that order) in the ``phone-messages`` database for ``gcphone`` to function correctly when storing/retrieving/updating phone text messages.
-7) [optional] Create indexes on the ``owner`` and ``num`` fields in the ``phone-calls`` database for ``gcphone`` to function most efficiently when storing/retrieving phone call history.
-8) [optional] Create index on the ``owner.identifiers.id`` field in the ``businesses`` database for ``usa-businesses` to function most efficiently when retreiving owned businsess for a character.
+4) [optional] Create index on the ``stored_location`` field in the ``vehicles`` database for ``usa-properties-og`` to function correctly when storing/retrieving vehicles from property garages.
+5) [optional] Create index on the ``owner.identifiers.id`` field in the ``businesses`` database for ``usa-businesses` to function most efficiently when retreiving owned businsess for a character.
 
 Most scripts use CouchDB (including the DB API @ `resources/essentialmode/db.lua`), however scripts can use the MySQL database instead with `mysql-async` or `oxmysql` (some do)
 
