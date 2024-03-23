@@ -324,8 +324,8 @@ CONFIG = {
                         TEXTURE = 13
                     },
                     ARMS = {
-                        COMPONENT = 1,
-                        TEXTURE = 1
+                        COMPONENT = 0,
+                        TEXTURE = 0
                     }
                 },
                 FEMALE = {
@@ -334,8 +334,8 @@ CONFIG = {
                         TEXTURE = 1
                     },
                     ARMS = {
-                        COMPONENT = 1,
-                        TEXTURE = 1
+                        COMPONENT = 14,
+                        TEXTURE = 0
                     }
                 }
             }
