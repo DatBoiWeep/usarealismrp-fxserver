@@ -12,8 +12,8 @@ local MAX_PLAYER_VEHICLES = 500
 local testDrivers = {}
 local stolenVehicles = {}
 local lastStolenPlate = nil
-local warnMinutes = 10 -- minutes until warning
-local finalMinutes = 15 -- minutes until 911/seize
+local warnMinutes = 3 -- minutes until warning
+local finalMinutes = 5 -- minutes until 911/seize
 
 local vehicleShopItems = {
 	["vehicles"] = {
