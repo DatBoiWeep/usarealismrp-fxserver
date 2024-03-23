@@ -676,6 +676,7 @@ TriggerEvent('es:addJobCommand', 'mute911', { "sheriff", "ems", "fire", "correct
 end, {
 	help = "Temporarily toggle receiving 911 calls"})
 
+
 RegisterServerEvent('911:call')
 AddEventHandler('911:call', function(x, y, z, msg, blipText)
     Send911Notification({"sheriff", "corrections"}, msg, x, y, z, blipText)

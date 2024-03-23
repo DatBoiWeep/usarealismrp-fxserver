@@ -298,18 +298,17 @@ end)
 
 RegisterServerEvent('storeRobberies:server:callCops')
 AddEventHandler('storeRobberies:server:callCops', function(store)
-    if(Config.UseCopJob)then
-        Citizen.Wait(math.random(1,1000))
-        if(not copsCalled[store])then
-            copsCalled[store] = true
+    store = Config.Shops[store]
+    Citizen.Wait(math.random(1,1000))
+    if(not copsCalled[store])then
+        copsCalled[store] = true
 
-            Citizen.CreateThread(function()
-                Citizen.Wait(1000 * Config.PoliceCallSpamPrevention)
-                copsCalled[store] = false
-            end)
+        Citizen.CreateThread(function()
+            Citizen.Wait(1000 * Config.PoliceCallSpamPrevention)
+            copsCalled[store] = false
+        end)
 
-            TriggerClientEvent("storeRobberies:client:callCops", -1, store)
-        end
+        TriggerEvent("911:call", store.shopKeeperCoords.x, store.shopKeeperCoords.y, store.shopKeeperCoords.z, "^1Robbery: ^0Armed robbery at store", "Armed Robbery")
     end
 end)
 
@@ -369,7 +368,7 @@ AddEventHandler('storeRobberies:server:registerMoney', function(source, store, p
                 local char = exports["usa-characters"]:GetCharacter(source)
                 local randomAmount = math.random(Config.Shops[store].registerMoney[1], Config.Shops[store].registerMoney[2])
                 exports.globals:getNumCops(function(numCops)
-                    if numCops == 0 then
+                    if numCops <= 2 then
                         randomAmount = math.ceil(randomAmount / 2)
                     end
                     char.giveMoney(randomAmount)
@@ -406,11 +405,10 @@ AddEventHandler('storeRobberies:server:safeMoney', function(source, store, passw
                     local user_id = vRP.getUserId({source})
                     vRP.giveInventoryItem({user_id,"dirty_money",randomAmount,true})
                 else
-                    print("getting safe money")
                     local char = exports["usa-characters"]:GetCharacter(source)
                     local randomAmount = math.random(Config.Shops[store].safeMoney[1], Config.Shops[store].safeMoney[2])
                     exports.globals:getNumCops(function(numCops)
-                        if numCops == 0 then
+                        if numCops <= 2 then
                             randomAmount = math.ceil(randomAmount / 2)
                         end
                         char.giveMoney(randomAmount)
