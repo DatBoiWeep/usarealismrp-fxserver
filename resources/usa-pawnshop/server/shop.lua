@@ -46,7 +46,7 @@ function getSellPrice(itemInfo)
     if itemInfo.name == "Stolen Goods" then
         return math.random(700, 2000)
     else
-        return ((itemInfo.price and math.floor(itemInfo.price / 1.65)) or 250)
+        return ((itemInfo.price and math.floor(itemInfo.price / 1.75)) or 100)
     end
 end
 
