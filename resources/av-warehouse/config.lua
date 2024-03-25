@@ -15,7 +15,7 @@ Config.HackTime = 20 -- Time before hacking minigame ends
 Config.CallCopsOnFail = true -- Send Police alert when failing hacking minigame?
 Config.CallCopsOnSucess = true -- If hacking minigame is successful send alert?
 Config.TimeBeforeAlert = 1 -- (in minutes), if CallCopsOnSucess is true we will give the player some time before calling cops
-Config.CooldownTime = 60 -- (1 hour by default)
+Config.CooldownTime = 180 -- (1 hour by default)
 Config.Guards = {
 	[1] = {
 		pos = {1064.79, -3097.34, -38.99, 184.67},
@@ -63,13 +63,13 @@ Config.Rewards = {
 		type = 'items',		
 		reward = {
 			[1] = { name = ".50 Cal Bullets", type = "ammo", price = 500, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_01" },
-			[2] = { name = "5.56mm Shell Casing", price = 100, legality = "legal", quantity = 30, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
-			[3] = { name = "7.62mm Shell Casing", price = 100, legality = "legal", quantity = 30, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
+			[2] = { name = "5.56mm Shell Casing", price = 100, legality = "legal", quantity = 15, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
+			[3] = { name = "7.62mm Shell Casing", price = 100, legality = "legal", quantity = 15, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
 			[4] = { name = "9mm Bullets", type = "ammo", price = 300, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_01" },
 			[5] = { name = ".45 Bullets", type = "ammo", price = 375, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_01" },
 			[6] = { name = "Musket Ammo", type = "ammo", price = 300, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_02" },
 			[7] = { name = "12 Gauge Shells", type = "ammo", price = 300, weight = 0.5, quantity = 40, legality = "legal", objectModel = "prop_ld_ammo_pack_02" },
-			[8] = { name = "9x18mm Shell Casing", price = 100, legality = "legal", quantity = 30, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
+			[8] = { name = "9x18mm Shell Casing", price = 100, legality = "legal", quantity = 15, type = "misc", weight = 0.2, objectModel = "prop_ld_ammo_pack_01"  },
 			[9] = { name = "Firework Projectile", legality = "illegal", type = "ammo", price = 400, weight = 15, quantity = 1 },
 			[10] = { name = "Firework Projectile", legality = "illegal", type = "ammo", price = 400, weight = 15, quantity = 1 },
 		}
@@ -111,14 +111,10 @@ Config.Rewards = {
 		type = 'weapons',		
 		reward = {
 			[1] = { name = "Pistol Parts", type = "weaponParts", weight = 10.0, quantity = 1 },
-			[2] = { name = "AP Pistol Parts", price = 20000, type = "weaponParts", weight = 15.0, quantity = 1 },
-			[3] = { name = "AK-47 Parts", type = "weaponParts", weight = 45.0, quantity = 1 },
-			[4] = { name = "Revolver Kit", type = "weaponParts", weight = 15.0, quantity = 1 },
-			[5] = { name = "Ceramic Pistol Parts", price = 3200, type = "weaponParts", weight = 10.0, quantity = 1 },
-			[6] = { name = "Marksman Pistol Parts", price = 3200, type = "weaponParts", weight = 10.0, quantity = 1 },
-			[7] = { name = "Double Barrel Shotgun Parts", price = 3200, type = "weaponParts", weight = 20.0, quantity = 1 },
-			[8] = { name = "Military Rifle Parts", price = 3200, type = "weaponParts", weight = 35.0, quantity = 1 },
-			[9] = { name = "Combat PDW Parts", price = 3200, type = "weaponParts", weight = 25.0, quantity = 1 },
+			[2] = { name = "Revolver Kit", type = "weaponParts", weight = 15.0, quantity = 1 },
+			[3] = { name = "Ceramic Pistol Parts", price = 3200, type = "weaponParts", weight = 10.0, quantity = 1 },
+			[4] = { name = "Marksman Pistol Parts", price = 3200, type = "weaponParts", weight = 10.0, quantity = 1 },
+			[5] = { name = "Double Barrel Shotgun Parts", price = 3200, type = "weaponParts", weight = 20.0, quantity = 1 },
 		}
 	},
 	[5] = {
@@ -171,9 +167,7 @@ Config.Rewards = {
 	[9] = {
 		type = 'weapons',		
 		reward = {
-			[1] = { name = "Assault Rifle MK2", type = "weapon", hash = `WEAPON_ASSAULTRIFLE_MK2`, quantity = 1, weight = 30, objectModel = "w_ar_assaultrifle" },
-			[2] = { name = "Battle Axe", type = "weapon", hash = `WEAPON_BATTLEAXE`, quantity = 1, weight = 15, objectModel = "prop_tool_fireaxe" },
-			[3] = { name = "Compact Rifle Parts", type = "weaponParts", weight = 40.0, quantity = 1 },
+			[1] = { name = "Battle Axe", type = "weapon", hash = `WEAPON_BATTLEAXE`, quantity = 1, weight = 15, objectModel = "prop_tool_fireaxe" },
 		}
 	},
 	[10] = {
@@ -197,20 +191,10 @@ Config.Rewards = {
 	[12] = {
 		type = 'weapons',		
 		reward = {
-			[1] = { name = "Tommy Gun Parts", type = "weaponParts", weight = 45.0, quantity = 1 },
-			[2] = { name = "Machine Pistol Parts", type = "weaponParts", weight = 20.0, quantity = 1 },
-			[3] = { name = "Micro SMG Parts", type = "weaponParts", weight = 30.0, quantity = 1 },
+			[1] = { name = "Tear Gas", type = "weapon", hash = `WEAPON_BZGAS`, quantity = 1, weight = 7, objectModel = "w_ex_grenadesmoke" },
 		}
 	},
 	[13] = {
-		type = 'weapons',		
-		reward = {
-			[1] = { name = "Mini SMG", type = "weapon", hash = `WEAPON_MINISMG`, quantity = 1, weight = 25, objectModel = "w_sb_microsmg" },
-			[2] = { name = "SMG Parts", type = "weaponParts", weight = 35.0, quantity = 1 },
-			[3] = { name = "Tear Gas", type = "weapon", hash = `WEAPON_BZGAS`, quantity = 1, weight = 7, objectModel = "w_ex_grenadesmoke" },
-		}
-	},
-	[14] = {
 		type = "items",
 		reward = {
 			[1] = { name = "Sticky Bomb", type = "weapon", hash = `WEAPON_STICKYBOMB`, quantity = 1, weight = 25, objectModel = "prop_bomb_01_s" },
@@ -219,7 +203,7 @@ Config.Rewards = {
 			[4] = { name = "Blackhat USB Drive", type = "misc", quantity = 1, weight = 1, objectModel = "hei_prop_hst_usb_drive"},
 		}
 	},
-	[15] = {
+	[14] = {
 		type = "items",
 		reward = {
 			[1] = {name = "Iron Oxide", legality = "legal", quantity = 5, type = "misc", weight = 8},
@@ -230,7 +214,7 @@ Config.Rewards = {
 			[6] = {name = "Thermite", legality = "illegal", quantity = 1, type = "misc", weight = 20},
 		}
 	},
-	[16] = {
+	[15] = {
 		type = "items",
 		reward = {
 			[1] = {name = 'Hotwiring Kit', type = 'misc', legality = 'illegal', quantity = 1, weight = 10},
@@ -241,13 +225,13 @@ Config.Rewards = {
 			[6] = {name = 'Hotwiring Kit', type = 'misc', legality = 'illegal', quantity = 1, weight = 10},
 		}
 	},
-	[17] = {
+	[16] = {
 		type = "items",
 		reward = {
 			[1] = {name = "Grappling Hook", legality = "legal", quantity = 1, type = "misc", weight = 25},
 		}
 	},
-	[18] = {
+	[17] = {
 		type = 'items',		
 		reward = {
 			[1] = { name = "Ninja Star Kit", type = "weaponParts", weight = 5.0, quantity = 3 },
