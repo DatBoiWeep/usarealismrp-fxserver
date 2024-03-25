@@ -63,6 +63,10 @@ function acceptableItem(item)
         return false
     elseif item.name:find("garden_pitcher") or item.name:find("leafblower") then
         return false
+    elseif item.name:find("Meat") or item.name:find("Fur") then
+        return false
+    elseif item.name:find("Sand") then
+        return false
     elseif item.type then
         if item.type == "license" then
             return false
