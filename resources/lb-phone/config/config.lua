@@ -163,6 +163,21 @@ Config.Companies.Services = {
                 y = -1060.8621826172
             }
         }
+    },
+    {
+        job = "tacofarmer",
+        name = "Taco Farmer",
+        icon = "https://r2.fivemanage.com/mGekYUReDw2ozOsYxZm5q/taco.png",
+        canCall = true, -- if true, players can call the company
+        canMessage = true, -- if true, players can message the company
+        bossRanks = {}, -- ranks that can manage the company
+        location = {
+            name = "Taco Farmer",
+            coords = {
+                x = 9.371845,
+                y = -1605.147
+            }
+        }
     }
 }
 

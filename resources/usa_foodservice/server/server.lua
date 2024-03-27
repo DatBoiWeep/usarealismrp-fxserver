@@ -8,6 +8,8 @@ RegisterServerEvent("bs:toggleDuty", function(jobName)
         businessName = "Burgershot"
     elseif jobName == "catcafe" then
         businessName = "Cat Cafe"
+    elseif jobName == "tacofarmer" then
+        businessName = "Taco Farmer"
     end
     -- check if added as employee
     if not isAnEmployee(businessName, char.get("_id")) then

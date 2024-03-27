@@ -307,7 +307,7 @@ CONFIG = {
                     PRICE = 85
                 },
             },
-            JOB_VEHICLE = { -- todo: add heading
+            JOB_VEHICLE = {
                 MODEL = "nspeedo",
                 SPAWN = {
                     X = -561.71411132812,
@@ -332,6 +332,87 @@ CONFIG = {
                     TORSO = {
                         COMPONENT = 63,
                         TEXTURE = 1
+                    },
+                    ARMS = {
+                        COMPONENT = 14,
+                        TEXTURE = 0
+                    }
+                }
+            }
+        },
+        TACOFARMER = {
+            JOB_NAME = "tacofarmer",
+            REGISTER = {
+                COORDS = vector3(9.371845, -1605.147, 29.37112),
+                MENU = {
+                    {
+                        header = "($275) Hard Shell Taco",
+                        context = "Classic hard shell beef taco",
+                        event = "bs:addOrderItem",
+                        args = {
+                            "Hard Shell Taco",
+                            "TACOFARMER"
+                        }
+                    },
+                    {
+                        header = "($125) Coca Cola",
+                        context = "Refreshing coca cola",
+                        event = "bs:addOrderItem",
+                        args = {
+                            "Coca Cola",
+                            "TACOFARMER"
+                        }
+                    },
+                    {
+                        header = "Done",
+                        context = "Register the new order",
+                        event = "bs:registerNewOrder",
+                        args = {
+                            "TACOFARMER"
+                        }
+                    }
+                }
+            },
+            COOKING = {
+                COORDS = vector3(11.56056, -1599.084, 29.37594)
+            },
+            COUNTER = {
+                COORDS = vector3(11.21881, -1605.677, 29.3932)
+            },
+            ITEMS = {
+                ["Hard Shell Taco"] = {
+                    PRICE = 275
+                },
+                ["Coca Cola"] = {
+                    PRICE = 125
+                },
+            },
+            JOB_VEHICLE = {
+                MODEL = "nspeedo",
+                SPAWN = {
+                    X = 28.264371871948,
+                    Y = -1607.4190673828,
+                    Z = 29.23265838623,
+                    HEADING = 139.0
+                },
+                LIVERY_NUM = 0
+            },
+            PROPERTY_NAME = "Taco Farmer",
+            OUTFIT = {
+                MALE = {
+                    TORSO = {
+                        COMPONENT = 9,
+                        TEXTURE = 2
+                    },
+                    ARMS = {
+                        COMPONENT = 0,
+                        TEXTURE = 0
+                    }
+                },
+                FEMALE = {
+                    TORSO = {
+                        COMPONENT = 14,
+                        TEXTURE = 3
                     },
                     ARMS = {
                         COMPONENT = 14,
