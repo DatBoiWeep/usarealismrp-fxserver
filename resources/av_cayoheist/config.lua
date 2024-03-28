@@ -6,12 +6,12 @@ Config.C4Item = 'Sticky Bomb' -- Item name for C4 used on doors.If you are on QB
 Config.RemoveC4 = true -- Remove C4 after use?.
 Config.PantherItem = 'panther' -- There's no sell location, make sure to add it to your own pawnshop script. If you don't have one: https://forum.cfx.re/search?q=pawnshop%20%23development%3Areleases
 Config.MinCops = 0 -- Min Cops online to start the heist.
-Config.Cooldown = 6 * 60 -- minutes
+Config.Cooldown = 8 * 60 -- minutes
 
 Config.Rewards = {
 	['Office'] = math.random(10000, 50000), -- Cash you receive from the office safe.
-	['Cash'] = math.random(30000, 70000), -- Cash you receive from the basement money pile.
-	['Safe'] = math.random(50000, 200000) -- Cash you receive from the basement safe after minigame.
+	['Cash'] = math.random(20000, 60000), -- Cash you receive from the basement money pile.
+	['Safe'] = math.random(40000, 125000) -- Cash you receive from the basement safe after minigame.
 }
 
 Config.Lang = {
