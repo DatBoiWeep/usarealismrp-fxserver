@@ -7,7 +7,7 @@ svConfig = {
     competitionMaxMoneyPerMinute = 3000,
 
     -- The amount of money that a player receives when he doesn't finish a competition race (is disqualified, DNF).
-    competitionDnfPrizeMoney = 1000,
+    competitionDnfPrizeMoney = 300,
 
     -- A string value which defines how the competition prize money should be distributed between race participants. Possible values:
     --
@@ -31,13 +31,13 @@ svConfig = {
             startHour = 4, -- Races start at [4:30AM PST | 7:30AM EST]
             startMinute = 30
         },
-        { -- EU Time
-            generationHour = 7,
-            generationMinute = 0,
+        -- { -- EU Time
+        --     generationHour = 7,
+        --     generationMinute = 0,
 
-            startHour = 8, -- Races start at [8AM PST | 11AM EST]
-            startMinute = 0
-        },
+        --     startHour = 8, -- Races start at [8AM PST | 11AM EST]
+        --     startMinute = 0
+        -- },
         { -- EU / NA Time
             generationHour = 10,
             generationMinute = 0,
@@ -52,13 +52,13 @@ svConfig = {
             startHour = 15,
             startMinute = 0 -- Races start at [3PM PST | 6PM EST]
         },
-        { -- NA (PST) Time
-            generationHour = 17,
-            generationMinute = 0,
+        -- { -- NA (PST) Time
+        --     generationHour = 17,
+        --     generationMinute = 0,
 
-            startHour = 18,
-            startMinute = 0 -- Races start at [6PM PST | 9PM EST]
-        },
+        --     startHour = 18,
+        --     startMinute = 0 -- Races start at [6PM PST | 9PM EST]
+        -- },
         { -- NA (PST) Late
             generationHour = 20,
             generationMinute = 0,
@@ -96,7 +96,7 @@ svConfig = {
 
     -- When a circuit track is chosen by the automatic competition generator/manually created, then how many laps should it be?
     -- Will be randomly selected between these two values by the automatic competition generator.
-    competitionMinLaps = 2,
+    competitionMinLaps = 3,
     competitionMaxLaps = math.random(3,6),
 
     -- The time (in minutes) which defines what's the earliest time a player can manually create a competition race.
@@ -115,11 +115,11 @@ svConfig = {
     -- Total: 25 + 25 + 10 + 0 + 0 = 60
     -- Chances: A = 25/60 = 41.6%, B = 25/60 = 41.6%, B = 10/60 = 16.6%, C = 0%, D = 0%
     competitionChanceWeights = {
-        ['S'] = 52,
-        ['A'] = 25,
-        ['B'] = 15,
-        ['C'] = 5,
-        ['D'] = 3
+        ['S'] = 10,
+        ['A'] = 30,
+        ['B'] = 25,
+        ['C'] = 20,
+        ['D'] = 15
     },
 
     -- Track verification system (true/false). If verified tracks are used, then the following will happen:
