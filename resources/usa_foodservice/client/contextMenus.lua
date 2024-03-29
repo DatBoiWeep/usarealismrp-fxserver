@@ -34,7 +34,7 @@ for name, info in pairs(CONFIG.RESTAURANTS) do
                 while not HasModelLoaded(GetHashKey(info.JOB_VEHICLE.MODEL)) do
                     Wait(1)
                 end
-                local deliveryVehicle = CreateVehicle(GetHashKey(info.JOB_VEHICLE.MODEL), info.JOB_VEHICLE.SPAWN.X, info.JOB_VEHICLE.SPAWN.Y, info.JOB_VEHICLE.SPAWN.Z, 32.7, true)
+                local deliveryVehicle = CreateVehicle(GetHashKey(info.JOB_VEHICLE.MODEL), info.JOB_VEHICLE.SPAWN.X, info.JOB_VEHICLE.SPAWN.Y, info.JOB_VEHICLE.SPAWN.Z, (info.JOB_VEHICLE.SPAWN.HEADING or 32.7), true)
                 SetVehicleLivery(deliveryVehicle, info.JOB_VEHICLE.LIVERY_NUM)
                 local plate = GetVehicleNumberPlateText(deliveryVehicle)
                 TriggerServerEvent("garage:giveKeyWithPlate", false, plate)

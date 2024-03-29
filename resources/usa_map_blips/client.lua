@@ -122,7 +122,8 @@ local blips = {
 	{ title = "Apartments", x = -914.08343505859, y = -1306.4748535156, id = 40, colour = 0, scale = 0.7},
 	{ title = "Apartments", x = 325.38638305664, y = -209.88813781738, id = 40, colour = 0, scale = 0.7},
 	{ title = "Arena", x = -1295.9306640625, y = -3389.06640625, id = 76, colour = 0, scale = 0.7},
-	{ title = "Pawn Shop", x = 184.53681945801, y = -1320.5942382813, id = 267, colour = 0, scale = 0.6},
+	{ title = "Pawn Shop", x = 184.53681945801, y = -1320.5942382813, id = 267, colour = 0, scale = 0.5},
+	{ title = "Taco Farmer", x = 9.371845, y = -1605.147, id = 209, colour = 5, scale = 0.5},
 }
 
 Citizen.CreateThread(function()

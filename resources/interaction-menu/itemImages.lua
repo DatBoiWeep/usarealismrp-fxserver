@@ -12,6 +12,7 @@ ITEM_IMAGES = {
     ["Peanut Butter Cups"] = "reesespbcup.webp", -- todo: test webp images // tested this and this singular one doesn't work but the others do??? :)
     ["Donut"] = "donut.png",
     ["Taco"] = "taco.png",
+    ["Hard Shell Taco"] = "taco.png",
     ["Nachos"] = "nachos.png",
     ["Sea Salt & Vinegar Chips"] = "seasaltvinegarchips.png",
     ["Cheetos"] = "cheetos.png",

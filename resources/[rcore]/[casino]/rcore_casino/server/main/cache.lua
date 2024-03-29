@@ -869,25 +869,17 @@ end)
 
 local randomModels = {
     "dababy",
-    "500gtrlam",
-    "italigtb2",
-    "bmwm8",
-    "ctsv16",
     "coquette4",
     "windsor",
-    "rmodgt63",
     "cypher",
     "gauntlet4",
     "komoda",
     "neon",
     "cinquemila",
-    "ocni422spe",
     "wildtrak",
-    "w463a1",
-    "dodgetrx",
     "dubsta3",
     "tamworth",
-    "trixbox",
+    "faction3",
     "youga3"
 }
 local chosenRandomModel = randomModels[math.random(1, #randomModels)]

@@ -366,6 +366,8 @@ local ITEMS = {
     { name = "Mint Bubble Tea", price = 20, type = "drink", substance = 45.0, quantity = 1, legality = "legal", weight = 1, objectModel = "p_amb_coffeecup_01"},
     { name = "Rose Bubble Tea", price = 20, type = "drink", substance = 45.0, quantity = 1, legality = "legal", weight = 1, objectModel = "p_amb_coffeecup_01"},
     --]]
+    -- TACO FARMER ITEMS
+    { name = "Hard Shell Taco", price = 275, type = "food", substance = 85.0, quantity = 1, legality = "legal", weight = 1, objectModel = "prop_taco_01"},
 }
 
 for i = 1, #ITEMS do

@@ -67,6 +67,10 @@ function acceptableItem(item)
         return false
     elseif item.name:find("Sand") then
         return false
+    elseif item.name:find("Weed") or item.name:find("Joint") then
+        return false
+    elseif item.name:find("Meth") or item.name:find("Red Phosphorus") or item.name:find("Pseudoephedrine") then
+        return false
     elseif item.type then
         if item.type == "license" then
             return false
