@@ -4,12 +4,10 @@ Config.SecondKey = false -- If you enable it (true) you have to press firstkey +
 
 Config.PursuitVehicles = {
 	--ADD YOUR VEHICLES SPAWN CODES HERE ex.:
-	"npolchal",
-	"npolstang",
-	"npolvette",
-	"intchar",
-	"tolplam",
-	"nm_avent"
+	"poldmntp",
+	"polvigerop",
+	"polgauntletp",
+	"polcoquettep"
 }
 
 -- If you want to allow your non pursuit emergency vehicle change mode to A+ you can edit line 14, 15 and 16.
