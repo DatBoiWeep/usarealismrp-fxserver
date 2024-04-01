@@ -1,9 +1,9 @@
-local LEO_VEHICLES = {"polstanierp","polbuffalop2","polbuffalop2", "polscoutp", "polcarap", "fbi2", "pbus", "policet", "police4", "pbike"}
+local LEO_VEHICLES = {"polstanierp","polbuffalop2","polbuffalop2", "polscoutp", "polcarap", "poldmntp","fbi2", "pbus", "policet", "police4", "pbike"}
 
 local JOB_VEHICLES = {
 	["sheriff"] = LEO_VEHICLES,
 	["corrections"] = LEO_VEHICLES,
-	["ems"] = {"sandbulance", "firetruck", "bfdsuv", "lguard2", "blazer"},
+	["ems"] = {"sandbulance", "firetruk", "bfdsuv", "ecara", "lguard2", "blazer"},
 	["doctor"] = {"bfdsuv"}
 }
 
