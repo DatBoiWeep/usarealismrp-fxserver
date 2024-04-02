@@ -33,7 +33,7 @@ end
 
 local ESX, QBCore
 if framework == 'ESX' then
-    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    ESX = exports["es_extended"]:getSharedObject()
 elseif framework == 'QB' then
     QBCore = exports['qb-core']:GetCoreObject()
 end
@@ -156,7 +156,7 @@ function getOnDutyPoliceAmount()
 
         return policeCount
     elseif framework == 'ESX' then
-        return exports["esx_service"]:GetInServiceCount("police")
+        return #ESX.GetExtendedPlayers('job', 'police')
     else
         -- CUSTOM
         exports.globals:getNumCops(function(num)
@@ -179,7 +179,6 @@ end)
 --
 
 function notifyPlayer(playerId, message, type)
-    -- TriggerClientEvent("usa:notify", playerId, message)
     TriggerClientEvent('rahe-boosting:client:notify', playerId, message, type)
 end
 
@@ -192,11 +191,14 @@ AddEventHandler('rahe-boosting:server:vinScratchSuccessful', function(playerId, 
     local restrictedVehModel = {'taxi', 'DABABY','rumpo'} -- Added a vehicle you want to get VIN Scratched? Be sure to add it to this list mofo.
     if vehicleModel ~= restrictedVehModel then
         vehInfo = exports["usa_carshop"]:GetVehicleByHashName(vehicleModel)
-        -- print("Vehicle Model is ["..vehicleModel.."] and was not a restricted vehicle. Assigning info") -- debug
+        if svConfig.debugMode then
+            print("Vehicle Model is ["..vehicleModel.."] and was not a restricted vehicle. Assigning info") -- debug
+        end
     end
-    -- print(vehInfo) -- debug
+    if svConfig.debugMode then
+        print(vehInfo)
+    end
     if vehInfo ~= nil then
-        -- print("VehInfo has data, now attaching attributes") -- debug
         vehicle = {
             owner = char.getFullName(),
             make = vehInfo.make,
@@ -217,9 +219,11 @@ AddEventHandler('rahe-boosting:server:vinScratchSuccessful', function(playerId, 
             model = vehInfo.model,
             plate = licensePlate
         }
-        -- print("Vehicle make is ["..vehicle.make.."] and the model is ["..vehicle.model.."].") -- debug
+        if svConfig.debugMode then
+            print("VehInfo has data, now attaching attributes")
+            print("Vehicle make is ["..vehicle.make.."] and the model is ["..vehicle.model.."].") -- debug
+        end
     else
-        -- print("VehInfo has NO DATA, attaching default attributes") -- debug
         vehicle = {
             owner = char.getFullName(),
             make = vehicleModelName,
@@ -240,9 +244,14 @@ AddEventHandler('rahe-boosting:server:vinScratchSuccessful', function(playerId, 
             model = vehicleModelName,
             plate = licensePlate
         }
-        -- print("Vehicle make is ["..vehicle.make.."] and the model is ["..vehicle.model.."].") -- debug
+        if svConfig.debugMode then
+            print("VehInfo has NO DATA, attaching default attributes")
+            print("Vehicle make is ["..vehicle.make.."] and the model is ["..vehicle.model.."].") -- debug
+        end
     end
-    -- print("The total sell price of this vehicle will be "..vehicle.price) -- DEBUG STUFF FOR WEEPY
+    if svConfig.debugMode then
+        print("Vehicle price is ["..vehicle.price.."]") -- debug
+    end
     -- add vehicle to database
     exports.usa_carshop:AddVehicleToDB(vehicle)
     -- add vehicle to player's list of owned vehicles
@@ -259,6 +268,8 @@ AddEventHandler('rahe-boosting:server:vinScratchSuccessful', function(playerId, 
         vehicle.price
     })
     print("Vehicle successfully added to DB")
+    -- Console Logs
+    print("PLAYER = ["..char.getFullName().."] has successfully completed a VIN Scratch contract. The vehicle is a ["..vehicleModelName.."] with the license plate ["..licensePlate.."].")
     -- notify
     notifyPlayer(playerId, "Your vehicle has been dropped off.", G_NOTIFICATION_TYPE_SUCCESS)
 

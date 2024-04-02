@@ -44,12 +44,30 @@ svConfig = {
     vehicleAreaMaximumOffset = 145.0,
 
     -- An option to enable / disable VIN scratching. If disabled, then the player will get an error message when trying to VIN scratch a vehicle.
-    vinScratchingEnabled = false,
+    vinScratchingEnabled = true,
 
     -- Determine whether experience should be distributed among group members when performing a contract with a group.
     -- Set to 'true' for experience to be shared among group members.
     -- Set to 'false' for experience to be given only to the contract owner.
     splitExperienceInGroups = true,
+
+    -- If all group members must enter the red pick up area at least once to get any kind of rewards (money, crypto, XP) in the end.
+    -- This can be used to prevent abuse situations where people are group boosting and some of the members are just AFKing along to get XP.
+    groupActivityCheck = true,
+
+    -- If this is defined, the user will be shown an 'Upload' button in the profile picture upload section.
+    -- When pressed, the user will be redirected to this website in their browser to upload their content.
+    recommendedUploadWebsite = 'https://upload.rahe.dev',
+
+    -- A list of image hosts will be allowed to use as a profile picture. The player won't be allowed to use a provider which isn't in this list.
+    -- If you have a 'recommendedUploadWebsite' defined in the previous option, then that will automatically be added into here.
+    --
+    -- We do NOT recommend using Imgur or Discord as allowed hosts!
+    -- They rate-limit and/or change URLs causing your images to stop working sooner or later, even if they may seem fine at first.
+    allowedImageHosts = {
+        'media.rahe.dev',
+        'r2.fivemanage.com'
+    },
 
     -- A list of conditions for different vehicle classes
     -- The list must be ordered by their 'xpRequired' value (high -> low)
@@ -307,7 +325,7 @@ svConfig = {
             cashRequired = 5750,
             cryptoRequired = 30,
             availablePerRestart = math.random(5,10),
-            isSoldOut = false,
+            isSoldOut = true,
             title = "Bank Laptop",
             description = "Time for a world of hacker man himself.",
             iconFile = 'laptop.png',

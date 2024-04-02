@@ -36,9 +36,27 @@
     </script>
 </head>
 
-<body x-data="{showMenu: false, activeTab: 'home', experience: 0, crypto: 0, isAdminPanelAllowed: false, inQueue: false, currencyLocale: 'en-US', currency: 'USD',
-                availableContracts: [], ownedContract: '', experience: 0, errorMessage: '', infoMessage: '', levelPercentage: 0, vehicleClasses: []}"
+<body x-data="{
+        showMenu: false,
+        activeTab: 'home',
+        experience: 0,
+        crypto: 0,
+        isAdminPanelAllowed: false,
+        inQueue: false,
+        currencyLocale: 'en-US',
+        currency: 'USD',
+        availableContracts: [],
+        ownedContract: '',
+        experience: 0,
+        errorMessage: '',
+        infoMessage: '',
+        levelPercentage: 0,
+        vehicleClasses: [],
+        recommendedUploadWebsite: null,
 
+        setDefaultPicture(event) {
+            event.target.src = 'https://media.rahe.dev/img/defaultprofile.webp';
+        }}"
       @message.window="
         if ($event.data.action == 'hideMenu')  {
             showMenu = false;
@@ -54,6 +72,7 @@
             currency = $event.data.data.currency;
             isAdminPanelAllowed = $event.data.data.isAdminPanelAllowed;
             vehicleClasses = $event.data.data.vehicleClasses.reverse();
+            recommendedUploadWebsite = $event.data.data.recommendedUploadWebsite;
         }
         else if ($event.data.action == 'loadSharedData') {
             experience = $event.data.data.experience;
@@ -78,7 +97,8 @@
             }, 3000);
         }">
 
-<div x-show="showMenu"
+<div x-transition
+     x-show="showMenu"
      style="position: absolute; margin: 0 auto; left:2vh; right: 2vh; top: 8vh; width:63.4vw; height:68vh;"
      class="bg-slate-800">
 
@@ -485,7 +505,7 @@
                                                                     class="cursor-none group flex w-full items-center justify-between space-x-3 rounded-full border border-gray-700 p-2 text-left shadow-sm hover:bg-gray-700 focus:outline-none">
                                                             <span class="flex min-w-0 flex-1 items-center justify-between space-x-3">
                                                                 <span class="block flex-shrink-0">
-                                                                  <img class="h-10 w-10 rounded-full" :src="participant.pictureUrl" alt="">
+                                                                  <img class="h-10 w-10 rounded-full" :src="participant.pictureUrl" @error="setDefaultPicture($event)" alt="">
                                                                 </span>
 
                                                                 <span class="block min-w-0 flex-1">
@@ -1051,6 +1071,7 @@
                                                                     <div class="h-10 w-10 flex-shrink-0">
                                                                         <img class="h-10 w-10 rounded-full"
                                                                              :src="entry.profile_picture"
+                                                                             @error="setDefaultPicture($event)"
                                                                              alt="">
                                                                     </div>
                                                                     <div class="ml-4">
@@ -1145,51 +1166,60 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-6 flex space-x-3">
-                                            <div x-show.transition="showNameChange" x-transition:enter="transition duration-500 transform ease-out"
-                                                 x-transition:enter-start="scale-75" x-transition:leave="transition duration-100 transform ease-in"
-                                                 x-transition:leave-end="opacity-0 scale-90" class="inline-flex text-center">
+                                        <div class="mt-6 flex space-x-3" x-data="{activeElement: '', requestKey: ''}" @message.window="if ($event.data.action == 'loadRequestKey') { requestKey = $event.data.key }">
+                                            <!-- Text input for name change -->
+                                            <div x-show="activeElement == 'name'" class="inline-flex text-center">
                                                 <input type="text" x-model="name"
                                                        class=" py-2 pl-3 text-sm border focus:ring-indigo-500 focus:border-indigo-500 block w-full border-gray-300 rounded-md text-gray-400"
-                                                       placeholder="New name.."
-                                                       @keyup.enter="$.post('https://rahe-boosting/searchTrack', JSON.stringify({text: value, allTracks: allTracks}))">
+                                                       placeholder="New name..">
                                                 <button @click="$.post('https://rahe-boosting/changeName', JSON.stringify({name: name}))"
                                                         type="button"
-                                                        class="items-center ml-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
-                                                    </svg>
+                                                        class="items-center ml-1 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
+                                                    <span x-text="TRANSLATIONS.PROFILE_TAB.SAVE || 'Save'"></span>
                                                 </button>
                                             </div>
 
-                                            <div x-show="showPictureChange" x-transition:enter="transition duration-500 transform ease-out"
-                                                 x-transition:enter-start="scale-75" x-transition:leave="transition duration-100 transform ease-in"
-                                                 x-transition:leave-end="opacity-0 scale-90" class="inline-flex text-center">
+                                            <!-- Text input for picture change -->
+                                            <div x-show="activeElement == 'picture'" class="inline-flex text-center">
                                                 <input type="text" x-model="picture"
                                                        class=" py-2 pl-3 text-sm border focus:ring-indigo-500 focus:border-indigo-500 block w-full border-gray-300 rounded-md text-gray-400"
                                                        placeholder="Picture address.."
                                                        @keyup.enter="$.post('https://rahe-boosting/searchTrack', JSON.stringify({text: value, allTracks: allTracks}))">
                                                 <button @click="$.post('https://rahe-boosting/changePicture', JSON.stringify({picture: picture}))"
                                                         type="button"
-                                                        class="items-center ml-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                                                        class="items-center ml-1 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
+                                                    <span x-text="TRANSLATIONS.PROFILE_TAB.SAVE || 'Save'"></span>
+                                                </button>
+
+                                                <button x-show="recommendedUploadWebsite" @click="window.invokeNative('openUrl', recommendedUploadWebsite + requestKey)" type="button"
+                                                        class="inline-flex items-center justify-center rounded-md bg-gray-700 text-white text-gray-300 hover:bg-gray-600 px-4 ml-1 shadow-sm text-sm font-semibold shadow-sm sm:w-auto h-full">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1.5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                                                     </svg>
+                                                    <span style="white-space: nowrap;" x-text="TRANSLATIONS.PROFILE_TAB.UPLOAD || 'Upload'"></span>
                                                 </button>
                                             </div>
 
-                                            <button @click="showPictureChange = false; setTimeout(function() {showNameChange = !showNameChange}, 100);"
+                                            <!-- Enter name change button -->
+                                            <button x-show="activeElement == ''" @click="activeElement = 'name'"
                                                     type="button" x-text="TRANSLATIONS.PROFILE_TAB.BUTTON_NAME"
                                                     class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
                                             </button>
 
-                                            <button @click="showNameChange = false; setTimeout(function() {showPictureChange = !showPictureChange}, 100);"
+                                            <!-- Enter picture change button -->
+                                            <button x-show="activeElement == ''" @click="activeElement = 'picture'; $.post('https://rahe-boosting/getRequestInfo', JSON.stringify({}))"
                                                     type="button" x-text="TRANSLATIONS.PROFILE_TAB.PICTURE_NAME"
                                                     class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
+                                            </button>
+
+                                            <!-- Exit name/picture change button-->
+                                            <button x-show="activeElement != ''"
+                                                    @click="activeElement = ''"
+                                                    type="button"
+                                                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                                    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                                </svg>
                                             </button>
                                         </div>
                                     </div>
@@ -1402,7 +1432,13 @@
 </div>
 
 
-<img x-show="showMenu" src="img/background-frame.png" alt="tablet" class="tablet-frame"
+<img x-transition
+     x-data="{backgroundUrl: 'img/background-frame.png'}"
+     @message.window="
+     if ($event.data.action == 'useThinBackgroundFrame') {
+        backgroundUrl = 'img/background-frame-2.png'
+     }"
+     x-show="showMenu" :src="backgroundUrl" alt="tablet" class="tablet-frame"
      style="pointer-events: none; position: absolute; margin: 0 auto; left:0; right: 0; top: 2.5vh; width:70vw;height:79vh;"/>
 
 </body>

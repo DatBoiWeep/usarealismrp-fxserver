@@ -202,4 +202,18 @@ svConfig = {
 
     -- The classes displayed on the track information page (used by the player to filter best results by class) and when creating a race.
     vehicleClasses = { 'S', 'A', 'B', 'C', 'D' },
+
+    -- If this is defined, the user will be shown an 'Upload' button in the profile picture upload section.
+    -- When pressed, the user will be redirected to this website in their browser to upload their content.
+    recommendedUploadWebsite = 'https://upload.rahe.dev',
+
+    -- A list of image hosts will be allowed to use as a profile picture. The player won't be allowed to use a provider which isn't in this list.
+    -- If you have a 'recommendedUploadWebsite' defined in the previous option, then that will automatically be added into here.
+    --
+    -- We do NOT recommend using Imgur or Discord as allowed hosts!
+    -- They rate-limit and/or change URLs causing your images to stop working sooner or later, even if they may seem fine at first.
+    allowedImageHosts = {
+        'media.rahe.dev',
+        'r2.fivemanage.com'
+    }
 }
