@@ -597,7 +597,7 @@ end)
 AddEventHandler('911:IllegalRacing', function(x, y, z)
     local time = math.random(10000, 20000)
     Citizen.Wait(time)
-    local string = '^*Illegal Street Racing ^1^*|^r Caller reports race in progress. ^1^*|^r ^*Recommended Response:^r Interceptors, Air One, and Patrol Units.'
+    local string = '^*Illegal Street Racing ^1^*|^r Caller reports multiple vehicles speeding in the area.'
     Send911Notification({'sheriff', 'corrections'}, string, x, y, z, 'Illegal Street Race')
 end)
 
