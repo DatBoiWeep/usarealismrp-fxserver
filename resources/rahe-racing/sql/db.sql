@@ -68,12 +68,12 @@ CREATE TABLE `ra_racing_user_settings`
 (
     `player_identifier` VARCHAR(60)  NOT NULL,
     `alias`             VARCHAR(40)  NULL     DEFAULT 'Unnamed',
-    `profile_picture`   VARCHAR(100) NOT NULL DEFAULT 'https://i.imgur.com/Lu9dGJH.png',
+    `profile_picture`   VARCHAR(100) NOT NULL DEFAULT 'https://media.rahe.dev/img/defaultprofile.webp',
     `rating`            SMALLINT(6)  NULL     DEFAULT 1400,
     `favorite_tracks`   LONGTEXT     NOT NULL DEFAULT '{}',
     `created_at`        DATETIME     NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (`player_identifier`)
 );
 
-INSERT INTO `ra_racing_user_settings` (`player_identifier`, `alias`, `profile_picture`, `rating`) VALUES ('0', 'Anonymous', 'https://i.imgur.com/Lu9dGJH.png', 1400);
+INSERT INTO `ra_racing_user_settings` (`player_identifier`, `alias`, `profile_picture`, `rating`) VALUES ('0', 'Anonymous', 'https://media.rahe.dev/img/defaultprofile.webp', 1400);
 

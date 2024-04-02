@@ -84,7 +84,7 @@
   "text_tablet_driver_level_2100":"God Tier",
 
   "notification_tablet_error_name_length": "The name length must be between 3 - 15 characters.",
-  "notification_tablet_error_picture_format": "The profile picture URL must match the format 'https://i.imgur.com.........jpg/png'",
+  "notification_tablet_error_picture_format": "The entered URL format isn't allowed. Click the 'Upload' button to head to our recommended image upload website.",
 
   "notification_tablet_info_name_changed": "Name successfully changed.",
   "notification_tablet_info_picture_changed": "Profile picture successfully changed.",
@@ -282,6 +282,8 @@
   "profile_tab_picture_name": "Change picture",
   "profile_tab_new_name_placeholder": "New name..",
   "profile_tab_new_picture_placeholder": "Picture address..",
+  "profile_tab_save": "Save",
+  "profile_tab_upload": "Upload",
 
   "profile_tab_checkpoint_color": "Checkpoint color",
   "profile_tab_gps_color": "GPS color",
@@ -296,7 +298,7 @@
   "profile_tab_faq_2_a": "The system calculates a rating change for every participant in a competition, \nusing the ELO principle. This means that in addition to your final position,\nother players and their ratings are taken into account too.",
 
   "profile_tab_faq_3_q": "When do competitions take place?",
-  "profile_tab_faq_3_a": "An anonymous person organizes competitions for each\nday, which take place throughout the day. The person also sponsors each race with a prize.\nThe competitions are inserted into the application every day at about every 3-5 hours.",
+  "profile_tab_faq_3_a": "An anonymous person organizes competitions for each\nday, which take place 19:00 - 22:00. The person also sponsors each race with a prize.\nThe competitions are inserted into the application every day at 14:00.",
 
   "profile_tab_faq_4_q": "How are tracks selected for the competitions?",
   "profile_tab_faq_4_a": "The anonymous man makes his choice randomly. A track qualifies for a certain\nclass competition only when it has been completed at least once by a vehicle which belongs to the specified class.",

@@ -84,7 +84,7 @@
   "text_tablet_driver_level_2100":"Solo dios puede alcanzarme",
 
   "notification_tablet_error_name_length": "El nombre tiene que tener entre 3 - 15 caracteres.",
-  "notification_tablet_error_picture_format": "La URL de la imagen de perfil debe coincidir con el formato 'https://i.imgur.com.........jpg/png'",
+  "notification_tablet_error_picture_format": "La URL ingresada no está permitida. Haz clic en el botón 'Subir' para dirigirte a nuestra página de carga recomendada.",
   "notification_tablet_info_name_changed": "Nombre cambiado con exito.",
   "notification_tablet_info_picture_changed": "Imagen de perfil cambiada con éxito.",
   "notification_tablet_info_track_preview": "Se ha marcado una vista previa de la pista en tu gps por 20 segundos.",
@@ -281,6 +281,8 @@
   "profile_tab_picture_name": "Cambiar foto",
   "profile_tab_new_name_placeholder": "Nuevo nombre..",
   "profile_tab_new_picture_placeholder": "Url de la foto..",
+  "profile_tab_save": "Guardar",
+  "profile_tab_upload": "Subir",
 
   "profile_tab_checkpoint_color": "Color de los checkpoints",
   "profile_tab_gps_color": "Color del GPS",

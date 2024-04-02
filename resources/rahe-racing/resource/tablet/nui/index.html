@@ -35,6 +35,7 @@
         isTrackCreationAllowed: true,
         isCompetitionCreationAllowed: true,
         vehicleClasses: [],
+        recommendedUploadWebsite: null,
 
         infoNotification(message) {
             this.infoMessage = message;
@@ -54,6 +55,10 @@
             {
                 that.errorMessage = '';
             }, 3000);
+        },
+
+        setDefaultPicture(event) {
+            event.target.src = 'https://media.rahe.dev/img/defaultprofile.webp';
         }}"
       x-init=""
       @message.window="
@@ -82,6 +87,7 @@
             isPlayerAdmin = $event.data.data.isPlayerAdmin;
             useVerifiedTracks = $event.data.data.useVerifiedTracks;
             manualCompetitionWaitTime = $event.data.data.manualCompetitionWaitTime;
+            recommendedUploadWebsite = $event.data.data.recommendedUploadWebsite;
         }
         else if ($event.data.action == 'showTrackCreationHelper') {
             showTrackCreationHelper = true;
@@ -107,6 +113,7 @@
 
 <!-- Tablet content area -->
 <div x-show="showMenu"
+     x-transition
      style="position: absolute; margin: 0 auto; left:2vh; right: 2vh; top: 8vh; width:63.4vw; height:68vh;"
      class="bg-slate-800">
 
@@ -173,7 +180,6 @@
 
         <!-- Home tab -->
         <div x-show="activeTab === 'home'" x-data="{ stats: [], events: [] }"
-             x-init=""
              @message.window="
              if ($event.data.action == 'loadTabData' && $event.data.tab == 'home')  {
                 stats = $event.data.data.stats;
@@ -266,6 +272,7 @@
                                     </div>
                                     <img class="w-7 h-7 bg-gray-300 rounded-full flex-shrink-0"
                                          :src="event.profile_picture"
+                                         @error="setDefaultPicture($event)"
                                          alt="">
                                 </div>
                             </li>
@@ -277,73 +284,10 @@
 
         <!-- Tracks tab -->
         <div x-show="activeTab === 'tracks'"
-             x-data="{
-                tracks: [],
-
-                showTrackSearch: false,
-                showLoadingSpinner: false,
-                trackSearchInput: '',
-
-                filteredTracks: [],
-                trackFilter: '',
-
-                setTrackFilter(value) {
-                    var that = this;
-                    this.showLoadingSpinner = true;
-
-                    setTimeout(function() {
-                        that.trackFilter = value;
-                        that.updateFilteredTracks();
-                        that.showLoadingSpinner = false;
-                    }, 10);
-                },
-
-                setTrackSearch(value) {
-                    var that = this;
-                    this.showLoadingSpinner = true;
-
-                    setTimeout(function() {
-                        that.trackSearchInput = value;
-                        that.updateFilteredTracks();
-                        that.showLoadingSpinner = false;
-                    }, 10);
-                },
-
-                updateFilteredTracks() {
-                    let newFilteredTracks = [];
-
-                    if (this.trackFilter == 'PERSONAL') {
-                        newFilteredTracks = _.filter(this.tracks, function(track) {
-                            return track.creator_identifier === identifier;
-                        });
-                    } else if (this.trackFilter == 'FAVORITE') {
-                        newFilteredTracks = _.filter(this.tracks, function(track) {
-                            return track.is_favorite === 1;
-                        });
-                    } else if (this.trackFilter == 'VERIFIED') {
-                        newFilteredTracks = _.filter(this.tracks, function(track) {
-                            return track.is_verified === 1;
-                        });
-                    } else {
-                        newFilteredTracks = this.tracks;
-                    }
-
-                    if (this.trackSearchInput !== '') {
-                        let searchString = this.trackSearchInput.toLowerCase();
-
-                        newFilteredTracks = _.filter(newFilteredTracks, function(track) {
-                            return track.name.toLowerCase().includes(searchString) || track.alias.toLowerCase().includes(searchString);
-                        });
-                    }
-
-                    this.filteredTracks = newFilteredTracks;
-                }
-             }"
-             x-init=""
+             x-data="tracksData()"
              @message.window="
              if ($event.data.action == 'loadTabData' && $event.data.tab == 'tracks')  {
-                tracks = $event.data.data.tracks;
-                updateFilteredTracks();
+                setTracks($event.data.data.tracks, identifier);
              }">
             <div class="pt-10 bg-gray-900 sm:pt-16 lg:pt-8 pt-4 lg:overflow-hidden pb-14">
                 <div class="mx-auto max-w-8xl lg:px-8">
@@ -461,15 +405,8 @@
                                 </div>
                             </div>
 
-                            <ul x-data="{
-                                setVerified(trackId, trackName, value) {
-                                    $.post('https://rahe-racing/setTrackVerified', JSON.stringify({trackId: trackId, trackName: trackName, value: value}));
-                                },
-                                setFavorite(trackId, trackName, value) {
-                                    $.post('https://rahe-racing/setTrackFavorite', JSON.stringify({trackId: trackId, trackName: trackName, value: value}));
-                                }}"
-                                role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                                <template x-for="track in filteredTracks">
+                            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                                <template x-for="track in items">
                                     <li class="col-span-1 bg-gray-800 rounded-lg shadow hover:bg-gray-700"
                                         x-data="{isHover: false}"
                                         @mouseover="isHover = true"
@@ -564,6 +501,7 @@
                                                        class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-300 font-medium border border-transparent rounded-bl-lg hover:text-gray-100">
                                                         <img class="h-5 w-5 rounded-full"
                                                              :src="track.profile_picture"
+                                                             @error="setDefaultPicture($event)"
                                                              alt="">
                                                         <span class="ml-3" x-text="translations.tracks_tab_track_information"></span>
                                                     </a>
@@ -586,6 +524,14 @@
                                         </div>
                                     </li>
                                 </template>
+
+                                <div x-show="observerStarted" class="h-64 col-span-3 flex py-2 text-gray-400 items-center justify-center" id="infinite-scroll-trigger">
+                                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    <span>Loading...</span>
+                                </div>
                             </ul>
                         </div>
                     </div>
@@ -598,7 +544,6 @@
                 <div class="mx-auto max-w-8xl lg:px-8">
                     <div class="col-span-3 mx-auto px-4 sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
                         <div class="w-full" x-data="{trackInfo: [], leaderBoardEntries: [], selectedFilter: ''}"
-                             x-init=""
                              @message.window="
                              if ($event.data.action == 'loadTrackInfo') {
                                 trackInfo = $event.data.data;
@@ -796,6 +741,7 @@
                                                             <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-300 sm:pl-6">
                                                                 <img class="h-10 w-10 rounded-full"
                                                                      :src="entry.profile_picture"
+                                                                     @error="setDefaultPicture($event)"
                                                                      alt="">
                                                             </td>
                                                             <td x-text="entry.alias"
@@ -1020,8 +966,6 @@
                 this.updateMinutesFromNowTime();
              }}"
 
-             x-init=""
-
              @race-creation-opened.window="updateMinutesFromNowTime();"
 
              @message.window="
@@ -1175,7 +1119,7 @@
                                                 <ul role="list" class="divide-y divide-white/5 mb-6">
                                                     <li class="py-4 px-2">
                                                         <div class="flex items-center gap-x-3">
-                                                            <img :src="selectedTrackInfo.profile_picture" alt=""
+                                                            <img :src="selectedTrackInfo.profile_picture" @error="setDefaultPicture($event)" alt=""
                                                                  class="h-6 w-6 flex-none rounded-full bg-gray-800">
                                                             <h3 class="truncate text-sm font-semibold leading-6 text-white"
                                                                 x-text="selectedTrackInfo.name"></h3>
@@ -1205,7 +1149,8 @@
                                                     <template x-for="(selectedCompetitionTrack, index) in selectedCompetitionTracks">
                                                         <li x-transition class="py-4 px-2">
                                                             <div class="flex items-center gap-x-3">
-                                                                <img :src="selectedCompetitionTrack.profile_picture" alt=""
+                                                                <img :src="selectedCompetitionTrack.profile_picture"
+                                                                     @error="setDefaultPicture($event)" alt=""
                                                                      class="h-6 w-6 flex-none rounded-full bg-gray-800">
                                                                 <h3 class="flex truncate text-sm font-semibold leading-6 text-white"
                                                                     x-text="selectedCompetitionTrack.name"></h3>
@@ -1264,6 +1209,7 @@
                                                             <div class="flex-shrink-0">
                                                                 <img class="h-10 w-10 rounded-full"
                                                                      :src="competitionTrack.profile_picture"
+                                                                     @error="setDefaultPicture($event)"
                                                                      alt="">
                                                             </div>
                                                             <div class="min-w-0 flex-1">
@@ -1328,7 +1274,6 @@
                     let date = new Date(timestamp);
                     return this.padNumber(date.getHours()) + ':' + this.padNumber(date.getMinutes());
                 }}"
-             x-init=""
              @message.window="
              if ($event.data.action == 'loadTabData' && $event.data.tab == 'races')  {
                 races = $event.data.data.races;
@@ -1638,7 +1583,6 @@
                 <div class="mx-auto max-w-8xl lg:px-8">
                     <div class="col-span-3 mx-auto px-4 sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
                         <div class="w-full" x-data="{raceInfo: '', leaderBoardEntries: []}"
-                             x-init=""
                              @message.window="
                              if ($event.data.action == 'loadRaceInfo') {
                                 raceInfo = $event.data.data.raceDetailsInfo;
@@ -1713,6 +1657,7 @@
                                                                     <div class="h-10 w-10 flex-shrink-0">
                                                                         <img class="h-10 w-10 rounded-full"
                                                                              :src="entry.profile_picture"
+                                                                             @error="setDefaultPicture($event)"
                                                                              alt="">
                                                                     </div>
                                                                     <div class="ml-4">
@@ -1763,7 +1708,6 @@
 
         <!-- Leaderboard tab -->
         <div x-show="activeTab === 'leaderboard'" x-data="{ leaderboardEntries: [] }"
-             x-init=""
              @message.window="
              if ($event.data.action == 'loadTabData' && $event.data.tab == 'leaderboard')  {
                 leaderboardEntries = $event.data.data.leaderboardEntries;
@@ -1829,6 +1773,7 @@
                                                                     <div class="h-10 w-10 flex-shrink-0">
                                                                         <img class="h-10 w-10 rounded-full"
                                                                              :src="entry.profile_picture"
+                                                                             @error="setDefaultPicture($event)"
                                                                              alt="">
                                                                     </div>
                                                                     <div class="ml-4">
@@ -1873,8 +1818,7 @@
         </div>
 
         <!-- Profile tab -->
-        <div x-show="activeTab === 'profile'" x-data="{name: '', showNameChange: false, showPictureChange: false, picture: '', date: ''}"
-             x-init=""
+        <div x-show="activeTab === 'profile'" x-data="{name: '', picture: '', date: ''}"
              @message.window="
              if ($event.data.action == 'loadTabData' && $event.data.tab == 'profile')  {
                 name = $event.data.data.name;
@@ -1913,51 +1857,64 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="flex space-x-3">
-                                            <div x-show.transition="showNameChange" x-transition:enter="transition duration-500 transform ease-out"
-                                                 x-transition:enter-start="scale-75" x-transition:leave="transition duration-100 transform ease-in"
-                                                 x-transition:leave-end="opacity-0 scale-90" class="inline-flex text-center">
+                                        <div class="flex space-x-3" x-data="{activeElement: '', requestKey: ''}" @message.window="if ($event.data.action == 'loadRequestKey') { requestKey = $event.data.key }">
+                                            <!-- Text input for name change -->
+                                            <div x-show="activeElement == 'name'" class="inline-flex text-center">
                                                 <input type="text" x-model="name"
                                                        class=" py-2 pl-3 text-sm border focus:ring-indigo-500 focus:border-indigo-500 block w-full border-gray-300 rounded-md text-gray-400"
                                                        :placeholder="translations.profile_tab_new_name_placeholder">
-                                                <button @click="$.post('https://rahe-racing/changeName', JSON.stringify({name: name}))" type="button"
-                                                        class="items-center ml-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
-                                                    </svg>
+                                                <button @click="$.post('https://rahe-racing/changeName', JSON.stringify({name: name}))"
+                                                        type="button"
+                                                        class="items-center ml-1 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
+                                                    <span x-text="translations.profile_tab_save || 'Save'"></span>
                                                 </button>
                                             </div>
 
-                                            <div x-show="showPictureChange" x-transition:enter="transition duration-500 transform ease-out"
-                                                 x-transition:enter-start="scale-75" x-transition:leave="transition duration-100 transform ease-in"
-                                                 x-transition:leave-end="opacity-0 scale-90" class="inline-flex text-center">
+                                            <!-- Text input for picture change -->
+                                            <div x-show="activeElement == 'picture'" class="inline-flex text-center">
                                                 <input type="text" x-model="picture"
                                                        class=" py-2 pl-3 text-sm border focus:ring-indigo-500 focus:border-indigo-500 block w-full border-gray-300 rounded-md text-gray-400"
                                                        :placeholder="translations.profile_tab_new_picture_placeholder">
                                                 <button @click="$.post('https://rahe-racing/changePicture', JSON.stringify({picture: picture}))"
                                                         type="button"
-                                                        class="items-center ml-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                                                        class="items-center ml-1 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
+                                                    <span x-text="translations.profile_tab_save || 'Save'"></span>
+                                                </button>
+
+                                                <button x-show="recommendedUploadWebsite" @click="window.invokeNative('openUrl', recommendedUploadWebsite + requestKey)" type="button"
+                                                        class="inline-flex items-center justify-center rounded-md bg-gray-700 text-white text-gray-300 hover:bg-gray-600 px-4 ml-1 shadow-sm text-sm font-semibold shadow-sm sm:w-auto h-full">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1.5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                                                     </svg>
+                                                    <span style="white-space: nowrap;" x-text="translations.profile_tab_upload || 'Upload'"></span>
                                                 </button>
                                             </div>
 
-                                            <button @click="showPictureChange = false; setTimeout(function() {showNameChange = !showNameChange}, 100);"
+                                            <!-- Enter name change button -->
+                                            <button x-show="activeElement == ''" @click="activeElement = 'name'"
                                                     type="button" x-text="translations.profile_tab_button_name"
                                                     class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
                                             </button>
 
-                                            <button @click="showNameChange = false; setTimeout(function() {showPictureChange = !showPictureChange}, 100);"
+                                            <!-- Enter picture change button -->
+                                            <button x-show="activeElement == ''" @click="activeElement = 'picture'; $.post('https://rahe-racing/getRequestInfo', JSON.stringify({}))"
                                                     type="button" x-text="translations.profile_tab_picture_name"
                                                     class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
                                             </button>
 
-                                            <button @click="$.post('https://rahe-racing/getVehicleClass', JSON.stringify({}))"
+                                            <!-- Exit name/picture change button-->
+                                            <button x-show="activeElement != ''"
+                                                    @click="activeElement = ''"
+                                                    type="button"
+                                                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                                    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+
+                                            <!-- Get vehicle class button -->
+                                            <button x-show="activeElement == ''"
+                                                    @click="$.post('https://rahe-racing/getVehicleClass', JSON.stringify({}))"
                                                     type="button"
                                                     class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -2237,7 +2194,14 @@
 </div>
 
 <!-- Tablet background frame -->
-<img x-show="showMenu" src="img/background-frame.png" alt="tablet" class="tablet-frame"
+<img x-data="{backgroundUrl: 'img/background-frame.png'}"
+     @message.window="
+     if ($event.data.action == 'useThinBackgroundFrame') {
+        backgroundUrl = 'img/background-frame-2.png'
+     }"
+     x-show="showMenu"
+     x-transition
+     :src="backgroundUrl" alt="tablet" class="tablet-frame"
      style="pointer-events: none; position: absolute; margin: 0 auto; left:0; right: 0; top: 2.5vh; width:70vw;height:79vh;"/>
 
 <!-- Track recording -->
@@ -2436,6 +2400,5 @@
         </table>
     </div>
 </div>
-
 </body>
 </html>

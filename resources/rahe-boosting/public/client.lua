@@ -25,7 +25,7 @@ function spawnBoostVehicle(contract)
         if DoesEntityExist(vehicle) then
             print("Vehicle exists.")
         else
-            print("Vehicle doesn't exist. Possible reasons : (1) Desync between client and server | (2) Client device failed to low high texture value in time.")
+            print("Vehicle doesn't exist. Possible reasons : (1) Desync between client and server | (2) Client device failed to load high texture value in time.")
             print("You can use this F8 error to submit a ticket. Model : ["..contract.vehicleModel.."] | LP : ["..contract.licensePlate.."]")
         end
     end

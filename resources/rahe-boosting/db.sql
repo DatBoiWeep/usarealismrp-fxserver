@@ -22,7 +22,7 @@ CREATE TABLE `ra_boosting_user_settings`
 (
     `player_identifier` VARCHAR(100) NOT NULL,
     `alias`             VARCHAR(40)  NULL     DEFAULT 'Unnamed',
-    `profile_picture`   VARCHAR(100) NOT NULL DEFAULT 'https://i.imgur.com/Lu9dGJH.png',
+    `profile_picture`   VARCHAR(100) NOT NULL DEFAULT 'https://media.rahe.dev/img/defaultprofile.webp',
     `experience`        FLOAT        NOT NULL DEFAULT 0,
     `crypto`            INT(11)      NOT NULL DEFAULT 0,
     `is_initialized`    INT(11)      NOT NULL DEFAULT 0,

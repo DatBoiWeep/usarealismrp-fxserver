@@ -7,7 +7,7 @@ game 'gta5'
 name 'RAHE Racing System'
 author 'Edward'
 description 'A feature-rich racing system by RAHE Development.'
-version '2.0.3'
+version '2.0.4'
 
 --[[ Manifest ]]--
 dependencies {

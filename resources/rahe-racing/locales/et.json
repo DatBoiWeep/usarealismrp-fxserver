@@ -84,7 +84,7 @@
   "text_tablet_driver_level_2100":"God Tier",
 
   "notification_tablet_error_name_length": "Nime pikkus peab olema 3-15 tähemärki pikk.",
-  "notification_tablet_error_picture_format": "Profiilipilt peab olema formaadis 'https://i.imgur.com.........jpg/png'",
+  "notification_tablet_error_picture_format": "Sisestatud URL pole lubatud. Klõpsa nupule 'Lae üles', et minna meie soovitatud üleslaadimislehele.",
 
   "notification_tablet_info_name_changed": "Nimi edukalt vahetatud.",
   "notification_tablet_info_picture_changed": "Profiilipilt edukalt vahetatud.",
@@ -282,6 +282,8 @@
   "profile_tab_picture_name": "Muuda pilti",
   "profile_tab_new_name_placeholder": "Uus nimi..",
   "profile_tab_new_picture_placeholder": "Pildi aadress..",
+  "profile_tab_save": "Salvesta",
+  "profile_tab_upload": "Lae üles",
 
   "profile_tab_checkpoint_color": "Checkpointide värvus",
   "profile_tab_gps_color": "GPS värvus",

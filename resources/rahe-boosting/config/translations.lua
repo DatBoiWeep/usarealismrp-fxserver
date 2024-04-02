@@ -49,6 +49,7 @@ translations = {
     NOTIFICATION_GAME_SUCCESSFUL_DELIVERY = 'You received $%d and %d %s for the successful delivery.',
     NOTIFICATION_GAME_PENALIZED_DELIVERY = 'You received $%d less than you should have, because the vehicle was damaged.',
     NOTIFICATION_GAME_SUCCESSFUL_VIN_DELIVERY = 'The dealer will scratch the VIN and deliver the vehicle to your garage.',
+    NOTIFICATION_GAME_NO_ACTIVITY = 'You did not gain anything for this boost as you did not actively participate in it.',
 
     LABEL_MAP_BLIP_DELIVER_HERE = 'Deliver the vehicle here',
     LABEL_MAP_VEHICLE_LOCATION = 'Vehicle location',
@@ -67,7 +68,7 @@ translations = {
 
     NOTIFICATION_TABLET_ERROR_NAME_LENGTH = 'The name length must be between 3 - 15 characters.',
     NOTIFICATION_TABLET_INFO_NAME_CHANGED = 'Name successfully changed.',
-    NOTIFICATION_TABLET_ERROR_PICTURE_FORMAT = "The profile picture URL must match the format 'https://i.imgur.com.........jpg/png'",
+    NOTIFICATION_TABLET_ERROR_PICTURE_FORMAT = "Invalid URL format. Click on 'Upload' to head to our recommended upload website.",
     NOTIFICATION_TABLET_INFO_PICTURE_CHANGED = 'Profile picture successfully changed.',
 
     NOTIFICATION_TABLET_INFO_ADMIN_GENERATED = 'Boosting contracts generated for the players in queue (%d %s)..',
