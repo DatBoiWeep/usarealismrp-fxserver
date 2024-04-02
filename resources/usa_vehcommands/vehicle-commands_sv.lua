@@ -25,6 +25,11 @@ local VEHICLE_RANKS = {
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polcarap")
 		},
+		["poldmntp"] = {
+			rank = 4,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("poldmntp")
+		},
 		["polmav"] = {
 			rank = 3,
 			allowedLiveries = { 1 },
@@ -107,6 +112,11 @@ local VEHICLE_RANKS = {
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polcarap")
 		},
+		["poldmntp"] = {
+			rank = 4,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("poldmntp")
+		},
 		["polmav"] = {
 			rank = 3,
 			allowedLiveries = { 1 },
@@ -174,6 +184,11 @@ local VEHICLE_RANKS = {
 			allowedLiveries = { 1, 2},
 			hash = GetHashKey("bfdsuv")
 		},
+		["ecara"] = {
+			rank = 1,
+			allowedLiveries = { 1},
+			hash = GetHashKey("ecara")
+		},
 		["firetruck"] = {
 			rank = 1,
 			allowedLiveries = { 1},
@@ -189,7 +204,6 @@ local VEHICLE_RANKS = {
 			allowedLiveries = { 1 },
 			hash = GetHashKey("buzzard2")
 		},
-		--["lguard2"] = 1,
 		["blazer2"] = {
 			rank = 1,
 			allowedLiveries = { 1 },
