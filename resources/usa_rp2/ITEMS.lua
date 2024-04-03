@@ -368,6 +368,8 @@ local ITEMS = {
     --]]
     -- TACO FARMER ITEMS
     { name = "Hard Shell Taco", price = 275, type = "food", substance = 85.0, quantity = 1, legality = "legal", weight = 1, objectModel = "prop_taco_01"},
+    -- END TACO FARMER ITEMS
+    { name = "Grappling Hook", type = "misc", price = 250, weight = 25, quantity = 1 },
 }
 
 for i = 1, #ITEMS do
