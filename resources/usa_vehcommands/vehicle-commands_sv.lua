@@ -5,10 +5,15 @@ local VEHICLE_RANKS = {
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polstanierp")
 		},
-		["polbuffalop2"] = {
-			rank = 4,
+		["polbuffalop"] = {
+			rank = 2,
 			allowedLiveries = {1, 2},
-			hash = GetHashKey("p14polbuffalop2tesla")
+			hash = GetHashKey("polbuffalop")
+		},
+		["polbuffalop2"] = {
+			rank = 2,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polbuffalop2")
 		},
 		["poltorencep"] = {
 			rank = 1,
@@ -20,6 +25,16 @@ local VEHICLE_RANKS = {
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polscoutp")
 		},
+		["polalamop2"] = {
+			rank = 2,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polalamop2")
+		},
+		["polstalkerp"] = {
+			rank = 2,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polstalkerp")
+		},
 		["polcarap"] = {
 			rank = 4,
 			allowedLiveries = {1, 2},
@@ -29,6 +44,11 @@ local VEHICLE_RANKS = {
 			rank = 4,
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("poldmntp")
+		},
+		["polvigerop"] = {
+			rank = 4,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polvigerop")
 		},
 		["polmav"] = {
 			rank = 3,
@@ -92,10 +112,15 @@ local VEHICLE_RANKS = {
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polstanierp")
 		},
-		["polbuffalop2"] = {
-			rank = 4,
+		["polbuffalop"] = {
+			rank = 2,
 			allowedLiveries = {1, 2},
-			hash = GetHashKey("p14polbuffalop2tesla")
+			hash = GetHashKey("polbuffalop")
+		},
+		["polbuffalop2"] = {
+			rank = 2,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polbuffalop2")
 		},
 		["poltorencep"] = {
 			rank = 1,
@@ -107,8 +132,18 @@ local VEHICLE_RANKS = {
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polscoutp")
 		},
+		["polalamop2"] = {
+			rank = 2,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polalamop2")
+		},
+		["polstalkerp"] = {
+			rank = 2,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polstalkerp")
+		},
 		["polcarap"] = {
-			rank = 4,
+			rank = 3,
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polcarap")
 		},
@@ -116,6 +151,11 @@ local VEHICLE_RANKS = {
 			rank = 4,
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("poldmntp")
+		},
+		["polvigerop"] = {
+			rank = 4,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("polvigerop")
 		},
 		["polmav"] = {
 			rank = 3,
