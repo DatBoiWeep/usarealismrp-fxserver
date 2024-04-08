@@ -639,405 +639,374 @@ Citizen.CreateThread(function()
                 if GetDistanceBetweenCoords(GetEntityCoords(me), info.x, info.y, info.z, true) < 1 then
                     nearest_property_info = NEARBY_PROPERTIES[name]
                     closest_coords.x, closest_coords.y, closest_coords.z = info.x, info.y, info.z
-                        --drawTxt("Press [ ~b~E~w~ ] to access the " .. name .. " property menu!",7,1,0.5,0.8,0.6,255,255,255,255)
-                        --if IsControlJustPressed(0, MENU_KEY) then
-                            Citizen.CreateThread(function()
-                                _menuPool = NativeUI.CreatePool()
-                                ------------------------------
-                                -- check for any owner --
-                                ------------------------------
-                                if nearest_property_info.owner.name then
-                                    ---------------------------------------
-                                    -- check if this client is owner --
-                                    ---------------------------------------
-                                    local can_open = {
-                                      status = false,
-                                      owner = false
+                        Citizen.CreateThread(function()
+                            _menuPool = NativeUI.CreatePool()
+                            ------------------------------
+                            -- check for any owner --
+                            ------------------------------
+                            if nearest_property_info.owner.name then
+                                ---------------------------------------
+                                -- check if this client is owner --
+                                ---------------------------------------
+                                local can_open = {
+                                    status = false,
+                                    owner = false
+                                }
+                                if nearest_property_info.owner.identifier == my_property_identifier then
+                                    can_open = {
+                                    status = true,
+                                    owner = true
                                     }
-                                    if nearest_property_info.owner.identifier == my_property_identifier then
-                                      can_open = {
-                                        status = true,
-                                        owner = true
-                                      }
-                                    else
-                                      if nearest_property_info.coowners then
-                                        for i = 1, #nearest_property_info.coowners do
-                                          if nearest_property_info.coowners[i].identifier == my_property_identifier then
-                                            can_open = {
-                                              status = true,
-                                              owner = false
-                                            }
-                                            break
-                                          end
+                                else
+                                    if nearest_property_info.coowners then
+                                    for i = 1, #nearest_property_info.coowners do
+                                        if nearest_property_info.coowners[i].identifier == my_property_identifier then
+                                        can_open = {
+                                            status = true,
+                                            owner = false
+                                        }
+                                        break
                                         end
-                                      end
                                     end
-                                    if can_open.status == true then
-                                        ----------------------------
-                                        -- create main menu  --
-                                        ----------------------------
-                                        local propertyType = (nearest_property_info.type == "business" and "business" or "property")
-                                        if can_open.owner == true then
-                                            mainMenu = NativeUI.CreateMenu(name, "~b~You own this " .. propertyType, 50 --[[X COORD]], 320 --[[Y COORD]])
-                                        else
-                                            local headerText = (nearest_property_info.type == "business" and "work here" or "co-own this property")
-                                            mainMenu = NativeUI.CreateMenu(name, "~b~You " .. headerText, 50 --[[X COORD]], 320 --[[Y COORD]])
-                                        end
-                                        ---------------------------
-                                        -- next fee due date  --
-                                        ---------------------------
-                                        local item = NativeUI.CreateItem("Next Fee Due: " .. nearest_property_info.fee.end_date, "Fee of $" .. nearest_property_info.fee.price .. " due on: " .. nearest_property_info.fee.end_date)
-                                        mainMenu:AddItem(item)
-                                        ---------------------------
-                                        -- leave property        --
-                                        ---------------------------
-                                        if nearest_property_info.will_leave == nil then
-                                            nearest_property_info.will_leave = false
-                                        end
-                                        local item = nil
-                                        if can_open.owner == true then
-                                            item = NativeUI.CreateCheckboxItem("Continue Tennancy", not nearest_property_info.will_leave, "Enable/Disable if you want to continue paying for this property", 1)
-                                            item.CheckboxEvent = function(parentmenu, selected, checked)
-                                                if GetGameTimer() - last_check_toggle > 5000 then
-                                                    last_check_toggle = GetGameTimer()
-                                                    nearest_property_info.will_leave = not checked
-                                                    TriggerServerEvent("properties:willLeave", nearest_property_info.name, not checked)
-                                                else
-                                                    TriggerEvent("usa:notify", "You are doing that too fast!")
-                                                    RemoveMenuPool(_menuPool)
-                                                end
-                                            end
-                                        else
-                                            if nearest_property_info.will_leave then
-                                                item = NativeUI.CreateItem("Tennancy Ending", "The owner has chosen not to continue paying and the house will go up for sale")
+                                    end
+                                end
+                                if can_open.status == true then
+                                    ----------------------------
+                                    -- create main menu  --
+                                    ----------------------------
+                                    local propertyType = (nearest_property_info.type == "business" and "business" or "property")
+                                    if can_open.owner == true then
+                                        mainMenu = NativeUI.CreateMenu(name, "~b~You own this " .. propertyType, 50 --[[X COORD]], 320 --[[Y COORD]])
+                                    else
+                                        local headerText = (nearest_property_info.type == "business" and "work here" or "co-own this property")
+                                        mainMenu = NativeUI.CreateMenu(name, "~b~You " .. headerText, 50 --[[X COORD]], 320 --[[Y COORD]])
+                                    end
+                                    ---------------------------
+                                    -- next fee due date  --
+                                    ---------------------------
+                                    local item = NativeUI.CreateItem("Next Fee Due: " .. nearest_property_info.fee.end_date, "Fee of $" .. nearest_property_info.fee.price .. " due on: " .. nearest_property_info.fee.end_date)
+                                    mainMenu:AddItem(item)
+                                    ---------------------------
+                                    -- leave property        --
+                                    ---------------------------
+                                    if nearest_property_info.will_leave == nil then
+                                        nearest_property_info.will_leave = false
+                                    end
+                                    local item = nil
+                                    if can_open.owner == true then
+                                        item = NativeUI.CreateCheckboxItem("Continue Tennancy", not nearest_property_info.will_leave, "Enable/Disable if you want to continue paying for this property", 1)
+                                        item.CheckboxEvent = function(parentmenu, selected, checked)
+                                            if GetGameTimer() - last_check_toggle > 5000 then
+                                                last_check_toggle = GetGameTimer()
+                                                nearest_property_info.will_leave = not checked
+                                                TriggerServerEvent("properties:willLeave", nearest_property_info.name, not checked)
                                             else
-                                                item = NativeUI.CreateItem("Tennancy Continuing", "The Tennancy will continue as normal")
-                                            end
-                                        end
-                                        mainMenu:AddItem(item)
-                                        ------------------------------
-                                        -- load /display money --
-                                        ------------------------------
-                                        TriggerServerEvent("properties:loadMoneyForMenu", nearest_property_info.name)
-                                        while not menu_data.money do
-                                            Wait(10)
-                                        end
-                                        local item = NativeUI.CreateItem("Money: ~g~$" .. comma_value(menu_data.money), "Amount of money stored at this property.")
-                                        mainMenu:AddItem(item)
-                                        --------------------
-                                        -- store money --
-                                        --------------------
-                                        local item = NativeUI.CreateItem("Store Money", "Store an amount of money at this property.")
-                                        item.Activated = function(parentmenu, selected)
-                                            -----------------------------
-                                            -- get amount to store --
-                                            -----------------------------
-                                            -- 1) close menu
-                                            RemoveMenuPool(_menuPool)
-                                            -- 2) get input
-                                            Citizen.CreateThread( function()
-                                                TriggerEvent("hotkeys:enable", false)
-                                                DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
-                                                while true do
-                                                    if ( UpdateOnscreenKeyboard() == 1 ) then
-                                                        local input_amount = GetOnscreenKeyboardResult()
-                                                        print("keyboard result: " .. input_amount)
-                                                        if ( string.len( input_amount ) > 0 ) then
-                                                            local amount = tonumber( input_amount )
-                                                            amount = math.floor(amount, 0)
-                                                            if ( amount > 0 ) then
-                                                                print("storing: $" .. amount)
-                                                                TriggerServerEvent("properties-og:storeMoney", nearest_property_info.name, amount)
-                                                            end
-                                                            break
-                                                        else
-                                                            DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
-                                                        end
-                                                    elseif ( UpdateOnscreenKeyboard() == 2 ) then
-                                                        break
-                                                    end
-                                                    Wait( 0 )
-                                                end
-                                                TriggerEvent("hotkeys:enable", true)
-                                            end )
-                                        end
-                                        mainMenu:AddItem(item)
-                                        --------------------------
-                                        -- withdraw money --
-                                        --------------------------
-                                        local item = NativeUI.CreateItem("Withdraw Money", "Withdraw an amount of money from this property.")
-                                        item.Activated = function(parentmenu, selected)
-                                            ----------------------------------
-                                            -- get amount to withdraw --
-                                            ----------------------------------
-                                            -- close menu --
-                                            RemoveMenuPool(_menuPool)
-                                            -- get input to withdraw --
-                                            Citizen.CreateThread( function()
-                                                TriggerEvent("hotkeys:enable", false)
-                                                DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
-                                                while true do
-                                                    if ( UpdateOnscreenKeyboard() == 1 ) then
-                                                        local input_amount = GetOnscreenKeyboardResult()
-                                                        if ( string.len( input_amount ) > 0 ) then
-                                                            local amount = tonumber( input_amount )
-                                                            amount = math.floor(amount, 0)
-                                                            if ( amount > 0 ) then
-                                                                TriggerServerEvent("properties:withdraw", nearest_property_info.name, amount, nil, true)
-                                                            end
-                                                            break
-                                                        else
-                                                            DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
-                                                        end
-                                                    elseif ( UpdateOnscreenKeyboard() == 2 ) then
-                                                        break
-                                                    end
-                                                    Wait( 0 )
-                                                end
-                                                TriggerEvent("hotkeys:enable", true)
-                                            end)
-                                        end
-                                        mainMenu:AddItem(item)
-                                        ----------------------------
-                                        -- access house inventory --
-                                        ----------------------------
-                                        local inventoryBtn = NativeUI.CreateItem("Storage", "Retrieve and store items from this property.")
-                                        inventoryBtn.Activated = function(parentmenu, selected)
-                                            TriggerServerEvent("properties-og:onStorageBtnSelected", nearest_property_info.name)
-                                            mainMenu:Visible(false)
-                                        end
-                                        mainMenu:AddItem(inventoryBtn)
-                                        -----------------
-                                        -- wardrobe --
-                                        -----------------
-                                        local wardrobe_submenu = _menuPool:AddSubMenu(mainMenu, "Wardrobe", "Store and retrieve outfits here.", true --[[KEEP POSITION]])
-                                        TriggerServerEvent("properties:getWardrobe", nearest_property_info.name)
-                                        waitingForWardrobeToLoad = true
-                                        while waitingForWardrobeToLoad do
-                                            Wait(10)
-                                        end
-                                        if menu_data.wardrobe and #menu_data.wardrobe > 0 then
-                                            for x  = 1, #menu_data.wardrobe do
-                                                local outfit = menu_data.wardrobe[x]
-                                                ---------------------------------------------
-                                                -- submenu for each wardrobe item --
-                                                ---------------------------------------------
-                                                local wardrobe_submenu2 = _menuPool:AddSubMenu(wardrobe_submenu.SubMenu, outfit.name, "Put on or delete " .. outfit.name, true --[[KEEP POSITION]])
-                                                local putonbtn = NativeUI.CreateItem("Put On", "Put on " .. outfit.name)
-                                                putonbtn.Activated = function(parentmenu, selected)
-                                                    SetPedOutfit(outfit.clothing)
-                                                    RemoveMenuPool(_menuPool)
-                                                end
-                                                wardrobe_submenu2.SubMenu:AddItem(putonbtn)
-                                                local deletebtn = NativeUI.CreateItem("Delete", "Delete " .. outfit.name)
-                                                deletebtn.Activated = function(parentmenu, selected)
-                                                    TriggerServerEvent("properties:deleteOutfitByName", nearest_property_info.name, outfit.name)
-                                                    RemoveMenuPool(_menuPool)
-                                                end
-                                                wardrobe_submenu2.SubMenu:AddItem(deletebtn)
-                                            end
-                                        else
-											local noitemsbtn = NativeUI.CreateItem("You have no outfits saved!", "Press the 'Save Current Outfit' button to save an outfit.")
-											wardrobe_submenu.SubMenu:AddItem(noitemsbtn)
-										end
-                                        -------------------
-                                        -- save button --
-                                        -------------------
-                                        local savebtn = NativeUI.CreateItem("Save Current Outfit", "Save your current outfit.")
-                                        savebtn.Activated = function(parentmenu, selected)
-                                            RemoveMenuPool(_menuPool)
-                                            Citizen.CreateThread(function()
-                                                -- get user input for name
-                                                local outfitname = GetUserInput()
-                                                if outfitname then
-                                                    -- save player's outfit
-                                                    local clothing = GetPedOutfit()
-                                                    -- build the object
-                                                    local outfit = {
-                                                        name = outfitname,
-                                                        clothing = clothing
-                                                    }
-                                                    TriggerServerEvent("properties-og:saveOutfit", nearest_property_info.name, outfit)
-                                                    RemoveMenuPool(_menuPool)
-                                                end
-                                            end)
-                                        end
-                                        wardrobe_submenu.SubMenu:AddItem(savebtn)
-                                        -------------------
-                                        -- spawn here --
-                                        -------------------
-                                        local spawnbtn = NativeUI.CreateItem("Spawn Here", "Set your spawn to this location.")
-                                        spawnbtn.Activated = function(parentmenu, selected)
-                                            local spawn = { x = nearest_property_info.x, y = nearest_property_info.y, z = nearest_property_info.z, name = nearest_property_info.name }
-                                            TriggerServerEvent("properties:setSpawnPoint", spawn)
-                                        end
-                                        mainMenu:AddItem(spawnbtn)
-                                        if can_open.owner == true then -- only allow true owners (non co owners) to modify co owners
-                                            ----------------------------
-                                            -- add / remove property co-owners --
-                                            ----------------------------
-                                            local coownersSubmenuText = "Manage co-owners"
-                                            if nearest_property_info.type == "business" then
-                                                coownersSubmenuText = "Manage employees"
-                                            end
-                                            local coowners_submenu = _menuPool:AddSubMenu(mainMenu, coownersSubmenuText, coownersSubmenuText, true --[[KEEP POSITION]])
-                                            -- transfer ownership
-                                            local transferOwner = NativeUI.CreateItem("Transfer Ownership", "Transfer ownership")
-                                            transferOwner.Activated = function(parentmenu, selected)
+                                                TriggerEvent("usa:notify", "You are doing that too fast!")
                                                 RemoveMenuPool(_menuPool)
-                                                Citizen.CreateThread( function()
-                                                    TriggerEvent("hotkeys:enable", false)
-                                                    DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
-                                                    while true do
-                                                        if ( UpdateOnscreenKeyboard() == 1 ) then
-                                                            local server_id = GetOnscreenKeyboardResult()
-                                                            if ( string.len( server_id ) > 0 ) then
-                                                                local server_id = tonumber( server_id )
-                                                                if ( server_id > 0 ) then
-                                                                    local confirmed = false
-                                                                    local before = GetGameTimer()
-                                                                    while not confirmed and (GetGameTimer() - before) < 30000 do
-                                                                        Citizen.Wait(0)
-                                                                        alert("~r~Transfer Ownership to "..server_id.."? ~INPUT_MP_TEXT_CHAT_TEAM~~r~/~INPUT_REPLAY_ENDPOINT~")
-                                                                        if IsControlJustPressed(0, 246) then
-                                                                            confirmed = true
-                                                                            TriggerServerEvent("properties:requestChangeOwner", nearest_property_info.name, server_id)
-                                                                        elseif IsControlJustPressed(0, 306) then
-                                                                            confirmed = true
-                                                                            TriggerEvent("usa:notify", "You stopped the transfer!")
-                                                                        end
-                                                                    end
-                                                                    if not confirmed then
-                                                                        TriggerEvent("usa:notify", "Transfer Timed Out")
-                                                                    end
-                                                                end
-                                                                break
-                                                            else
-                                                                DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
-                                                            end
-                                                        elseif ( UpdateOnscreenKeyboard() == 2 ) then
-                                                            break
-                                                        end
-                                                        Wait( 0 )
-                                                    end
-                                                    TriggerEvent("hotkeys:enable", true)
-                                                end )
                                             end
-                                            coowners_submenu.SubMenu:AddItem(transferOwner)
-                                            TriggerServerEvent("properties:getCoOwners", nearest_property_info.name)
-                                            while not menu_data.coowners do
-                                                Wait(1)
-                                            end
-                                            for i = 1, #menu_data.coowners do
-                                                local coownerSubmenuText = "co-owner"
-                                                if nearest_property_info.type == "business" then
-                                                    coownerSubmenuText = "employee"
-                                                end
-                                                local coowner_submenu = _menuPool:AddSubMenu(coowners_submenu.SubMenu, menu_data.coowners[i].name, "Manage this person's " .. coownerSubmenuText .. " status" , true --[[KEEP POSITION]])
-                                                -- remove as owner --
-                                                local removeownerbtn = NativeUI.CreateItem("Remove", "Click to remove this person as an " .. coownerSubmenuText)
-                                                removeownerbtn.Activated = function(pmenu, selected)
-                                                RemoveMenuPool(_menuPool)
-                                                TriggerServerEvent("properties:removeCoOwner", nearest_property_info.name, i)
-                                                end
-                                                coowner_submenu.SubMenu:AddItem(removeownerbtn)
-                                            end
-                                            local addOwnerPersonTypeText = "co-owner"
-                                            if nearest_property_info.type == "business" then
-                                                addOwnerPersonTypeText = "employee"
-                                            end
-                                            local add_owner_btn = NativeUI.CreateItem("Add " .. addOwnerPersonTypeText, "Add a new " .. addOwnerPersonTypeText)
-                                            add_owner_btn.Activated = function(parentmenu, selected)
-                                                ------------------------------------------------
-                                                -- get server ID of player to add as co-owner --
-                                                ------------------------------------------------
-                                                -- 1) close menu
-                                                RemoveMenuPool(_menuPool)
-                                                -- 2) get SSN + employee type input (if business)
-                                                local input = nil
-                                                if nearest_property_info.type == "business" then
-                                                    input = lib.inputDialog('New Employee', {
-                                                        {type = "input", label = "SSN", description = "SSN of new employee", required = true},
-                                                        {type = "checkbox", label = "Manager?"}
-                                                    })
-                                                else
-                                                    input = lib.inputDialog('New Co-Owner', {"SSN"})
-                                                end
-                                                if not input then return end
-                                                TriggerServerEvent("properties:addCoOwner", nearest_property_info.name, input)
-                                            end
-                                            coowners_submenu.SubMenu:AddItem(add_owner_btn)
-                                        else
-                                            local coowners_submenuText = "Co-owners"
-                                            if nearest_property_info.type == "business" then
-                                                coowners_submenuText = "Employees"
-                                            end
-                                            local coowners_submenu = _menuPool:AddSubMenu(mainMenu, coowners_submenuText, "See " .. coowners_submenuText, true)
-                                            TriggerServerEvent("properties:getCoOwners", nearest_property_info.name)
-                                            while not menu_data.coowners do
-                                            Wait(1)
-                                            end
-                                            for i = 1, #menu_data.coowners do
-                                            local coowner = NativeUI.CreateItem(menu_data.coowners[i].name, (nearest_property_info.type ~= "business" and "Lives Here" or "Works here"))
-                                            coowners_submenu.SubMenu:AddItem(coowner)
-                                            end
-                                        end
-                                        -- tell owner about /casinoveh command if Diamond Casino --
-                                        if nearest_property_info.name == "Diamond Casino" then
-                                            local casinoPodiumVehInfoBtn = NativeUI.CreateItem("Update Podium Vehicle", "Use /casinoveh to set the lucky wheel prize vehicle")
-                                            mainMenu:AddItem(casinoPodiumVehInfoBtn)
                                         end
                                     else
-                                        mainMenu = NativeUI.CreateMenu(name, "", 50 --[[X COORD]], 320 --[[Y COORD]])
-                                        local itembtn = NativeUI.CreateItem("Owner: " .. nearest_property_info.owner.name, nearest_property_info.owner.name .. " owns this property.")
-                                        mainMenu:AddItem(itembtn)
-                                        local itembtn2 = NativeUI.CreateItem("End Date: " .. nearest_property_info.fee.end_date, "This property will be up for sale on " .. nearest_property_info.fee.end_date)
-                                        mainMenu:AddItem(itembtn2)
-                                        if nearest_property_info.type == "business" then
-                                            local itembtn3 = NativeUI.CreateItem("~r~Rob", "Rob this property of its money!")
-                                            itembtn3.Activated = function(parentmenu, selected)
-                                                if IsPedArmed(GetPlayerPed(-1), 7) then
-                                                    TriggerServerEvent('es_holdup:rob', nearest_property_info.name)
-                                                    RemoveMenuPool(_menuPool)
-                                                else
-                                                    TriggerEvent("usa:notify", "I am not threatend!")
-                                                end
-                                            end
-                                            mainMenu:AddItem(itembtn3)
+                                        if nearest_property_info.will_leave then
+                                            item = NativeUI.CreateItem("Tennancy Ending", "The owner has chosen not to continue paying and the house will go up for sale")
+                                        else
+                                            item = NativeUI.CreateItem("Tennancy Continuing", "The Tennancy will continue as normal")
                                         end
+                                    end
+                                    mainMenu:AddItem(item)
+                                    ------------------------------
+                                    -- load /display money --
+                                    ------------------------------
+                                    TriggerServerEvent("properties:loadMoneyForMenu", nearest_property_info.name)
+                                    while not menu_data.money do
+                                        Wait(10)
+                                    end
+                                    local item = NativeUI.CreateItem("Money: ~g~$" .. comma_value(menu_data.money), "Amount of money stored at this property.")
+                                    mainMenu:AddItem(item)
+                                    --------------------
+                                    -- store money --
+                                    --------------------
+                                    local item = NativeUI.CreateItem("Store Money", "Store an amount of money at this property.")
+                                    item.Activated = function(parentmenu, selected)
+                                        -----------------------------
+                                        -- get amount to store --
+                                        -----------------------------
+                                        -- 1) close menu
+                                        RemoveMenuPool(_menuPool)
+                                        -- 2) get input
+                                        Citizen.CreateThread( function()
+                                            TriggerEvent("hotkeys:enable", false)
+                                            DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
+                                            while true do
+                                                if ( UpdateOnscreenKeyboard() == 1 ) then
+                                                    local input_amount = GetOnscreenKeyboardResult()
+                                                    print("keyboard result: " .. input_amount)
+                                                    if ( string.len( input_amount ) > 0 ) then
+                                                        local amount = tonumber( input_amount )
+                                                        amount = math.floor(amount, 0)
+                                                        if ( amount > 0 ) then
+                                                            print("storing: $" .. amount)
+                                                            TriggerServerEvent("properties-og:storeMoney", nearest_property_info.name, amount)
+                                                        end
+                                                        break
+                                                    else
+                                                        DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
+                                                    end
+                                                elseif ( UpdateOnscreenKeyboard() == 2 ) then
+                                                    break
+                                                end
+                                                Wait( 0 )
+                                            end
+                                            TriggerEvent("hotkeys:enable", true)
+                                        end )
+                                    end
+                                    mainMenu:AddItem(item)
+                                    --------------------------
+                                    -- withdraw money --
+                                    --------------------------
+                                    local item = NativeUI.CreateItem("Withdraw Money", "Withdraw an amount of money from this property.")
+                                    item.Activated = function(parentmenu, selected)
+                                        ----------------------------------
+                                        -- get amount to withdraw --
+                                        ----------------------------------
+                                        -- close menu --
+                                        RemoveMenuPool(_menuPool)
+                                        -- get input to withdraw --
+                                        Citizen.CreateThread( function()
+                                            TriggerEvent("hotkeys:enable", false)
+                                            DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
+                                            while true do
+                                                if ( UpdateOnscreenKeyboard() == 1 ) then
+                                                    local input_amount = GetOnscreenKeyboardResult()
+                                                    if ( string.len( input_amount ) > 0 ) then
+                                                        local amount = tonumber( input_amount )
+                                                        amount = math.floor(amount, 0)
+                                                        if ( amount > 0 ) then
+                                                            TriggerServerEvent("properties:withdraw", nearest_property_info.name, amount, nil, true)
+                                                        end
+                                                        break
+                                                    else
+                                                        DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
+                                                    end
+                                                elseif ( UpdateOnscreenKeyboard() == 2 ) then
+                                                    break
+                                                end
+                                                Wait( 0 )
+                                            end
+                                            TriggerEvent("hotkeys:enable", true)
+                                        end)
+                                    end
+                                    mainMenu:AddItem(item)
+                                    ----------------------------
+                                    -- access house inventory --
+                                    ----------------------------
+                                    local inventoryBtn = NativeUI.CreateItem("Storage", "Retrieve and store items from this property.")
+                                    inventoryBtn.Activated = function(parentmenu, selected)
+                                        TriggerServerEvent("properties-og:onStorageBtnSelected", nearest_property_info.name)
+                                        mainMenu:Visible(false)
+                                    end
+                                    mainMenu:AddItem(inventoryBtn)
+                                    -----------------
+                                    -- wardrobe --
+                                    -----------------
+                                    local wardrobe_submenu = _menuPool:AddSubMenu(mainMenu, "Wardrobe", "Store and retrieve outfits here.", true --[[KEEP POSITION]])
+                                    TriggerServerEvent("properties:getWardrobe", nearest_property_info.name)
+                                    waitingForWardrobeToLoad = true
+                                    while waitingForWardrobeToLoad do
+                                        Wait(10)
+                                    end
+                                    if menu_data.wardrobe and #menu_data.wardrobe > 0 then
+                                        for x  = 1, #menu_data.wardrobe do
+                                            local outfit = menu_data.wardrobe[x]
+                                            ---------------------------------------------
+                                            -- submenu for each wardrobe item --
+                                            ---------------------------------------------
+                                            local wardrobe_submenu2 = _menuPool:AddSubMenu(wardrobe_submenu.SubMenu, outfit.name, "Put on or delete " .. outfit.name, true --[[KEEP POSITION]])
+                                            local putonbtn = NativeUI.CreateItem("Put On", "Put on " .. outfit.name)
+                                            putonbtn.Activated = function(parentmenu, selected)
+                                                SetPedOutfit(outfit.clothing)
+                                                RemoveMenuPool(_menuPool)
+                                            end
+                                            wardrobe_submenu2.SubMenu:AddItem(putonbtn)
+                                            local deletebtn = NativeUI.CreateItem("Delete", "Delete " .. outfit.name)
+                                            deletebtn.Activated = function(parentmenu, selected)
+                                                TriggerServerEvent("properties:deleteOutfitByName", nearest_property_info.name, outfit.name)
+                                                RemoveMenuPool(_menuPool)
+                                            end
+                                            wardrobe_submenu2.SubMenu:AddItem(deletebtn)
+                                        end
+                                    else
+                                        local noitemsbtn = NativeUI.CreateItem("You have no outfits saved!", "Press the 'Save Current Outfit' button to save an outfit.")
+                                        wardrobe_submenu.SubMenu:AddItem(noitemsbtn)
+                                    end
+                                    -------------------
+                                    -- save button --
+                                    -------------------
+                                    local savebtn = NativeUI.CreateItem("Save Current Outfit", "Save your current outfit.")
+                                    savebtn.Activated = function(parentmenu, selected)
+                                        RemoveMenuPool(_menuPool)
+                                        Citizen.CreateThread(function()
+                                            -- get user input for name
+                                            local outfitname = GetUserInput()
+                                            if outfitname then
+                                                -- save player's outfit
+                                                local clothing = GetPedOutfit()
+                                                -- build the object
+                                                local outfit = {
+                                                    name = outfitname,
+                                                    clothing = clothing
+                                                }
+                                                TriggerServerEvent("properties-og:saveOutfit", nearest_property_info.name, outfit)
+                                                RemoveMenuPool(_menuPool)
+                                            end
+                                        end)
+                                    end
+                                    wardrobe_submenu.SubMenu:AddItem(savebtn)
+                                    -------------------
+                                    -- spawn here --
+                                    -------------------
+                                    local spawnbtn = NativeUI.CreateItem("Spawn Here", "Set your spawn to this location.")
+                                    spawnbtn.Activated = function(parentmenu, selected)
+                                        local spawn = { x = nearest_property_info.x, y = nearest_property_info.y, z = nearest_property_info.z, name = nearest_property_info.name }
+                                        TriggerServerEvent("properties:setSpawnPoint", spawn)
+                                    end
+                                    mainMenu:AddItem(spawnbtn)
+                                    -- add / remove property co-owners --
+                                    local coownersSubmenuText = "Manage co-owners"
+                                    if nearest_property_info.type == "business" then
+                                        coownersSubmenuText = "Manage employees"
+                                    end
+                                    local coowners_submenu = _menuPool:AddSubMenu(mainMenu, coownersSubmenuText, coownersSubmenuText, true --[[KEEP POSITION]])
+                                    -- transfer ownership
+                                    local transferOwner = NativeUI.CreateItem("Transfer Ownership", "Transfer ownership")
+                                    transferOwner.Activated = function(parentmenu, selected)
+                                        RemoveMenuPool(_menuPool)
+                                        Citizen.CreateThread( function()
+                                            TriggerEvent("hotkeys:enable", false)
+                                            DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
+                                            while true do
+                                                if ( UpdateOnscreenKeyboard() == 1 ) then
+                                                    local server_id = GetOnscreenKeyboardResult()
+                                                    if ( string.len( server_id ) > 0 ) then
+                                                        local server_id = tonumber( server_id )
+                                                        if ( server_id > 0 ) then
+                                                            local confirmed = false
+                                                            local before = GetGameTimer()
+                                                            while not confirmed and (GetGameTimer() - before) < 30000 do
+                                                                Citizen.Wait(0)
+                                                                alert("~r~Transfer Ownership to "..server_id.."? ~INPUT_MP_TEXT_CHAT_TEAM~~r~/~INPUT_REPLAY_ENDPOINT~")
+                                                                if IsControlJustPressed(0, 246) then
+                                                                    confirmed = true
+                                                                    TriggerServerEvent("properties:requestChangeOwner", nearest_property_info.name, server_id)
+                                                                elseif IsControlJustPressed(0, 306) then
+                                                                    confirmed = true
+                                                                    TriggerEvent("usa:notify", "You stopped the transfer!")
+                                                                end
+                                                            end
+                                                            if not confirmed then
+                                                                TriggerEvent("usa:notify", "Transfer Timed Out")
+                                                            end
+                                                        end
+                                                        break
+                                                    else
+                                                        DisplayOnscreenKeyboard( false, "", "", "", "", "", "", 9 )
+                                                    end
+                                                elseif ( UpdateOnscreenKeyboard() == 2 ) then
+                                                    break
+                                                end
+                                                Wait( 0 )
+                                            end
+                                            TriggerEvent("hotkeys:enable", true)
+                                        end )
+                                    end
+                                    coowners_submenu.SubMenu:AddItem(transferOwner)
+                                    TriggerServerEvent("properties:getCoOwners", nearest_property_info.name)
+                                    while not menu_data.coowners do
+                                        Wait(1)
+                                    end
+                                    for i = 1, #menu_data.coowners do
+                                        local coownerSubmenuText = "co-owner"
+                                        if nearest_property_info.type == "business" then
+                                            coownerSubmenuText = "employee"
+                                        end
+                                        local coowner_submenu = _menuPool:AddSubMenu(coowners_submenu.SubMenu, menu_data.coowners[i].name, "Manage this person's " .. coownerSubmenuText .. " status" , true --[[KEEP POSITION]])
+                                        -- remove as owner --
+                                        local removeownerbtn = NativeUI.CreateItem("Remove", "Click to remove this person as an " .. coownerSubmenuText)
+                                        removeownerbtn.Activated = function(pmenu, selected)
+                                        RemoveMenuPool(_menuPool)
+                                        TriggerServerEvent("properties:removeCoOwner", nearest_property_info.name, i)
+                                        end
+                                        coowner_submenu.SubMenu:AddItem(removeownerbtn)
+                                    end
+                                    local addOwnerPersonTypeText = "co-owner"
+                                    if nearest_property_info.type == "business" then
+                                        addOwnerPersonTypeText = "employee"
+                                    end
+                                    local add_owner_btn = NativeUI.CreateItem("Add " .. addOwnerPersonTypeText, "Add a new " .. addOwnerPersonTypeText)
+                                    add_owner_btn.Activated = function(parentmenu, selected)
+                                        ------------------------------------------------
+                                        -- get server ID of player to add as co-owner --
+                                        ------------------------------------------------
+                                        -- 1) close menu
+                                        RemoveMenuPool(_menuPool)
+                                        -- 2) get SSN + employee type input (if business)
+                                        local input = nil
+                                        if nearest_property_info.type == "business" then
+                                            input = lib.inputDialog('New Employee', {
+                                                {type = "input", label = "SSN", description = "SSN of new employee", required = true},
+                                                {type = "checkbox", label = "Manager?"}
+                                            })
+                                        else
+                                            input = lib.inputDialog('New Co-Owner', {"SSN"})
+                                        end
+                                        if not input then return end
+                                        TriggerServerEvent("properties:addCoOwner", nearest_property_info.name, input)
+                                    end
+                                    coowners_submenu.SubMenu:AddItem(add_owner_btn)
+                                    -- tell owner about /casinoveh command if Diamond Casino --
+                                    if nearest_property_info.name == "Diamond Casino" then
+                                        local casinoPodiumVehInfoBtn = NativeUI.CreateItem("Update Podium Vehicle", "Use /casinoveh to set the lucky wheel prize vehicle")
+                                        mainMenu:AddItem(casinoPodiumVehInfoBtn)
                                     end
                                 else
-                                    ---------------------------
-                                    -- create main menu --
-                                    ---------------------------
-                                    mainMenu = NativeUI.CreateMenu(name, "This property is for sale!", 50 --[[X COORD]], 320 --[[Y COORD]])
-                                    -----------------
-                                    -- no owner --
-                                    -----------------
-                                    local pricebtn = NativeUI.CreateItem("Price : $" .. comma_value(nearest_property_info.fee.price), "This property costs $" .. comma_value(nearest_property_info.fee.price))
-                                    mainMenu:AddItem(pricebtn)
-                                    local purchasebtn = NativeUI.CreateItem("Purchase", "Buy this property for $" .. comma_value(nearest_property_info.fee.price) .. "!")
-                                    purchasebtn.Activated = function(parentmenu, selected)
-                                        TriggerServerEvent("properties:purchaseProperty", nearest_property_info)
-                                        RemoveMenuPool(_menuPool)
+                                    mainMenu = NativeUI.CreateMenu(name, "", 50 --[[X COORD]], 320 --[[Y COORD]])
+                                    local itembtn = NativeUI.CreateItem("Owner: " .. nearest_property_info.owner.name, nearest_property_info.owner.name .. " owns this property.")
+                                    mainMenu:AddItem(itembtn)
+                                    local itembtn2 = NativeUI.CreateItem("End Date: " .. nearest_property_info.fee.end_date, "This property will be up for sale on " .. nearest_property_info.fee.end_date)
+                                    mainMenu:AddItem(itembtn2)
+                                    if nearest_property_info.type == "business" then
+                                        local itembtn3 = NativeUI.CreateItem("~r~Rob", "Rob this property of its money!")
+                                        itembtn3.Activated = function(parentmenu, selected)
+                                            if IsPedArmed(GetPlayerPed(-1), 7) then
+                                                TriggerServerEvent('es_holdup:rob', nearest_property_info.name)
+                                                RemoveMenuPool(_menuPool)
+                                            else
+                                                TriggerEvent("usa:notify", "I am not threatend!")
+                                            end
+                                        end
+                                        mainMenu:AddItem(itembtn3)
                                     end
-                                    mainMenu:AddItem(purchasebtn)
                                 end
-                                --[[
-                                ----------------
-                                -- close btn --
-                                ----------------
-                                local closebtn = NativeUI.CreateItem("Close Menu", "Close this property menu.")
-                                closebtn.Activated = function(parentmenu, selected)
+                            else
+                                ---------------------------
+                                -- create main menu --
+                                ---------------------------
+                                mainMenu = NativeUI.CreateMenu(name, "This property is for sale!", 50 --[[X COORD]], 320 --[[Y COORD]])
+                                -----------------
+                                -- no owner --
+                                -----------------
+                                local pricebtn = NativeUI.CreateItem("Price : $" .. comma_value(nearest_property_info.fee.price), "This property costs $" .. comma_value(nearest_property_info.fee.price))
+                                mainMenu:AddItem(pricebtn)
+                                local purchasebtn = NativeUI.CreateItem("Purchase", "Buy this property for $" .. comma_value(nearest_property_info.fee.price) .. "!")
+                                purchasebtn.Activated = function(parentmenu, selected)
+                                    TriggerServerEvent("properties:purchaseProperty", nearest_property_info)
                                     RemoveMenuPool(_menuPool)
                                 end
-                                mainMenu:AddItem(closebtn)
-                                --]]
-                                _menuPool:RefreshIndex()
-                                _menuPool:Add(mainMenu)
-                                mainMenu:Visible(true)
-                            end)
-                        --end
+                                mainMenu:AddItem(purchasebtn)
+                            end
+                            _menuPool:RefreshIndex()
+                            _menuPool:Add(mainMenu)
+                            mainMenu:Visible(true)
+                        end)
                 elseif info.garage_coords then
                     if GetDistanceBetweenCoords(GetEntityCoords(me), info.garage_coords.x, info.garage_coords.y, info.garage_coords.z, true) < 1 then
                         nearest_property_info = NEARBY_PROPERTIES[name]

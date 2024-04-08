@@ -732,9 +732,16 @@ end)
 ---------------------------
 RegisterServerEvent("properties:addCoOwner")
 AddEventHandler("properties:addCoOwner", function(property_name, input)
-  if not ownsProperty(property_name, source) then
-    TriggerClientEvent("usa:notify", source, "Not property owner")
-    return
+  if PROPERTIES[property_name].type == "business" then
+    if not isBusinessManager(property_name, source) then
+      TriggerClientEvent("usa:notify", source, "Error", "^3INFO: ^0You do not have permission to manage employees")
+      return
+    end
+  else
+    if not ownsProperty(property_name, source, true) then
+      TriggerClientEvent("usa:notify", source, "Error", "^3INFO: ^0You do not own this property")
+      return
+    end
   end
   local id = tonumber(input[1])
   local isManager = nil
@@ -783,7 +790,7 @@ AddEventHandler("properties:requestChangeOwner", function(property_name, id)
       TriggerClientEvent("usa:notify", source, "You cant transfer a house to yourself!")
     end
   else
-    TriggerClientEvent("usa:notify", source, "That is not your house!")
+    TriggerClientEvent("usa:notify", source, "You do not have permission to change owners to this property!")
   end
 end)
 
@@ -853,7 +860,7 @@ AddEventHandler("properties:changeOwner", function(property_name, targetID, owne
         TriggerClientEvent("usa:notify", ownerID, "You cant transfer a house to yourself!")
       end
     else
-      TriggerClientEvent("usa:notify", ownerID, "That is not your house!")
+      TriggerClientEvent("usa:notify", ownerID, "You do not have permission to change owners to this property!")
     end
   end
 end)
@@ -921,6 +928,17 @@ end)
 ------------------------------
 RegisterServerEvent("properties:removeCoOwner")
 AddEventHandler("properties:removeCoOwner", function(property_name, index)
+  if PROPERTIES[property_name].type == "business" then
+    if not isBusinessManager(property_name, source) then
+      TriggerClientEvent("usa:notify", source, "Error", "^3INFO: ^0You do not have permission to manage employees")
+      return
+    end
+  else
+    if not ownsProperty(property_name, source, true) then
+      TriggerClientEvent("usa:notify", source, "Error", "^3INFO: ^0You do not own this property")
+      return
+    end
+  end
   -- check if property has any co owners already --
   if not PROPERTIES[property_name].coowners then
     PROPERTIES[property_name] = {}
@@ -1701,9 +1719,14 @@ function TrimPropertyTableForClient(propertyInfo)
   return toSendInfo
 end
 
-function ownsProperty(name, src)
+function ownsProperty(name, src, doNotIncludeCoOwnersAsOwners)
   local char = exports["usa-characters"]:GetCharacter(src)
-  local owned = GetOwnedProperties(char.get("_id"), true)
+  local owned = {}
+  if doNotIncludeCoOwnersAsOwners then
+    owned = GetOwnedProperties(char.get("_id"), false)
+  else
+    owned = GetOwnedProperties(char.get("_id"), true)
+  end
   for i = 1, #owned do
     if owned[i].name == name then
       return true

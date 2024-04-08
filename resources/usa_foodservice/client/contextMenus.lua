@@ -149,6 +149,7 @@ RegisterNetEvent("bs:prepareMeal", function(number, restuarantName)
     for i = 1, #orderItems do
         minutesToCook = minutesToCook + (1.0 * orderItems[i].quantity)
     end
+    minutesToCook = math.min(minutesToCook, 10) -- cap at 10 mins for now
     print("total cook time: " .. minutesToCook)
     if lib.progressBar({
         duration = minutesToCook * 60 * 1000,

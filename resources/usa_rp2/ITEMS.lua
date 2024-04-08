@@ -345,7 +345,7 @@ local ITEMS = {
     { name = "Coca Cola", price = 350, type = "drink", substance = 100.0, quantity = 1, legality = "legal", weight = 5, objectModel = "prop_food_bs_juice03" },
     -- CAT CAFE ITEMS
     { name = "Fruit Tart", price = 250, type = "food", substance = 40.0, quantity = 1, legality = "legal", weight = 1, objectModel = "v_res_tt_doughnut01"},
-    { name = "Pancake", price = 450, type = "food", substance = 65.0, quantity = 1, legality = "legal", weight = 1, objectModel = "xs_prop_burger_meat_wl"},
+    { name = "Pancake", price = 450, type = "food", substance = 65.0, quantity = 1, legality = "legal", weight = 1},
     { name = "Miso Soup", price = 400, type = "food", substance = 40.0, quantity = 1, legality = "legal", weight = 3, objectModel = "prop_cs_bowl_01b"},
     { name = "UWU Sandwich", price = 500, type = "food", substance = 90.0, quantity = 1, legality = "legal", weight = 2, objectModel = "prop_sandwich_01"},
     { name = "Weepy Cupcake", price = 250, type = "food", substance = 40.0, quantity = 1, legality = "legal", weight = 2},
@@ -368,6 +368,8 @@ local ITEMS = {
     --]]
     -- TACO FARMER ITEMS
     { name = "Hard Shell Taco", price = 275, type = "food", substance = 85.0, quantity = 1, legality = "legal", weight = 1, objectModel = "prop_taco_01"},
+    -- END TACO FARMER ITEMS
+    { name = "Grappling Hook", type = "misc", price = 250, weight = 25, quantity = 1 },
 }
 
 for i = 1, #ITEMS do

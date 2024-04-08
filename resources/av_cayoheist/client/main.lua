@@ -69,12 +69,6 @@ CreateThread(function()
 				}
 				if hasGrapplingHook then
 					cutscene(1)
-					local p = PlayerPedId()
-					SetPedRelationshipGroupHash(p, GetHashKey("PLAYER"))
-					AddRelationshipGroup('Guardias')
-					SetRelationshipBetweenGroups(0, GetHashKey("Guardias"), GetHashKey("Guardias"))
-					SetRelationshipBetweenGroups(5, GetHashKey("Guardias"), GetHashKey("PLAYER"))
-					SetRelationshipBetweenGroups(5, GetHashKey("PLAYER"), GetHashKey("Guardias"))
 				else 
 					exports.globals:notify("Need grappling hook!")
 				end
@@ -301,7 +295,7 @@ AddEventHandler('av_cayoheist:npc', function()
 		GiveWeaponToPed(guardias[x], GetHashKey(guardia.weapon), 255, false, false)
 		SetPedDropsWeaponsWhenDead(guardias[x], false)
 		SetPedFleeAttributes(guardias[x], 0, false)	
-		SetPedRelationshipGroupHash(guardias[x], GetHashKey("Guardias"))	
+		SetPedRelationshipGroupHash(guardias[x], GetHashKey("CayoPericoGuards"))	
 		TaskGuardCurrentPosition(guardias[x], 5.0, 5.0, 1)
 		x = x + 1
 	end

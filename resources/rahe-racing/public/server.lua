@@ -291,6 +291,8 @@ supportedVehicles = {
     { name = "Declasse Tulip M-100", model = "tulip2", class = "A" },
     { name = "Declasse Hotring Sabre", model = "hotring", class = "A" },
     -- CUSTOM- A Class:
+    { name = "Bravado Buffalo Hellhound", model = "vwe_buffalo3", class = "A" },
+    { name = "Bravado Gresley Hellhound", model = "vwe_gresley1", class = "A" },
     { name = "Karin Rebel Custom", model = "rebeld", class = "A" },
     -- B Class:**
     { name = "Imponte Beater Dukes", model = "dukes3", class = "B" },
@@ -419,6 +421,9 @@ supportedVehicles = {
     { name = "Karin Ariant", model = "ariant", class = "B"},
     { name = "Karin Asteropers", model = "asteropers", class = "B"},
     { name = "Albany Esperanto", model = "vwe_esperanto1", class = "B"},
+    { name = "Annis Euros R", model = "vwe_euros1", class = "B" },
+    { name = "Annis Hellion XL", model = "vwe_hellion1", class = "B" },
+    { name = "Annis Savestra RE", model = "vwe_savestra1", class = "B" },
     -- C Class:**
     { name = "Declasse Yosemite Rancher", model = "yosemite3", class = "C" },
     { name = "Dinka Blista Compact", model = "blista2", class = "C" },

@@ -432,6 +432,13 @@ local vehicleShopItems = {
 			{make = "Pfister", model = "Neon", price = 270000, hash = "neon", storage_capacity = 220.0},
 		},
 		["Custom"] = {
+			{make = "Annis", model = "Euros R", price = 150000, hash = "vwe_euros1", storage_capacity = 160.0},
+			{make = "Annis", model = "Hellion XL", price = 130000, hash = "vwe_hellion1", storage_capacity = 280.0},
+			{make = "Annis", model = "Savestra RE", price = 160000, hash = "vwe_savestra1", storage_capacity = 160.0},
+			--
+			{make = "Bravado", model = "Buffalo Hellhound", price = 255000, hash = "vwe_buffalo3", storage_capacity = 220.0},
+			{make = "Bravado", model = "Gresley Hellhound", price = 265000, hash = "vwe_gresley1", storage_capacity = 280.0},
+			--
 			{make = "Declasse", model = "Silver-Star", price = 40000, hash = "silverstar", storage_capacity = 280.0},
 			{make = "Declasse", model = "Silver-Star (Lowrider)", price = 80000, hash = "silverstar2", storage_capacity = 250.0},
 			--

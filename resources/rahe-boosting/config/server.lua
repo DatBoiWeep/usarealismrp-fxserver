@@ -453,6 +453,8 @@ supportedVehicles = {
     { name = "Declasse Tahoma Coupe", model = "tahoma", class = "A" },
     { name = "Declasse Tulip M-100", model = "tulip2", class = "A" },
     -- Custom A Class
+    { name = "Bravado Buffalo Hellhound", model = "vwe_buffalo3", class = "A" },
+    { name = "Bravado Gresley Hellhound", model = "vwe_gresley1", class = "A" },
     { name = "Karin Rebel Custom", model = "rebeld", class = "A" },
     -- B CLASS
     { name = "Declasse Hotring Sabre", model = "hotring", class = "B" },
@@ -521,6 +523,9 @@ supportedVehicles = {
     { name = "Ubermacht Sentinel Classic Widebody", model = "sentinel4", class = "B" },
     { name = "Weeny Issi Sport", model = "issi8", class = "B" },
     -- Custom B Class
+    { name = "Annis Euros R", model = "vwe_euros1", class = "B" },
+    { name = "Annis Hellion XL", model = "vwe_hellion1", class = "B" },
+    { name = "Annis Savestra RE", model = "vwe_savestra1", class = "B" },
     { name = "Voodoo Caddy S", model = "voodoo_caddys", class = "B" },
     { name = "Dababy Car", model = "dababy", class = "B" }, 
     { name = "Progen Proff", model = "proff", class = "B" },
