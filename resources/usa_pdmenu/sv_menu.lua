@@ -1,4 +1,4 @@
-local LEO_VEHICLES = {"polstanierp","polbuffalop","polbuffalop2", "polscoutp", "polalamop2", "polstalkerp" ,"polcarap", "poldmntp", "polvigerop","fbi2", "pbus", "policet", "police4", "pbike"}
+local LEO_VEHICLES = {"polstanierp","polbuffalop","polbuffalop2", "polscoutp", "polalamop2", "polstalkerp" ,"polcarap", "poldmntp", "polvigerop","fbi2", "umcaval", "bcat", "pbus", "policet", "police4", "pbike"}
 
 local JOB_VEHICLES = {
 	["sheriff"] = LEO_VEHICLES,
