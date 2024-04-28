@@ -50,6 +50,16 @@ local VEHICLE_RANKS = {
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polvigerop")
 		},
+		["umcaval"] = {
+			rank = 4,
+			allowedLiveries = { 1 },
+			hash = GetHashKey("umcaval")
+		},
+		["bcat"] = {
+			rank = 4,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("bcat")
+		},
 		["polmav"] = {
 			rank = 3,
 			allowedLiveries = { 1 },
@@ -156,6 +166,16 @@ local VEHICLE_RANKS = {
 			rank = 4,
 			allowedLiveries = {1, 2},
 			hash = GetHashKey("polvigerop")
+		},
+		["umcaval"] = {
+			rank = 4,
+			allowedLiveries = { 1 },
+			hash = GetHashKey("umcaval")
+		},
+		["bcat"] = {
+			rank = 4,
+			allowedLiveries = {1, 2},
+			hash = GetHashKey("bcat")
 		},
 		["polmav"] = {
 			rank = 3,
